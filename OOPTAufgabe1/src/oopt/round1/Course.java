@@ -1,6 +1,8 @@
+package oopt.round1;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 
 /**
  * Representing a course at any university.
@@ -8,15 +10,14 @@ import java.util.List;
  * @author rich
  * @date 12.10.2011
  */
+public class Course {
 
-public class LVA {
-
-	private final int lvaNumber;
+	private final String lvaIdentifier;
 	private final String name;
 	private final List<Student> students;
 	
-	public LVA(int lvaNumber, String name) {
-		this.lvaNumber = lvaNumber;
+	public Course(String lvaIdentifier, String name) {
+		this.lvaIdentifier = lvaIdentifier;
 		this.name = name;
 		this.students = new ArrayList<Student>();
 	}
@@ -27,10 +28,5 @@ public class LVA {
 		Date now = new Date();
 		
 		return this.students.add(s);
-	}
-	
-	@Override
-	public int hashCode() {
-		return lvaNumber;
 	}
 }
