@@ -18,6 +18,9 @@ public class Course {
 	private Date lateUnenrol = new Date();
 	
 	public Course(String lvaIdentifier, String name) {
+		if (lvaIdentifier == null || name == null) {
+			throw new IllegalArgumentException("Invalid argument in constructors. Must not be null.");
+		}
 		this.lvaIdentifier = lvaIdentifier;
 		this.name = name;
 	}
