@@ -9,6 +9,10 @@ public class CourseManager {
 	
 	public static Course createNewCourse(String lvaIdentifier, String name) {
 		Course course = new Course(lvaIdentifier, name);
+		if (courses.contains(course)) {
+			throw new IllegalArgumentException("Course with this lvaIdentifier already exists.");
+		}
+		
 		courses.add(course);
 		return course;
 	}
