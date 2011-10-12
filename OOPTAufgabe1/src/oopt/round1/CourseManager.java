@@ -9,7 +9,7 @@ public class CourseManager {
 
 	private static final List<Course> courses = new ArrayList<Course>();
 	private static final List<Student> students = new ArrayList<Student>();
-	private static final Map<Course, List<Student>> courseStudents = new HashMap<Course, List<Student>>();
+	private static final Map<Course, List<Student>> enrolments = new HashMap<Course, List<Student>>();
 	
 	public static Course createNewCourse(String lvaIdentifier, String name) {
 		Course course = new Course(lvaIdentifier, name);
@@ -33,10 +33,10 @@ public class CourseManager {
 	
 	public static void enrole(String lvaIdentifier, String matrikelNumber) {
 		Course course = getCourseFor(lvaIdentifier);
-		List<Student> studentsInCourse = courseStudents.get(course);
+		List<Student> studentsInCourse = enrolments.get(course);
 		if (studentsInCourse == null) {
 			studentsInCourse = new ArrayList<Student>();
-			courseStudents.put(course, studentsInCourse);
+			enrolments.put(course, studentsInCourse);
 		}
 		Student student = getStudentFor(matrikelNumber);
 		studentsInCourse.add(student);
