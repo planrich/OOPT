@@ -6,6 +6,7 @@ import java.util.List;
 public class CourseManager {
 
 	private static final List<Course> courses = new ArrayList<Course>();
+	private static final List<Student> students = new ArrayList<Student>();
 	
 	public static Course createNewCourse(String lvaIdentifier, String name) {
 		Course course = new Course(lvaIdentifier, name);
@@ -15,5 +16,15 @@ public class CourseManager {
 		
 		courses.add(course);
 		return course;
+	}
+	
+	public static Student createNewStudent(int matrikelNumber, String name) {
+		Student student = new Student(matrikelNumber, name);
+		if (students.contains(student)) {
+			throw new IllegalArgumentException("Student with this Matrikel Number already exists.");
+		}
+		
+		students.add(student);
+		return student;
 	}
 }
