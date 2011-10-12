@@ -14,7 +14,7 @@ public class CourseManagerTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void shouldThrowExceptionIfStudentAlreadyExists() {
-		CourseManager.createNewStudent(123, "Simon Zuend");
-		CourseManager.createNewStudent(123, "Klaus Nigsch");
+		CourseManager.createNewStudent("123", "Simon Zuend");
+		CourseManager.createNewStudent("123", "Klaus Nigsch");
 	}
 }

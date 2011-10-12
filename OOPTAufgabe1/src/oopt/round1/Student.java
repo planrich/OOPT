@@ -8,10 +8,10 @@ package oopt.round1;
  */
 public class Student {
 
-	private final int matrikelNumber;
+	private final String matrikelNumber;
 	private final String name;
 	
-	public Student(int matrikelNumber, String name) {
+	public Student(String matrikelNumber, String name) {
 		this.matrikelNumber = matrikelNumber;
 		this.name = name;
 	}
@@ -23,12 +23,12 @@ public class Student {
 		}
 		if (obj instanceof Student) {
 			Student student = (Student) obj;
-			return student.matrikelNumber == this.matrikelNumber;
+			return student.matrikelNumber.equals(this.matrikelNumber);
 		}
 		return false;
 	}
 
-	public int getMatrikelNumber() {
+	public String getMatrikelNumber() {
 		return matrikelNumber;
 	}
 

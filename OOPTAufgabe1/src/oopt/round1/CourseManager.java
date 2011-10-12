@@ -18,7 +18,7 @@ public class CourseManager {
 		return course;
 	}
 	
-	public static Student createNewStudent(int matrikelNumber, String name) {
+	public static Student createNewStudent(String matrikelNumber, String name) {
 		Student student = new Student(matrikelNumber, name);
 		if (students.contains(student)) {
 			throw new IllegalArgumentException("Student with this Matrikel Number already exists.");
