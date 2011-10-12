@@ -53,6 +53,9 @@ public class CourseManager {
 	public static int studentCountIn(String lvaIdentifier) {
 		Course course = getCourseFor(lvaIdentifier);
 		List<Student> studentsInCourse = enrolments.get(course);
+		if (studentsInCourse == null) {
+			return 0;
+		}
 		return studentsInCourse.size();
 	}
 	
