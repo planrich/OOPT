@@ -1,5 +1,7 @@
 package oopt.round1;
 
+import java.util.Date;
+
 /**
  * Representing a course at any university.
  * 
@@ -10,6 +12,10 @@ public class Course {
 
 	private final String lvaIdentifier;
 	private final String name;
+	
+	private Date earlyEnrol = new Date();
+	private Date lateEnrol = new Date();
+	private Date lateUnenrol = new Date();
 	
 	public Course(String lvaIdentifier, String name) {
 		this.lvaIdentifier = lvaIdentifier;
@@ -26,5 +32,37 @@ public class Course {
 			return course.lvaIdentifier.equals(this.lvaIdentifier);
 		}
 		return false;
+	}
+
+	public Date getEarlyEnrol() {
+		return earlyEnrol;
+	}
+
+	public void setEarlyEnrol(Date earlyEnrol) {
+		this.earlyEnrol = earlyEnrol;
+	}
+
+	public Date getLateEnrol() {
+		return lateEnrol;
+	}
+
+	public void setLateEnrol(Date lateEnrol) {
+		this.lateEnrol = lateEnrol;
+	}
+
+	public Date getLateUnenrol() {
+		return lateUnenrol;
+	}
+
+	public void setLateUnenrol(Date lateUnenrol) {
+		this.lateUnenrol = lateUnenrol;
+	}
+
+	public String getLvaIdentifier() {
+		return lvaIdentifier;
+	}
+
+	public String getName() {
+		return name;
 	}
 }

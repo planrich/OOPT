@@ -27,4 +27,12 @@ public class Student {
 		}
 		return false;
 	}
+
+	public int getMatrikelNumber() {
+		return matrikelNumber;
+	}
+
+	public String getName() {
+		return name;
+	}
 }
