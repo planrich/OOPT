@@ -1,6 +1,7 @@
 package oopt.round1;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,23 +32,50 @@ public class CourseManager {
 		return student;
 	}
 	
-	public void enrole(String lvaIdentifier, String matrikelNumber) {
+	//for now we return boolean maybe change that in the future?
+	public boolean enrole(String lvaIdentifier, String matrikelNumber) {
+
 		Course course = getCourseFor(lvaIdentifier);
+		
+		Date now = new Date();
+		
+		if (now.before(course.getEarlyEnrol()) || now.after(course.getLateEnrol())) {
+			return false;
+		}
+		
 		List<Student> studentsInCourse = enrolments.get(course);
 		if (studentsInCourse == null) {
 			studentsInCourse = new ArrayList<Student>();
 			enrolments.put(course, studentsInCourse);
 		}
+		
 		Student student = getStudentFor(matrikelNumber);
+		
+		if (studentsInCourse.contains(student)) {
+			return false;
+		}
+		
 		studentsInCourse.add(student);
+		
+		return true;
 	}
 	
-	public void unenrole(String lvaIdentifier, String matrikelNumber) {
+	public boolean unenrole(String lvaIdentifier, String matrikelNumber) {
+
 		Course course = getCourseFor(lvaIdentifier);
+		
+		Date now = new Date();
+		
+		if (now.after(course.getLateUnenrol())) {
+			return false;
+		}
+		
 		List<Student> studentsInCourse = enrolments.get(course);
 		if (studentsInCourse != null) {
-			studentsInCourse.remove(getStudentFor(matrikelNumber));
+			return studentsInCourse.remove(getStudentFor(matrikelNumber));
 		}
+		
+		return false;
 	}
 	
 	public int studentCountIn(String lvaIdentifier) {
