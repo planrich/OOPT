@@ -29,4 +29,16 @@ public class Course {
 		
 		return this.students.add(s);
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == this) {
+			return true;
+		}
+		if (obj instanceof Course) {
+			Course course = (Course) obj;
+			return course.lvaIdentifier.equals(this.lvaIdentifier);
+		}
+		return false;
+	}
 }
