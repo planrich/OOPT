@@ -42,6 +42,20 @@ public class CourseManager {
 		studentsInCourse.add(student);
 	}
 	
+	public static void unenrole(String lvaIdentifier, String matrikelNumber) {
+		Course course = getCourseFor(lvaIdentifier);
+		List<Student> studentsInCourse = enrolments.get(course);
+		if (studentsInCourse != null) {
+			studentsInCourse.remove(getStudentFor(matrikelNumber));
+		}
+	}
+	
+	public static int studentCountIn(String lvaIdentifier) {
+		Course course = getCourseFor(lvaIdentifier);
+		List<Student> studentsInCourse = enrolments.get(course);
+		return studentsInCourse.size();
+	}
+	
 	private static Course getCourseFor(String lvaIdentifier) {
 		for (Course course : courses) {
 			if (course.getLvaIdentifier().equals(lvaIdentifier)) {
