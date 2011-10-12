@@ -56,6 +56,14 @@ public class CourseManager {
 		return studentsInCourse.size();
 	}
 	
+	public static List<Course> getCourses() {
+		return courses;
+	}
+
+	public static List<Student> getStudents() {
+		return students;
+	}
+	
 	private static Course getCourseFor(String lvaIdentifier) {
 		for (Course course : courses) {
 			if (course.getLvaIdentifier().equals(lvaIdentifier)) {

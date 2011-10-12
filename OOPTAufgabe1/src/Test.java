@@ -61,11 +61,11 @@ public class Test {
 		CourseManager.enrole("123.451","1025996");
 		
 		System.out.println("-Liste aller LVAs:");
-		List<Course> courses = null;
+		List<Course> courses = CourseManager.getCourses();
 		//list all course informations
 		for (Course c : courses) {
 			
-			int size = 0;
+			int size = CourseManager.studentCountIn(c.getLvaIdentifier());
 			
 			System.out.println(String.format(
 					"%s : %s" +
@@ -82,7 +82,7 @@ public class Test {
 		}
 		
 		//list all students that are enroled into any course
-		List<Student> enroledStudents = null; //CourseManager.getStudents();
+		List<Student> enroledStudents = CourseManager.getStudents();
 		for (Student student : enroledStudents) {
 			System.out.println(String.format("%s %s",
 					student.getMatrikelNumber(),
