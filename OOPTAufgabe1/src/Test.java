@@ -11,18 +11,20 @@ public class Test {
 		
 		System.out.println("-Anlegen der Lehrveranstaltungen");
 		
+		//students
 		CourseManager.createNewStudent("1025637", "Richard Plangger");
 		CourseManager.createNewStudent("1025990", "Simon Zuend");
 		CourseManager.createNewStudent("1025991", "Klaus Nigsch");
 		CourseManager.createNewStudent("1046344", "Max Mustermann");
 		CourseManager.createNewStudent("0232454", "Simon Stammler");
 		CourseManager.createNewStudent("1034523", "Lukas Fleischhacker");
-		CourseManager.createNewStudent("1025992", "Gabriel");
+		CourseManager.createNewStudent("1025992", "Erzengel Gabriel");
 		CourseManager.createNewStudent("0825993", "Morgan Freeman");
 		CourseManager.createNewStudent("0025994", "John Rambo");
 		CourseManager.createNewStudent("0025995", "Arnold Schwarzenegger");
 		CourseManager.createNewStudent("1025996", "Albert Einstein");
 		
+		//courses
 		CourseManager.createNewCourse("123.456", "Objektorientierte Programmiertechniken");
 		CourseManager.createNewCourse("123.451", "Funktionale Programmierung");
 		CourseManager.createNewCourse("133.412", "Statistik und Wahrscheinlichkeitsrechnung");
@@ -30,17 +32,18 @@ public class Test {
 		CourseManager.createNewCourse("173.432", "Mathematik 2");
 		CourseManager.createNewCourse("133.451", "Daten- und Informatikrecht");
 		
-		CourseManager.enrole("1025637","123.456");
-		CourseManager.enrole("1025990","123.456");
-		CourseManager.enrole("1025991","173.432");
-		CourseManager.enrole("1034523","123.456");
-		CourseManager.enrole("0025995","123.456");
-		CourseManager.enrole("0025995","123.456");
-		CourseManager.enrole("0025995","133.412");
-		CourseManager.enrole("0025995","123.456");
-		CourseManager.enrole("0025994","123.456");
-		CourseManager.enrole("0825993","133.451");
-		CourseManager.enrole("1025996","123.451");
+		//enrolements
+		CourseManager.enrole("123.456","1025637");
+		CourseManager.enrole("123.456","1025990");
+		CourseManager.enrole("173.432","1025991");
+		CourseManager.enrole("123.456","1034523");
+		CourseManager.enrole("123.456","0025995");
+		CourseManager.enrole("123.456","0025995");
+		CourseManager.enrole("133.412","0025995");
+		CourseManager.enrole("123.456","0025995");
+		CourseManager.enrole("123.456","0025994");
+		CourseManager.enrole("133.451","0825993");
+		CourseManager.enrole("123.451","1025996");
 		
 		System.out.println("-Liste aller LVAs:");
 		List<Course> courses = null;
