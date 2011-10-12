@@ -9,7 +9,7 @@ public class CourseManager {
 
 	private static final List<Course> courses = new ArrayList<Course>();
 	private static final List<Student> students = new ArrayList<Student>();
-	private static final Map<String, List<String>> courseStudents = new HashMap<String, List<String>>();
+	private static final Map<Course, List<Student>> courseStudents = new HashMap<Course, List<Student>>();
 	
 	public static Course createNewCourse(String lvaIdentifier, String name) {
 		Course course = new Course(lvaIdentifier, name);
@@ -32,11 +32,31 @@ public class CourseManager {
 	}
 	
 	public static void enrole(String lvaIdentifier, String matrikelNumber) {
-		List<String> studentsInCourse = courseStudents.get(lvaIdentifier);
+		Course course = getCourseFor(lvaIdentifier);
+		List<Student> studentsInCourse = courseStudents.get(course);
 		if (studentsInCourse == null) {
-			studentsInCourse = new ArrayList<String>();
-			courseStudents.put(lvaIdentifier, studentsInCourse);
+			studentsInCourse = new ArrayList<Student>();
+			courseStudents.put(course, studentsInCourse);
 		}
-		studentsInCourse.add(matrikelNumber);
+		Student student = getStudentFor(matrikelNumber);
+		studentsInCourse.add(student);
+	}
+	
+	private static Course getCourseFor(String lvaIdentifier) {
+		for (Course course : courses) {
+			if (course.getLvaIdentifier().equals(lvaIdentifier)) {
+				return course;
+			}
+		}
+		throw new IllegalArgumentException("Course '" + lvaIdentifier + "' does not exist");
+	}
+	
+	private static Student getStudentFor(String matrikelNumber) {
+		for (Student student : students) {
+			if (student.getMatrikelNumber().equals(matrikelNumber)) {
+				return student;
+			}
+		}
+		throw new IllegalArgumentException("Student '" + matrikelNumber + "' does not exist");
 	}
 }

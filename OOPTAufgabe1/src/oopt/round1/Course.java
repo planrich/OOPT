@@ -33,6 +33,11 @@ public class Course {
 		}
 		return false;
 	}
+	
+	@Override
+	public int hashCode() {
+		return lvaIdentifier.hashCode();
+	}
 
 	public Date getEarlyEnrol() {
 		return earlyEnrol;
