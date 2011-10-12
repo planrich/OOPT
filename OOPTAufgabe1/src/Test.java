@@ -83,6 +83,7 @@ public class Test {
 					size)); 
 		}
 		
+		System.out.println("-Liste aller Studenten:");
 		//list all students that are enroled into any course
 		List<Student> enroledStudents = courseManager.getStudents();
 		for (Student student : enroledStudents) {
