@@ -51,7 +51,7 @@ public class CourseManagerTest {
 		Assert.assertEquals(2, CourseManager.studentCountIn("456"));
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testStudentCountForNonExistingCourse() {
 		Assert.assertEquals(0, CourseManager.studentCountIn("Does not exist"));
 	}
