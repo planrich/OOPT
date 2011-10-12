@@ -1,3 +1,4 @@
+import java.util.Date;
 import java.util.List;
 
 import oopt.round1.Course;
@@ -25,12 +26,26 @@ public class Test {
 		CourseManager.createNewStudent("1025996", "Albert Einstein");
 		
 		//courses
-		CourseManager.createNewCourse("123.456", "Objektorientierte Programmiertechniken");
-		CourseManager.createNewCourse("123.451", "Funktionale Programmierung");
-		CourseManager.createNewCourse("133.412", "Statistik und Wahrscheinlichkeitsrechnung");
-		CourseManager.createNewCourse("133.452", "Logikorientiere Programmierung");
-		CourseManager.createNewCourse("173.432", "Mathematik 2");
-		CourseManager.createNewCourse("133.451", "Daten- und Informatikrecht");
+		Course course = CourseManager.createNewCourse("123.456", "Objektorientierte Programmiertechniken");
+		course.setLateEnrol(new Date(System.currentTimeMillis() + (10 * 60 * 60 * 24) * 100)); //in 10 days
+		course.setLateUnenrol(new Date(System.currentTimeMillis() + (11 * 60 * 60 * 24) * 100)); //in 11 days
+		course = CourseManager.createNewCourse("123.451", "Funktionale Programmierung");
+		course.setLateEnrol(new Date(System.currentTimeMillis() + (1 * 60 * 60 * 24) * 100)); //in 1 days
+		course.setLateUnenrol(new Date(System.currentTimeMillis() + (10 * 60 * 60 * 24) * 100)); //in 10 days
+		course = CourseManager.createNewCourse("133.412", "Statistik und Wahrscheinlichkeitsrechnung");
+		course.setLateEnrol(new Date(System.currentTimeMillis() + (2 * 60 * 60 * 24) * 100)); //in 2 days
+		course.setLateUnenrol(new Date(System.currentTimeMillis() + (5 * 60 * 60 * 24) * 100)); //in 5 days
+		course = CourseManager.createNewCourse("133.452", "Logikorientiere Programmierung");
+		course.setLateEnrol(new Date(System.currentTimeMillis() + (7 * 60 * 60 * 24) * 100)); //in 7 days
+		course.setLateUnenrol(new Date(System.currentTimeMillis() + (10 * 60 * 60 * 24) * 100)); //in 10 days
+		course = CourseManager.createNewCourse("133.451", "Daten- und Informatikrecht");
+		course.setLateEnrol(new Date(System.currentTimeMillis() + (10 * 60 * 60 * 24) * 100)); //in 10 days
+		course.setLateUnenrol(new Date(System.currentTimeMillis() + (10 * 60 * 60 * 24) * 100)); //in 10 days
+
+		course = CourseManager.createNewCourse("173.432", "Mathematik 2");
+		course.setLateEnrol(new Date(System.currentTimeMillis() - (3 * 60 * 60 * 24) * 100)); //before 3 days
+		course.setEarlyEnrol(new Date(System.currentTimeMillis() - (4 * 60 * 60 * 24) * 100)); //before 4 days
+		course.setLateUnenrol(new Date(System.currentTimeMillis() + (2 * 60 * 60 * 24) * 100)); //in 2 days
 		
 		//enrolements
 		CourseManager.enrole("123.456","1025637");
@@ -49,16 +64,21 @@ public class Test {
 		List<Course> courses = null;
 		//list all course informations
 		for (Course c : courses) {
+			
+			int size = 0;
+			
 			System.out.println(String.format(
 					"%s : %s" +
 					"\n\tAnmeldungbegin: %s" +
 					"\n\tAnmeldungsende: %s" +
-					"\n\tAbmeldungsende: %s",
+					"\n\tAbmeldungsende: %s" +
+					"\n\tAnzahl der angemeldeten Studenten: %d",
 					c.getLvaIdentifier(), 
 					c.getName(), 
 					c.getEarlyEnrol(),
 					c.getLateEnrol(),
-					c.getLateUnenrol())); 
+					c.getLateUnenrol(),
+					size)); 
 		}
 		
 		//list all students that are enroled into any course
