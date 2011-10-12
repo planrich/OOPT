@@ -40,4 +40,19 @@ public class CourseManagerTest {
 		CourseManager.createNewStudent("123", "Simon Zuend");
 		CourseManager.createNewStudent("123", "Klaus Nigsch");
 	}
+	
+	@Test
+	public void testStudentCountInCourse() {
+		CourseManager.createNewCourse("456", "Course 1");
+		CourseManager.createNewStudent("456", "Simon Zuend");
+		CourseManager.createNewStudent("567", "Klaus Nigsch");
+		CourseManager.enrole("456", "456");
+		CourseManager.enrole("456", "567");
+		Assert.assertEquals(2, CourseManager.studentCountIn("456"));
+	}
+	
+	@Test
+	public void testStudentCountForNonExistingCourse() {
+		Assert.assertEquals(0, CourseManager.studentCountIn("Does not exist"));
+	}
 }
