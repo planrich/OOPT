@@ -12,6 +12,13 @@ public class CourseManager {
 	private final List<Student> students = new ArrayList<Student>();
 	private final Map<Course, List<Student>> enrolments = new HashMap<Course, List<Student>>();
 	
+	/**
+	 * Create a new {@link Course} with the specified data.
+	 * {@link IllegalArgumentException} is thrown if the {@link Course} (with this lvaIdentifier) already exists
+	 * @param lvaIdentifier
+	 * @param name
+	 * @return the created {@link Course}
+	 */
 	public Course createNewCourse(String lvaIdentifier, String name) {
 		Course course = new Course(lvaIdentifier, name);
 		if (courses.contains(course)) {
@@ -22,6 +29,14 @@ public class CourseManager {
 		return course;
 	}
 	
+	/**
+	 * Create a new {@link Student}
+	 * {@link IllegalArgumentException} is thrown if another student with this matrikelNumber
+	 * exists.
+	 * @param matrikelNumber
+	 * @param name
+	 * @return
+	 */
 	public Student createNewStudent(String matrikelNumber, String name) {
 		Student student = new Student(matrikelNumber, name);
 		if (students.contains(student)) {
@@ -33,6 +48,12 @@ public class CourseManager {
 	}
 	
 	//for now we return boolean maybe change that in the future?
+	/**
+	 * Enrole a {@link Student} to a {@link Course} 
+	 * @param lvaIdentifier
+	 * @param matrikelNumber
+	 * @return true if the {@link Student} is successfully enroled, false otherwise
+	 */
 	public boolean enrole(String lvaIdentifier, String matrikelNumber) {
 
 		Course course = getCourseFor(lvaIdentifier);
@@ -60,6 +81,12 @@ public class CourseManager {
 		return true;
 	}
 	
+	/**
+	 * Unenrole a {@link Student} from a course.
+	 * @param lvaIdentifier
+	 * @param matrikelNumber
+	 * @return true if the unenrole deadline has not passed, false otherwise
+	 */
 	public boolean unenrole(String lvaIdentifier, String matrikelNumber) {
 
 		Course course = getCourseFor(lvaIdentifier);
@@ -78,6 +105,11 @@ public class CourseManager {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param lvaIdentifier
+	 * @return count of all {@link Student}s that have been created
+	 */
 	public int studentCountIn(String lvaIdentifier) {
 		Course course = getCourseFor(lvaIdentifier);
 		List<Student> studentsInCourse = enrolments.get(course);
