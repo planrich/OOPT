@@ -1,6 +1,7 @@
 package oopt.round2.test;
 
 import java.util.Date;
+import java.util.NoSuchElementException;
 
 import junit.framework.Assert;
 
@@ -66,7 +67,7 @@ public class CourseManagerTest {
 		Assert.assertEquals(2, courseManager.studentCountIn("456"));
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NoSuchElementException.class)
 	public void testStudentCountForNonExistingCourse() {
 		Assert.assertEquals(0, courseManager.studentCountIn("Does not exist"));
 
@@ -129,7 +130,7 @@ public class CourseManagerTest {
 		Assert.assertFalse(courseManager.unenrole("abcd", "12321"));
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NoSuchElementException.class)
 	public void deleteIllegalCourse() {
 		courseManager.createNewCourse("123123", "OOPT");
 		courseManager.deleteCourse("1231232");

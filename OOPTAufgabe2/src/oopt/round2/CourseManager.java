@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import oopt.round2.Course.State;
 
@@ -150,7 +151,7 @@ public class CourseManager {
 			}
 		}
 		
-		throw new IllegalArgumentException("Course '" + lvaIdentifier + "' does not exist");
+		throw new NoSuchElementException("Course '" + lvaIdentifier + "' does not exist");
 	}
 	
 	private Student getStudentFor(String matrikelNumber) {
@@ -159,6 +160,6 @@ public class CourseManager {
 				return student;
 			}
 		}
-		throw new IllegalArgumentException("Student '" + matrikelNumber + "' does not exist");
+		throw new NoSuchElementException("Student '" + matrikelNumber + "' does not exist");
 	}
 }
