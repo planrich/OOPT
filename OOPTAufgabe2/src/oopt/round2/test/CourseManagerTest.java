@@ -5,6 +5,7 @@ import java.util.Date;
 import junit.framework.Assert;
 
 import oopt.round2.Course;
+import oopt.round2.Course.State;
 import oopt.round2.CourseManager;
 
 import org.junit.Before;
@@ -119,12 +120,31 @@ public class CourseManagerTest {
 	@Test
 	public void tooLateUnenrolement() {
 		courseManager.createNewStudent("12321", "Simon Zuend");
-		Course c = courseManager.createNewCourse("abcd", "LVA");
-		c.setLateEnrol(new Date(System.currentTimeMillis() + (3 * 60 * 60 * 24) * 100));
-		c.setEarlyEnrol(new Date(System.currentTimeMillis() - (4 * 60 * 60 * 24) * 100));
-		c.setLateUnenrol(new Date(System.currentTimeMillis() - (4 * 60 * 60 * 24) * 100));
+		Course course = courseManager.createNewCourse("abcd", "LVA");
+		course.setLateEnrol(new Date(System.currentTimeMillis() + (3 * 60 * 60 * 24) * 100));
+		course.setEarlyEnrol(new Date(System.currentTimeMillis() - (4 * 60 * 60 * 24) * 100));
+		course.setLateUnenrol(new Date(System.currentTimeMillis() - (4 * 60 * 60 * 24) * 100));
 		
 		Assert.assertTrue(courseManager.enrole("abcd", "12321"));
 		Assert.assertFalse(courseManager.unenrole("abcd", "12321"));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void deleteIllegalCourse() {
+		courseManager.createNewCourse("123123", "OOPT");
+		courseManager.deleteCourse("1231232");
+	}
+	
+	@Test
+	public void testNormalState() {
+		Course course = courseManager.createNewCourse("123123", "OOPT");
+		Assert.assertEquals(course.getState(), State.DEFAULT);
+	}
+	
+	@Test
+	public void testDeletedState() {
+		Course course = courseManager.createNewCourse("123123", "OOPT");
+		courseManager.deleteCourse("123123");
+		Assert.assertEquals(course.getState(), State.DELETED);
 	}
 }

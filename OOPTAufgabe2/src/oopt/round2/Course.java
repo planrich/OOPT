@@ -17,12 +17,19 @@ public class Course {
 	private Date lateEnrol = new Date();
 	private Date lateUnenrol = new Date();
 	
+	public enum State {
+		DEFAULT, DELETED; 
+	}
+	
+	private State state;
+	
 	public Course(String lvaIdentifier, String name) {
 		if (lvaIdentifier == null || name == null) {
 			throw new IllegalArgumentException("Invalid argument in constructors. Must not be null.");
 		}
 		this.lvaIdentifier = lvaIdentifier;
 		this.name = name;
+		this.state = State.DEFAULT;
 	}
 	
 	@Override
@@ -72,5 +79,11 @@ public class Course {
 
 	public String getName() {
 		return name;
+	}
+	public State getState() {
+		return state;
+	}
+	public void setState(State status) {
+		this.state = status;
 	}
 }

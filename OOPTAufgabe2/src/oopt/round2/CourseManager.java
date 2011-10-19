@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import oopt.round2.Course.State;
+
 public class CourseManager {
 
 	private final List<Course> courses = new ArrayList<Course>();
@@ -120,11 +122,25 @@ public class CourseManager {
 	}
 	
 	public List<Course> getCourses() {
-		return courses;
+		List<Course> visibleCourses = new ArrayList<Course>();
+		for (Course course : courses){
+			if(course.getState() == State.DEFAULT)
+				visibleCourses.add(course);
+		}
+		return visibleCourses;
 	}
 
 	public List<Student> getStudents() {
 		return students;
+	}
+	
+	public void deleteCourse (String lvaIdentifier) {
+		Course course = getCourseFor(lvaIdentifier);
+		course.setState(State.DELETED);
+	}
+	public void enableCourse (String lvaIdentifier) {
+		Course course = getCourseFor(lvaIdentifier);
+		course.setState(State.DEFAULT);
 	}
 	
 	private Course getCourseFor(String lvaIdentifier) {
@@ -133,6 +149,7 @@ public class CourseManager {
 				return course;
 			}
 		}
+		
 		throw new IllegalArgumentException("Course '" + lvaIdentifier + "' does not exist");
 	}
 	
