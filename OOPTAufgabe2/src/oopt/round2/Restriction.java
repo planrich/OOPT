@@ -5,7 +5,7 @@ import java.util.ArrayList;
 // abfragen, ob Student Restrictions erfüllt
 public class Restriction {
 	
-	public List<Achievement> achievements = new ArrayList<Achievement>();
+	private List<Achievement> achievements = new ArrayList<Achievement>();
 
 	public Restriction() {	
 	}
@@ -19,6 +19,10 @@ public class Restriction {
 	}
 	
 	public boolean checkRestrictionsFor(Student student) {
-		return true;
+		List<Achievement> studentAchievements = student.getAchievements();
+		if(achievements.containsAll(studentAchievements)) {
+			return true;
+		}
+		return false;
 	}
 }

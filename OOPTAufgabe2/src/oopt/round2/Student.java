@@ -1,5 +1,8 @@
 package oopt.round2;
 
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  * A student at any university
  * 
@@ -10,6 +13,8 @@ public class Student {
 
 	private final String matrikelNumber;
 	private final String name;
+	
+	private List<Achievement> achievements = new ArrayList<Achievement>();
 	
 	public Student(String matrikelNumber, String name) {
 		if (matrikelNumber == null || name == null) {
@@ -37,5 +42,13 @@ public class Student {
 
 	public String getName() {
 		return name;
+	}
+	
+	public void addAchievements(Achievement achievement) {
+		achievements.add(achievement);
+	}
+	
+	public List<Achievement> getAchievements() {
+		return achievements;
 	}
 }
