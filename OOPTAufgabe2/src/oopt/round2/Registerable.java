@@ -9,11 +9,17 @@ public abstract class Registerable {
 	private final List<Restriction> restrictions = new ArrayList<Restriction>();
 	private final List<Student> students = new ArrayList<Student>();
 	
+	private int maxStudents = 0;
+	
 	private Date earlyEnrol = new Date();
 	private Date lateEnrol = new Date();
 	private Date lateUnenrol = new Date();
 	
 	public boolean registerStudent(Student student) {
+		if (students.size() >= maxStudents) {
+			return false;
+		}
+		
 		Date now = new Date();
 		if (now.before(earlyEnrol) || now.after(lateEnrol)) {
 			return false;
@@ -67,6 +73,14 @@ public abstract class Registerable {
 	
 	public void setLateUnenrol(Date lateUnenrol) {
 		this.lateUnenrol = lateUnenrol;
+	}
+	
+	public void setMaxStudents(int amount) {
+		this.maxStudents = amount;
+	}
+	
+	public int getMaxStudents() {
+		return maxStudents;
 	}
 	
 	@Override
