@@ -9,12 +9,11 @@ import java.util.NoSuchElementException;
 
 import oopt.round2.Course.State;
 
-public class UniversityManager {
+public class UniversityService {
 
 	private final List<Course> courses = new ArrayList<Course>();
 	private final List<Course> deletedCourses = new ArrayList<Course>();
 	private final List<Student> students = new ArrayList<Student>();
-	private final Map<Course, List<Student>> enrolments = new HashMap<Course, List<Student>>();
 	
 	/**
 	 * Create a new {@link Course} with the specified data.
@@ -30,7 +29,6 @@ public class UniversityManager {
 		}
 		
 		courses.add(course);
-		enrolments.put(course, new ArrayList<Student>());
 		return course;
 	}
 	
@@ -52,7 +50,6 @@ public class UniversityManager {
 		return student;
 	}
 	
-	//for now we return boolean maybe change that in the future?
 	/**
 	 * Enrole a {@link Student} to a {@link Course} 
 	 * @param lvaIdentifier
@@ -62,28 +59,9 @@ public class UniversityManager {
 	public boolean enrole(String lvaIdentifier, String matrikelNumber) {
 
 		Course course = getCourseFor(lvaIdentifier);
-		
-		Date now = new Date();
-		
-		if (now.before(course.getEarlyEnrol()) || now.after(course.getLateEnrol())) {
-			return false;
-		}
-		
-		List<Student> studentsInCourse = enrolments.get(course);
-		if (studentsInCourse == null) {
-			studentsInCourse = new ArrayList<Student>();
-			enrolments.put(course, studentsInCourse);
-		}
-		
 		Student student = getStudentFor(matrikelNumber);
 		
-		if (studentsInCourse.contains(student)) {
-			return false;
-		}
-		
-		studentsInCourse.add(student);
-		
-		return true;
+		return course.registerStudent(student);
 	}
 	
 	/**
@@ -92,9 +70,8 @@ public class UniversityManager {
 	 */
 	public void cancelCourse(String courseIdentifier) {
 		Course course = getCourseFor(courseIdentifier);
-		List<Student> students = enrolments.remove(course);
 		
-		for (Student student : students) {
+		for (Student student : course.students) {
 			informCanceled(student,course,"Course has been canceled");
 		}
 		
@@ -116,15 +93,9 @@ public class UniversityManager {
 	public boolean unenrole(String lvaIdentifier, String matrikelNumber) {
 
 		Course course = getCourseFor(lvaIdentifier);
+		Student student = getStudentFor(matrikelNumber);
 		
-		Date now = new Date();
-		
-		if (now.after(course.getLateUnenrol())) {
-			return false;
-		}
-		
-		List<Student> studentsInCourse = enrolments.get(course);
-		return studentsInCourse.remove(getStudentFor(matrikelNumber));
+		return course.unregisterStudent(student);
 	}
 
 	/**
@@ -134,9 +105,8 @@ public class UniversityManager {
 	 */
 	public int studentCountIn(String lvaIdentifier) {
 		Course course = getCourseFor(lvaIdentifier);
-		List<Student> studentsInCourse = enrolments.get(course); //every course has its enrolement created in createNewCourse
-		
-		return studentsInCourse.size();
+
+		return course.students.size();
 	}
 	
 	public List<Course> getCourses() {
@@ -157,21 +127,12 @@ public class UniversityManager {
 		Course course = getCourseFor(lvaIdentifier);
 		courses.remove(course);
 		deletedCourses.add(course);
-		List<Student> students = enrolments.remove(course);
-		
-		
-		/*for (Student student : students) {
-			
-		}*/
-		
-		students.clear();
 	}
 	
 	public void enableCourse (String lvaIdentifier) {
 		Course course = getDeletedCourseFor(lvaIdentifier);
 		deletedCourses.remove(course);
 		courses.add(course);
-		enrolments.put(course, new ArrayList<Student>());
 	}
 	
 	private Course getDeletedCourseFor(String lvaIdentifier) {

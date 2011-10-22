@@ -3,11 +3,12 @@ Erste Idee: entweder neues Feld in Klasse, oder Kurse in andere List
 verschieben
 
 ---
-enableCourse
+enable/disableCourse with flag
 
 2) Eine LVA kann auch abgesagt werden und alle Studenten werden
 darueber informiert.
 Impl: LVA hat zusaetzliche Methode die das bewerkstelligen kann
+-- cancel
 
 3) Bedingungen zur Anmeldung sollen eingebaut werden. STEOP, STEG,
 azyklische Bedingungn von LVAs
