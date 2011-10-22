@@ -20,7 +20,7 @@ public class Restriction {
 	
 	public boolean checkRestrictionsFor(Student student) {
 		List<Achievement> studentAchievements = student.getAchievements();
-		if(achievements.containsAll(studentAchievements)) {
+		if(studentAchievements.containsAll(achievements)) {
 			return true;
 		}
 		return false;

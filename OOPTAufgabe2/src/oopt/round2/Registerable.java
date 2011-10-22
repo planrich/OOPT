@@ -68,4 +68,18 @@ public abstract class Registerable {
 	public void setLateUnenrol(Date lateUnenrol) {
 		this.lateUnenrol = lateUnenrol;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == this) {
+			return true;
+		}
+		
+		if (obj instanceof Registerable) {
+			Registerable registerable = (Registerable) obj;
+			return (registerable.restrictions.equals(this.restrictions)
+					&& registerable.students.equals(this.students));
+		}
+		return false;
+	}
 }
