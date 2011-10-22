@@ -123,11 +123,7 @@ public class UniversityManager {
 		}
 		
 		List<Student> studentsInCourse = enrolments.get(course);
-		if (studentsInCourse != null) {
-			return studentsInCourse.remove(getStudentFor(matrikelNumber));
-		}
-		
-		return false;
+		return studentsInCourse.remove(getStudentFor(matrikelNumber));
 	}
 
 	/**
@@ -137,18 +133,16 @@ public class UniversityManager {
 	 */
 	public int studentCountIn(String lvaIdentifier) {
 		Course course = getCourseFor(lvaIdentifier);
-		List<Student> studentsInCourse = enrolments.get(course);
-		if (studentsInCourse == null) {
-			return 0;
-		}
+		List<Student> studentsInCourse = enrolments.get(course); //every course has its enrolement created in createNewCourse
+		
 		return studentsInCourse.size();
 	}
 	
 	public List<Course> getCourses() {
 		List<Course> visibleCourses = new ArrayList<Course>();
-		for (Registerable r : courses){
-			if (r instanceof Course && ((Course)r).getState() == State.DEFAULT) { //not good change that later
-				visibleCourses.add((Course)r);
+		for (Course course : courses){
+			if (course.getState() == State.DEFAULT) {
+				visibleCourses.add(course);
 			}
 		}
 		return visibleCourses;
@@ -168,9 +162,9 @@ public class UniversityManager {
 	}
 	
 	private Course getCourseFor(String lvaIdentifier) {
-		for (Registerable r : courses) {
-			if (r.getLvaIdentifier().equals(lvaIdentifier) && r instanceof Course) {
-				return (Course)r;
+		for (Course course : courses) {
+			if (course.getLvaIdentifier().equals(lvaIdentifier)) {
+				return course;
 			}
 		}
 		
