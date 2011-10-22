@@ -26,9 +26,13 @@ public class Restriction {
 	
 	public boolean checkRestrictionsFor(Student student) {
 		List<Achievement> studentAchievements = student.getAchievements();
-		if(studentAchievements.containsAll(achievements)) {
-			return true;
+		
+		for (Achievement achievement : achievements) {
+			if (!studentAchievements.contains(achievement)) {
+				return false;
+			}
 		}
+		
 		return false;
 	}
 	
