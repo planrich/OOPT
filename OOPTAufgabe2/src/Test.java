@@ -88,7 +88,7 @@ public class Test {
 			System.out.println("no");
 		}
 		
-		System.out.print("Arnold now tries to enrole to Mathematik 2 without having made Mathematik 1 Examination...");
+		System.out.print("Arnold now tries to enrole to Mathematik 2 without having made Mathematik 1 examination...");
 		if (mathe2.registerStudent(arnold)) {
 			System.out.println("greate success");
 		} else {

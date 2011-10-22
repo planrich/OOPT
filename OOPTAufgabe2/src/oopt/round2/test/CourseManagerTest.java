@@ -57,7 +57,8 @@ public class CourseManagerTest {
 	
 	@Test
 	public void testStudentCountInCourse() {
-		courseManager.createNewCourse("456", "Course 1");
+		Course c = courseManager.createNewCourse("456", "Course 1");
+		c.setMaxStudents(100);
 		courseManager.createNewStudent("456", "Simon Zuend");
 		courseManager.createNewStudent("567", "Klaus Nigsch");
 		courseManager.enrole("456", "456");
@@ -75,6 +76,7 @@ public class CourseManagerTest {
 	public void normalEnrolement() {
 		courseManager.createNewStudent("1232", "Simon Zuend");
 		Course c = courseManager.createNewCourse("abc", "LVA");
+		c.setMaxStudents(10);
 		c.setLateEnrol(new Date(System.currentTimeMillis() + (3 * 60 * 60 * 24) * 100));
 		c.setEarlyEnrol(new Date(System.currentTimeMillis() - (4 * 60 * 60 * 24) * 100));
 		c.setLateUnenrol(new Date(System.currentTimeMillis() + (4 * 60 * 60 * 24) * 100));
@@ -108,6 +110,7 @@ public class CourseManagerTest {
 	public void unenroleNormal() {
 		courseManager.createNewStudent("12321", "Simon Zuend");
 		Course c = courseManager.createNewCourse("abcd", "LVA");
+		c.setMaxStudents(10);
 		c.setLateEnrol(new Date(System.currentTimeMillis() + (3 * 60 * 60 * 24) * 100));
 		c.setEarlyEnrol(new Date(System.currentTimeMillis() - (4 * 60 * 60 * 24) * 100));
 		c.setLateUnenrol(new Date(System.currentTimeMillis() + (4 * 60 * 60 * 24) * 100));
@@ -120,6 +123,7 @@ public class CourseManagerTest {
 	public void tooLateUnenrolement() {
 		courseManager.createNewStudent("12321", "Simon Zuend");
 		Course course = courseManager.createNewCourse("abcd", "LVA");
+		course.setMaxStudents(10);
 		course.setLateEnrol(new Date(System.currentTimeMillis() + (3 * 60 * 60 * 24) * 100));
 		course.setEarlyEnrol(new Date(System.currentTimeMillis() - (4 * 60 * 60 * 24) * 100));
 		course.setLateUnenrol(new Date(System.currentTimeMillis() - (4 * 60 * 60 * 24) * 100));
