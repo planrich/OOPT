@@ -150,4 +150,10 @@ public class UniversityService {
 		}
 		throw new NoSuchElementException("Student '" + matrikelNumber + "' does not exist");
 	}
+
+	public void pass(Student student, Registerable registerable) {
+		if (registerable.getStudents().contains(student) && registerable.hasAchievement()) {
+			student.addAchievements(registerable.getAchievement());
+		}
+	}
 }

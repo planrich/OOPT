@@ -5,6 +5,7 @@ import oopt.round2.Achievement;
 import oopt.round2.Course;
 import oopt.round2.Exam;
 import oopt.round2.Registerable;
+import oopt.round2.Restriction;
 import oopt.round2.Student;
 import oopt.round2.UniversityService;
 
@@ -28,62 +29,32 @@ public class Test {
 		universityService.createNewStudent("0825993", "John Rambo");
 		universityService.createNewStudent("0025994", "Morgan Freeman");
 		universityService.createNewStudent("0025995", "Arnold Schwarzenegger");
-		universityService.createNewStudent("1025996", "Albert Einstein");
-		
-		//courses
-		Course course = universityService.createNewCourse("123.456", "Objektorientierte Programmiertechniken");
-		course.setLateEnrol(new Date(System.currentTimeMillis() + (10 * 60 * 60 * 24) * 100)); //in 10 days
-		course.setLateUnenrol(new Date(System.currentTimeMillis() + (11 * 60 * 60 * 24) * 100)); //in 11 days
-		course = universityService.createNewCourse("123.451", "Funktionale Programmierung");
-		course.setLateEnrol(new Date(System.currentTimeMillis() + (1 * 60 * 60 * 24) * 100)); //in 1 days
-		course.setLateUnenrol(new Date(System.currentTimeMillis() + (10 * 60 * 60 * 24) * 100)); //in 10 days
-		course = universityService.createNewCourse("133.412", "Statistik und Wahrscheinlichkeitsrechnung");
-		course.setLateEnrol(new Date(System.currentTimeMillis() + (2 * 60 * 60 * 24) * 100)); //in 2 days
-		course.setLateUnenrol(new Date(System.currentTimeMillis() + (5 * 60 * 60 * 24) * 100)); //in 5 days
-		course = universityService.createNewCourse("133.452", "Logikorientiere Programmierung");
-		course.setLateEnrol(new Date(System.currentTimeMillis() + (7 * 60 * 60 * 24) * 100)); //in 7 days
-		course.setLateUnenrol(new Date(System.currentTimeMillis() + (10 * 60 * 60 * 24) * 100)); //in 10 days
-		course = universityService.createNewCourse("133.451", "Bodybuilding");
-		course.setLateEnrol(new Date(System.currentTimeMillis() + (10 * 60 * 60 * 24) * 100)); //in 10 days
-		course.setLateUnenrol(new Date(System.currentTimeMillis() + (10 * 60 * 60 * 24) * 100)); //in 10 days
+		Student albert_einstein = universityService.createNewStudent("1025996", "Albert Einstein");
 
-		course = universityService.createNewCourse("173.432", "Mathematik 2");
-		course.setLateEnrol(new Date(System.currentTimeMillis() - (3 * 60 * 60 * 24) * 100)); //before 3 days
-		course.setEarlyEnrol(new Date(System.currentTimeMillis() - (4 * 60 * 60 * 24) * 100)); //before 4 days
-		course.setLateUnenrol(new Date(System.currentTimeMillis() + (2 * 60 * 60 * 24) * 100)); //in 2 days
+		Course mathe2 = universityService.createNewCourse("173.432", "Mathematik 2");
+		mathe2.setLateEnrol(new Date(System.currentTimeMillis() - (3 * 60 * 60 * 24) * 100)); //before 3 days
+		mathe2.setEarlyEnrol(new Date(System.currentTimeMillis() + (4 * 60 * 60 * 24) * 100)); //in 4 days
+		mathe2.setLateUnenrol(new Date(System.currentTimeMillis() + (6 * 60 * 60 * 24) * 100)); //in 6 days
 		
-		course = universityService.createNewCourse("174.431", "Mathematik 1");
+		Course mathe1 = universityService.createNewCourse("174.431", "Mathematik 1");
 		Registerable mathe1_exam = new Exam("EI 7", new Date(), new Date());
-		//course.
-		
-		
-		
-		//achievments
-		Achievement steop = new Achievement("");
-		Achievement steg = new Achievement("");
-		
-		
+		mathe1.add(mathe1_exam);
+		Achievement mathe1_achieve = new Achievement(mathe1_exam, 6);
+		mathe1_exam.setAchievement(mathe1_achieve);
+
+		mathe2.getRestrictions().addAchievement(mathe1_achieve);
 		
 		//enrolements
 		System.out.println("###Checking enrolements in the valid enrolement timespan:");
 		System.out.print(String.format("%s is trying to enrole to %s...","0025995","133.451"));
-		if (universityService.enrole("133.451","0025995")) {
+		if (universityService.enrole("174.431","1025996")) {
 			System.out.println("great success!");
 		} else {
 			System.out.println("failed");
 		}
-		System.out.print(String.format("%s is trying _again_ to enrole to %s...","0025995","133.451"));
-		if (universityService.enrole("133.451","0025995")) {
-			System.out.println("great success!");
-		} else {
-			System.out.println("failed");
-		}
-		System.out.print(String.format("%s is trying to unenrole from %s...","0025995","133.451"));
-		if (universityService.unenrole("133.451","0025995")) {
-			System.out.println("great success!");
-		} else {
-			System.out.println("failed");
-		}
+		
+		
+		universityService.pass(albert_einstein, mathe1_exam);
 		
 		universityService.enrole("173.432","1025991");
 		universityService.enrole("123.456","1025637");

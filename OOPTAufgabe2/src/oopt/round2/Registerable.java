@@ -6,8 +6,10 @@ import java.util.List;
 
 public abstract class Registerable {
 	
-	private final List<Restriction> restrictions = new ArrayList<Restriction>();
+	private final Restriction restrictions = new Restriction();
 	private final List<Student> students = new ArrayList<Student>();
+	
+	private Achievement achievement;
 	
 	private Date earlyEnrol = new Date();
 	private Date lateEnrol = new Date();
@@ -67,5 +69,21 @@ public abstract class Registerable {
 	
 	public void setLateUnenrol(Date lateUnenrol) {
 		this.lateUnenrol = lateUnenrol;
+	}
+	
+	public void setAchievement(Achievement achievement) {
+		this.achievement = achievement;
+	}
+	
+	public Achievement getAchievement() {
+		return achievement;
+	}
+	
+	public Restriction getRestrictions() {
+		return restrictions;
+	}
+
+	public boolean hasAchievement() {
+		return achievement != null;
 	}
 }
