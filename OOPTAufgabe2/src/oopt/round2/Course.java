@@ -1,6 +1,8 @@
 package oopt.round2;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Representing a course at any university.
@@ -8,14 +10,9 @@ import java.util.Date;
  * @author rich
  * @date 12.10.2011
  */
-public class Course {
+public class Course extends Registerable {
 
-	private final String lvaIdentifier;
-	private final String name;
-	
-	private Date earlyEnrol = new Date();
-	private Date lateEnrol = new Date();
-	private Date lateUnenrol = new Date();
+	private final List<Registerable> related;
 	
 	public enum State {
 		DEFAULT, DELETED; 
@@ -24,65 +21,15 @@ public class Course {
 	private State state;
 	
 	public Course(String lvaIdentifier, String name) {
-		if (lvaIdentifier == null || name == null) {
-			throw new IllegalArgumentException("Invalid argument in constructors. Must not be null.");
-		}
-		this.lvaIdentifier = lvaIdentifier;
-		this.name = name;
+		super(lvaIdentifier,name);
 		this.state = State.DEFAULT;
+		this.related = new ArrayList<Registerable>();
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == this) {
-			return true;
-		}
-		if (obj instanceof Course) {
-			Course course = (Course) obj;
-			return course.lvaIdentifier.equals(this.lvaIdentifier);
-		}
-		return false;
-	}
-	
-	@Override
-	public int hashCode() {
-		return lvaIdentifier.hashCode();
-	}
-
-	public Date getEarlyEnrol() {
-		return earlyEnrol;
-	}
-
-	public void setEarlyEnrol(Date earlyEnrol) {
-		this.earlyEnrol = earlyEnrol;
-	}
-
-	public Date getLateEnrol() {
-		return lateEnrol;
-	}
-
-	public void setLateEnrol(Date lateEnrol) {
-		this.lateEnrol = lateEnrol;
-	}
-
-	public Date getLateUnenrol() {
-		return lateUnenrol;
-	}
-
-	public void setLateUnenrol(Date lateUnenrol) {
-		this.lateUnenrol = lateUnenrol;
-	}
-
-	public String getLvaIdentifier() {
-		return lvaIdentifier;
-	}
-
-	public String getName() {
-		return name;
-	}
 	public State getState() {
 		return state;
 	}
+	
 	public void setState(State status) {
 		this.state = status;
 	}

@@ -2,7 +2,7 @@ import java.util.Date;
 import java.util.List;
 
 import oopt.round2.Course;
-import oopt.round2.CourseManager;
+import oopt.round2.UniversityManager;
 import oopt.round2.Student;
 
 
@@ -12,7 +12,7 @@ public class Test {
 		
 		System.out.println("###Anlegen der Lehrveranstaltungen");
 		
-		CourseManager courseManager = new CourseManager();
+		UniversityManager courseManager = new UniversityManager();
 		
 		//students
 		courseManager.createNewStudent("1025637", "Richard Plangger");

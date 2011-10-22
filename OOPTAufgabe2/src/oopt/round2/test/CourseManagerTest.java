@@ -7,7 +7,7 @@ import junit.framework.Assert;
 
 import oopt.round2.Course;
 import oopt.round2.Course.State;
-import oopt.round2.CourseManager;
+import oopt.round2.UniversityManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,11 +15,11 @@ import org.junit.Test;
 
 public class CourseManagerTest {
 	
-	private CourseManager courseManager;
+	private UniversityManager courseManager;
 	
 	@Before
 	public void init() {
-		courseManager = new CourseManager();
+		courseManager = new UniversityManager();
 	}
 	
 	@Test

@@ -9,11 +9,11 @@ import java.util.NoSuchElementException;
 
 import oopt.round2.Course.State;
 
-public class CourseManager {
+public class UniversityManager {
 
-	private final List<Course> courses = new ArrayList<Course>();
+	private final List<Registerable> courses = new ArrayList<Registerable>();
 	private final List<Student> students = new ArrayList<Student>();
-	private final Map<Course, List<Student>> enrolments = new HashMap<Course, List<Student>>();
+	private final Map<Registerable, List<Student>> enrolments = new HashMap<Registerable, List<Student>>();
 	
 	/**
 	 * Create a new {@link Course} with the specified data.
@@ -124,9 +124,10 @@ public class CourseManager {
 	
 	public List<Course> getCourses() {
 		List<Course> visibleCourses = new ArrayList<Course>();
-		for (Course course : courses){
-			if(course.getState() == State.DEFAULT)
-				visibleCourses.add(course);
+		for (Registerable r : courses){
+			if (r instanceof Course && ((Course)r).getState() == State.DEFAULT) { //not good change that later
+				visibleCourses.add((Course)r);
+			}
 		}
 		return visibleCourses;
 	}
@@ -145,9 +146,9 @@ public class CourseManager {
 	}
 	
 	private Course getCourseFor(String lvaIdentifier) {
-		for (Course course : courses) {
-			if (course.getLvaIdentifier().equals(lvaIdentifier)) {
-				return course;
+		for (Registerable r : courses) {
+			if (r.getLvaIdentifier().equals(lvaIdentifier) && r instanceof Course) {
+				return (Course)r;
 			}
 		}
 		
