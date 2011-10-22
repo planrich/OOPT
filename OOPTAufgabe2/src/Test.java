@@ -39,7 +39,7 @@ public class Test {
 		
 		//mathe 2
 		Course mathe2 = universityService.createNewCourse("173.432", "Mathematik 2");
-		mathe1.setMaxStudents(Integer.MAX_VALUE);
+		mathe2.setMaxStudents(Integer.MAX_VALUE);
 		mathe2.setLateEnrol(new Date(System.currentTimeMillis() + (3 * 60 * 60 * 24) * 100)); //in 3 days
 		mathe2.setEarlyEnrol(new Date(System.currentTimeMillis() - (4 * 60 * 60 * 24) * 100)); //before 4 days
 		mathe2.setLateUnenrol(new Date(System.currentTimeMillis() + (6 * 60 * 60 * 24) * 100)); //in 6 days
@@ -98,7 +98,8 @@ public class Test {
 		//delete a course
 		System.out.println("###Checking deleting feature");
 		System.out.println("Creating course Body Building");
-		universityService.createNewCourse("123.333", "Body Building");
+		Course body = universityService.createNewCourse("123.333", "Body Building");
+		body.setMaxStudents(10);
 		System.out.println("Deleting course Body Building");
 		universityService.deleteCourse("123.333");
 		System.out.print("Arnold wants to enrole to Body Building...");
@@ -127,7 +128,18 @@ public class Test {
 		System.out.println("Taking course Body Building and canceling it.");
 		universityService.cancelCourse("123.333");
 		
-		
-		
+		System.out.println("###Checking maxStudents feature");
+		Course oopt = universityService.createNewCourse("111.222", "OOPT");
+		oopt.setMaxStudents(2);
+		if (universityService.enrole("111.222","1025996")) {
+			System.out.println("1 student of 2 enroled");
+		}
+		if (universityService.enrole("111.222","1025637")) {
+			System.out.println("2 student of 2 enroled");
+		}
+		System.out.print("trying to enrole student which exceeds the maxstudents...");
+		if (!universityService.enrole("111.222","1025637")) {
+			System.out.println("fails");
+		}
 	}
 }

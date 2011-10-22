@@ -2,9 +2,6 @@
 Erste Idee: entweder neues Feld in Klasse, oder Kurse in andere List
 verschieben
 
----
-enable/disableCourse with flag
-
 2) Eine LVA kann auch abgesagt werden und alle Studenten werden
 darueber informiert.
 Impl: LVA hat zusaetzliche Methode die das bewerkstelligen kann
@@ -22,3 +19,10 @@ gewinnt
 
 5) Maximale Anzahl der Teilnehmer von LVAs, Pruefungen etc.
 Impl. setzt eine gute Strukturierung von 4) voraus
+
+
+1) -> works
+2) -> works
+3) -> works
+4) -> works
+5) -> works
