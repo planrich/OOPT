@@ -4,9 +4,7 @@ import java.util.Date;
 import java.util.NoSuchElementException;
 
 import junit.framework.Assert;
-
 import oopt.round2.Course;
-import oopt.round2.Course.State;
 import oopt.round2.UniversityService;
 
 import org.junit.Before;
@@ -134,18 +132,5 @@ public class CourseManagerTest {
 	public void deleteIllegalCourse() {
 		courseManager.createNewCourse("123123", "OOPT");
 		courseManager.deleteCourse("1231232");
-	}
-	
-	@Test
-	public void testNormalState() {
-		Course course = courseManager.createNewCourse("123123", "OOPT");
-		Assert.assertEquals(course.getState(), State.DEFAULT);
-	}
-	
-	@Test
-	public void testDeletedState() {
-		Course course = courseManager.createNewCourse("123123", "OOPT");
-		courseManager.deleteCourse("123123");
-		Assert.assertEquals(course.getState(), State.DELETED);
 	}
 }

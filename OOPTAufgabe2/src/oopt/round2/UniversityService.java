@@ -75,6 +75,8 @@ public class UniversityService {
 	
 	private boolean informCanceled(Student student, Course course, String detail_message) {
 		
+		System.out.println("Info to " + student.getName() + ": " + course.getName() + " has been canceled!"); //TMP for now
+		
 		//TODO: send email?
 		return true;
 	}
@@ -149,5 +151,14 @@ public class UniversityService {
 			}
 		}
 		throw new NoSuchElementException("Student '" + matrikelNumber + "' does not exist");
+	}
+
+	public boolean pass(Student student, Registerable registerable) {
+		if (registerable.getStudents().contains(student) && registerable.hasAchievement()) {
+			student.addAchievements(registerable.getAchievement());
+			return true;
+		}
+		
+		return false;
 	}
 }

@@ -1,13 +1,19 @@
 package oopt.round2;
 
-import java.util.List;
 import java.util.ArrayList;
-// abfragen, ob Student Restrictions erfüllt
+import java.util.List;
+
+
 public class Restriction {
 	
 	private List<Achievement> achievements = new ArrayList<Achievement>();
-
-	public Restriction() {	
+	private String name;
+	
+	public Restriction(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException("Constructor argument must not be null.");
+		}
+		this.name = name;
 	}
 	
 	public void addAchievement(Achievement achievement) {
@@ -20,8 +26,29 @@ public class Restriction {
 	
 	public boolean checkRestrictionsFor(Student student) {
 		List<Achievement> studentAchievements = student.getAchievements();
-		if(achievements.containsAll(studentAchievements)) {
+		
+		for (Achievement achievement : achievements) {
+			if (!studentAchievements.contains(achievement)) {
+				return false;
+			}
+		}
+		
+		return false;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == this) {
 			return true;
+		}
+		
+		if (obj instanceof Restriction) {
+			Restriction restriction = (Restriction) obj;
+			return this.name.equals(restriction.name) && this.achievements.equals(restriction.achievements);
 		}
 		return false;
 	}
