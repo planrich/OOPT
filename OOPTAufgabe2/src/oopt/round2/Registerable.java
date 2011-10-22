@@ -6,7 +6,7 @@ import java.util.List;
 
 public abstract class Registerable {
 	
-	private final Restriction restrictions = new Restriction();
+	private final List<Restriction> restrictions = new ArrayList<Restriction>();
 	private final List<Student> students = new ArrayList<Student>();
 	
 	private Achievement achievement;
@@ -79,7 +79,7 @@ public abstract class Registerable {
 		return achievement;
 	}
 	
-	public Restriction getRestrictions() {
+	public List<Restriction> getRestrictions() {
 		return restrictions;
 	}
 
