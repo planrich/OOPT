@@ -1,10 +1,13 @@
 package oopt.round2;
 
 public class Achievement {
-	//muss schauen ob Student z.B: LVA machen darf
-	private String lvaIdentifier;
 	
-	public Achievement(String lvaIdentifier) {
-		this.lvaIdentifier = lvaIdentifier;
+	private final int ects; 	//ECTS Credits
+	private final Registerable target;
+	
+	
+	public Achievement(Registerable registerable, int credits) {
+		this.target = registerable;
+		this.ects = credits;
 	}
 }
