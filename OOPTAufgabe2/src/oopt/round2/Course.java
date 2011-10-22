@@ -1,7 +1,5 @@
 package oopt.round2;
 
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -11,33 +9,42 @@ import java.util.List;
  * @date 12.10.2011
  */
 public class Course extends Registerable {
-
-	private final List<Registerable> related;
 	
-	public enum State {
-		DEFAULT, DELETED; 
-	}
-	
-	private State state;
+	private String lvaIdentifier;
+	private String name;
 	
 	public Course(String lvaIdentifier, String name) {
-		this.state = State.DEFAULT;
-		this.related = new ArrayList<Registerable>();
-	}
-	
-	public State getState() {
-		return state;
-	}
-	
-	public void setState(State status) {
-		this.state = status;
+		if (lvaIdentifier == null || name == null) {
+			throw new IllegalArgumentException("Constructor arguments must not be null.");
+		}
+		
+		this.lvaIdentifier = lvaIdentifier;
+		this.name = name;
 	}
 
 	public String getLvaIdentifier() {
-		return null;
+		return lvaIdentifier;
 	}
 	
 	public String getName() {
-		return null;
+		return name;
+	}
+	
+	@Override
+	public int hashCode() {
+		return lvaIdentifier.hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == this) {
+			return true;
+		}
+		
+		if (obj instanceof Course) {
+			Course course = (Course) obj;
+			return course.getLvaIdentifier().equals(this.lvaIdentifier);
+		}
+		return false;
 	}
 }
