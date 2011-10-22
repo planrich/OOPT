@@ -15,8 +15,6 @@ public class Test {
 
 	public static void main(String[] args) {
 		
-		System.out.println("###Anlegen der Lehrveranstaltungen");
-		
 		UniversityService universityService = new UniversityService();
 		
 		//students
@@ -35,17 +33,20 @@ public class Test {
 
 		//mathe 1
 		Course mathe1 = universityService.createNewCourse("174.431", "Mathematik 1");
+		mathe1.setMaxStudents(Integer.MAX_VALUE);
 		mathe1.setLateEnrol(new Date(System.currentTimeMillis() + (3 * 60 * 60 * 24) * 100)); //in 3 days
 		mathe1.setEarlyEnrol(new Date(System.currentTimeMillis() - (4 * 60 * 60 * 24) * 100)); //before 4 days
 		mathe1.setLateUnenrol(new Date(System.currentTimeMillis() + (6 * 60 * 60 * 24) * 100)); //in 6 days
 		
 		//mathe 2
 		Course mathe2 = universityService.createNewCourse("173.432", "Mathematik 2");
+		mathe1.setMaxStudents(Integer.MAX_VALUE);
 		mathe2.setLateEnrol(new Date(System.currentTimeMillis() + (3 * 60 * 60 * 24) * 100)); //in 3 days
 		mathe2.setEarlyEnrol(new Date(System.currentTimeMillis() - (4 * 60 * 60 * 24) * 100)); //before 4 days
 		mathe2.setLateUnenrol(new Date(System.currentTimeMillis() + (6 * 60 * 60 * 24) * 100)); //in 6 days
 		
 		Registerable mathe1_exam = new Exam("EI 7", new Date(), new Date());
+		mathe1_exam.setMaxStudents(10);
 		mathe1_exam.setLateEnrol(new Date(System.currentTimeMillis() + (3 * 60 * 60 * 24) * 100)); //in 3 days
 		mathe1_exam.setEarlyEnrol(new Date(System.currentTimeMillis() - (4 * 60 * 60 * 24) * 100)); //before 4 days
 		mathe1_exam.setLateUnenrol(new Date(System.currentTimeMillis() + (6 * 60 * 60 * 24) * 100)); //in 6 days
