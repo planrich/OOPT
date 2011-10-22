@@ -12,6 +12,7 @@ import oopt.round2.Course.State;
 public class UniversityManager {
 
 	private final List<Course> courses = new ArrayList<Course>();
+	private final List<Course> deletedCourses = new ArrayList<Course>();
 	private final List<Student> students = new ArrayList<Student>();
 	private final Map<Course, List<Student>> enrolments = new HashMap<Course, List<Student>>();
 	
@@ -154,11 +155,33 @@ public class UniversityManager {
 	
 	public void deleteCourse (String lvaIdentifier) {
 		Course course = getCourseFor(lvaIdentifier);
-		course.setState(State.DELETED);
+		courses.remove(course);
+		deletedCourses.add(course);
+		List<Student> students = enrolments.remove(course);
+		
+		
+		/*for (Student student : students) {
+			
+		}*/
+		
+		students.clear();
 	}
+	
 	public void enableCourse (String lvaIdentifier) {
-		Course course = getCourseFor(lvaIdentifier);
-		course.setState(State.DEFAULT);
+		Course course = getDeletedCourseFor(lvaIdentifier);
+		deletedCourses.remove(course);
+		courses.add(course);
+		enrolments.put(course, new ArrayList<Student>());
+	}
+	
+	private Course getDeletedCourseFor(String lvaIdentifier) {
+		for (Course course : deletedCourses) {
+			if (course.getLvaIdentifier().equals(lvaIdentifier)) {
+				return course;
+			}
+		}
+		
+		throw new NoSuchElementException("Course '" + lvaIdentifier + "' does not exist");
 	}
 	
 	private Course getCourseFor(String lvaIdentifier) {
