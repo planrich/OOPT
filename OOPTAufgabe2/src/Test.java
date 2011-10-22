@@ -29,24 +29,37 @@ public class Test {
 		universityService.createNewStudent("0025994", "Morgan Freeman");
 		Student arnold = universityService.createNewStudent("0025995", "Arnold Schwarzenegger");
 		Student albert_einstein = universityService.createNewStudent("1025996", "Albert Einstein");
+<<<<<<< HEAD
 
 
 		//mathe 1
 		Course mathe1 = universityService.createNewCourse("174.431", "Mathematik 1");
 		mathe1.setMaxStudents(Integer.MAX_VALUE);
+=======
+
+
+		//mathe 1
+		Course mathe1 = universityService.createNewCourse("174.431", "Mathematik 1");
+>>>>>>> rich
 		mathe1.setLateEnrol(new Date(System.currentTimeMillis() + (3 * 60 * 60 * 24) * 100)); //in 3 days
 		mathe1.setEarlyEnrol(new Date(System.currentTimeMillis() - (4 * 60 * 60 * 24) * 100)); //before 4 days
 		mathe1.setLateUnenrol(new Date(System.currentTimeMillis() + (6 * 60 * 60 * 24) * 100)); //in 6 days
 		
 		//mathe 2
 		Course mathe2 = universityService.createNewCourse("173.432", "Mathematik 2");
+<<<<<<< HEAD
 		mathe1.setMaxStudents(Integer.MAX_VALUE);
+=======
+>>>>>>> rich
 		mathe2.setLateEnrol(new Date(System.currentTimeMillis() + (3 * 60 * 60 * 24) * 100)); //in 3 days
 		mathe2.setEarlyEnrol(new Date(System.currentTimeMillis() - (4 * 60 * 60 * 24) * 100)); //before 4 days
 		mathe2.setLateUnenrol(new Date(System.currentTimeMillis() + (6 * 60 * 60 * 24) * 100)); //in 6 days
 		
 		Registerable mathe1_exam = new Exam("EI 7", new Date(), new Date());
+<<<<<<< HEAD
 		mathe1_exam.setMaxStudents(10);
+=======
+>>>>>>> rich
 		mathe1_exam.setLateEnrol(new Date(System.currentTimeMillis() + (3 * 60 * 60 * 24) * 100)); //in 3 days
 		mathe1_exam.setEarlyEnrol(new Date(System.currentTimeMillis() - (4 * 60 * 60 * 24) * 100)); //before 4 days
 		mathe1_exam.setLateUnenrol(new Date(System.currentTimeMillis() + (6 * 60 * 60 * 24) * 100)); //in 6 days
@@ -55,7 +68,11 @@ public class Test {
 		Achievement mathe1_achieve = new Achievement(mathe1_exam, 6);
 		mathe1_exam.setAchievement(mathe1_achieve);
 
+<<<<<<< HEAD
 		Restriction r = new Restriction("Examination Mathematik 1");
+=======
+		Restriction r = new Restriction();
+>>>>>>> rich
 		r.addAchievement(mathe1_achieve);
 		mathe2.getRestrictions().add(r);
 		
