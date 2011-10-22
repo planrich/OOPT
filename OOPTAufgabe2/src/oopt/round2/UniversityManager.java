@@ -13,7 +13,7 @@ public class UniversityManager {
 
 	private final List<Course> courses = new ArrayList<Course>();
 	private final List<Student> students = new ArrayList<Student>();
-	private final Map<Registerable, List<Student>> enrolments = new HashMap<Registerable, List<Student>>();
+	private final Map<Course, List<Student>> enrolments = new HashMap<Course, List<Student>>();
 	
 	/**
 	 * Create a new {@link Course} with the specified data.
@@ -29,6 +29,7 @@ public class UniversityManager {
 		}
 		
 		courses.add(course);
+		enrolments.put(course, new ArrayList<Student>());
 		return course;
 	}
 	
@@ -85,6 +86,27 @@ public class UniversityManager {
 	}
 	
 	/**
+	 * Reject a {@link Course} and inform them.
+	 * @param courseIdentifier
+	 */
+	public void cancelCourse(String courseIdentifier) {
+		Course course = getCourseFor(courseIdentifier);
+		List<Student> students = enrolments.remove(course);
+		
+		for (Student student : students) {
+			informCanceled(student,course,"Course has been canceled");
+		}
+		
+		deleteCourse(courseIdentifier);
+	}
+	
+	public boolean informCanceled(Student student, Course course, String detail_message) {
+		
+		//TODO: send email?
+		return true;
+	}
+	
+	/**
 	 * Unenrole a {@link Student} from a course.
 	 * @param lvaIdentifier
 	 * @param matrikelNumber
@@ -101,13 +123,9 @@ public class UniversityManager {
 		}
 		
 		List<Student> studentsInCourse = enrolments.get(course);
-		if (studentsInCourse != null) {
-			return studentsInCourse.remove(getStudentFor(matrikelNumber));
-		}
-		
-		return false;
+		return studentsInCourse.remove(getStudentFor(matrikelNumber));
 	}
-	
+
 	/**
 	 * 
 	 * @param lvaIdentifier
@@ -115,18 +133,16 @@ public class UniversityManager {
 	 */
 	public int studentCountIn(String lvaIdentifier) {
 		Course course = getCourseFor(lvaIdentifier);
-		List<Student> studentsInCourse = enrolments.get(course);
-		if (studentsInCourse == null) {
-			return 0;
-		}
+		List<Student> studentsInCourse = enrolments.get(course); //every course has its enrolement created in createNewCourse
+		
 		return studentsInCourse.size();
 	}
 	
 	public List<Course> getCourses() {
 		List<Course> visibleCourses = new ArrayList<Course>();
-		for (Registerable r : courses){
-			if (r instanceof Course && ((Course)r).getState() == State.DEFAULT) { //not good change that later
-				visibleCourses.add((Course)r);
+		for (Course course : courses){
+			if (course.getState() == State.DEFAULT) {
+				visibleCourses.add(course);
 			}
 		}
 		return visibleCourses;
@@ -140,6 +156,7 @@ public class UniversityManager {
 		Course course = getCourseFor(lvaIdentifier);
 		course.setState(State.DELETED);
 	}
+	
 	public void enableCourse (String lvaIdentifier) {
 		Course course = getCourseFor(lvaIdentifier);
 		course.setState(State.DEFAULT);
@@ -148,7 +165,7 @@ public class UniversityManager {
 	private Course getCourseFor(String lvaIdentifier) {
 		for (Course course : courses) {
 			if (course.getLvaIdentifier().equals(lvaIdentifier)) {
-				return (Course)course;
+				return course;
 			}
 		}
 		
