@@ -13,4 +13,12 @@ public class Restriction {
 	public void addAchievement(Achievement achievement) {
 		achievements.add(achievement);
 	}
+	
+	public List<Achievement> getAchievements() {
+		return achievements; 
+	}
+	
+	public boolean checkRestrictionsFor(Student student) {
+		return true;
+	}
 }
