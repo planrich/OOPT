@@ -1,0 +1,23 @@
+1) Man soll die Lehrveranstaltung aus der sichtbaren entfernen koennen.
+Erste Idee: entweder neues Feld in Klasse, oder Kurse in andere List
+verschieben
+
+---
+enableCourse
+
+2) Eine LVA kann auch abgesagt werden und alle Studenten werden
+darueber informiert.
+Impl: LVA hat zusaetzliche Methode die das bewerkstelligen kann
+
+3) Bedingungen zur Anmeldung sollen eingebaut werden. STEOP, STEG,
+azyklische Bedingungn von LVAs
+Impl: Hier streiten sich die Geister :) -> beste Branch gewinnt
+
+4) Anmeldung nicht nur zu LVAs sondern auch zu Pruefungen etc.
+Impl: Hier ist auch unklar was die beste Loesung ist. Wir sind uns
+einig das alle miteinander zu tun haben, deswegen waere hier eine
+Vererbung aus manchen Gesichtspunkten nicht schlecht. -> beste Branch
+gewinnt
+
+5) Maximale Anzahl der Teilnehmer von LVAs, Pruefungen etc.
+Impl. setzt eine gute Strukturierung von 4) voraus

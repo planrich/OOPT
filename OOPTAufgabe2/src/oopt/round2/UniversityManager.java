@@ -11,9 +11,9 @@ import oopt.round2.Course.State;
 
 public class UniversityManager {
 
-	private final List<Registerable> courses = new ArrayList<Registerable>();
+	private final List<Course> courses = new ArrayList<Course>();
 	private final List<Student> students = new ArrayList<Student>();
-	private final Map<Registerable, List<Student>> enrolments = new HashMap<Registerable, List<Student>>();
+	private final Map<Course, List<Student>> enrolments = new HashMap<Course, List<Student>>();
 	
 	/**
 	 * Create a new {@link Course} with the specified data.
@@ -29,6 +29,7 @@ public class UniversityManager {
 		}
 		
 		courses.add(course);
+		enrolments.put(course, new ArrayList<Student>());
 		return course;
 	}
 	
@@ -85,6 +86,27 @@ public class UniversityManager {
 	}
 	
 	/**
+	 * Reject a {@link Course} and inform them.
+	 * @param courseIdentifier
+	 */
+	public void cancelCourse(String courseIdentifier) {
+		Course course = getCourseFor(courseIdentifier);
+		List<Student> students = enrolments.remove(course);
+		
+		for (Student student : students) {
+			informCanceled(student,course,"Course has been canceled");
+		}
+		
+		deleteCourse(courseIdentifier);
+	}
+	
+	public boolean informCanceled(Student student, Course course, String detail_message) {
+		
+		//TODO: send email?
+		return true;
+	}
+	
+	/**
 	 * Unenrole a {@link Student} from a course.
 	 * @param lvaIdentifier
 	 * @param matrikelNumber
@@ -107,7 +129,7 @@ public class UniversityManager {
 		
 		return false;
 	}
-	
+
 	/**
 	 * 
 	 * @param lvaIdentifier
