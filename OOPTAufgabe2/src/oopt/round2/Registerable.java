@@ -19,7 +19,11 @@ public abstract class Registerable {
 			return false;
 		}
 		
-		// TODO: check here for restriction
+		for (Restriction restriction : restrictions) {
+			if (!restriction.checkRestrictionsFor(student)) {
+				return false;
+			}
+		}
 		
 		return students.add(student);
 	}
