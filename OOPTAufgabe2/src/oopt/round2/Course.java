@@ -21,7 +21,6 @@ public class Course extends Registerable {
 	private State state;
 	
 	public Course(String lvaIdentifier, String name) {
-		super(lvaIdentifier,name);
 		this.state = State.DEFAULT;
 		this.related = new ArrayList<Registerable>();
 	}
@@ -32,5 +31,13 @@ public class Course extends Registerable {
 	
 	public void setState(State status) {
 		this.state = status;
+	}
+
+	public String getLvaIdentifier() {
+		return null;
+	}
+	
+	public String getName() {
+		return null;
 	}
 }

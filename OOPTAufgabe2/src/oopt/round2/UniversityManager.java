@@ -11,7 +11,7 @@ import oopt.round2.Course.State;
 
 public class UniversityManager {
 
-	private final List<Registerable> courses = new ArrayList<Registerable>();
+	private final List<Course> courses = new ArrayList<Course>();
 	private final List<Student> students = new ArrayList<Student>();
 	private final Map<Registerable, List<Student>> enrolments = new HashMap<Registerable, List<Student>>();
 	
@@ -146,9 +146,9 @@ public class UniversityManager {
 	}
 	
 	private Course getCourseFor(String lvaIdentifier) {
-		for (Registerable r : courses) {
-			if (r.getLvaIdentifier().equals(lvaIdentifier) && r instanceof Course) {
-				return (Course)r;
+		for (Course course : courses) {
+			if (course.getLvaIdentifier().equals(lvaIdentifier)) {
+				return (Course)course;
 			}
 		}
 		
