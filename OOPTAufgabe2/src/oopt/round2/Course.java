@@ -1,5 +1,8 @@
 package oopt.round2;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Representing a course at any university.
  * 
@@ -10,6 +13,7 @@ public class Course extends Registerable {
 	
 	private String lvaIdentifier;
 	private String name;
+	private final List<Registerable> list;
 	
 	public Course(String lvaIdentifier, String name) {
 		if (lvaIdentifier == null || name == null) {
@@ -18,6 +22,11 @@ public class Course extends Registerable {
 		
 		this.lvaIdentifier = lvaIdentifier;
 		this.name = name;
+		this.list = new ArrayList<Registerable>();
+	}
+	
+	public void add(Registerable registerable) {
+		list.add(registerable);
 	}
 
 	public String getLvaIdentifier() {

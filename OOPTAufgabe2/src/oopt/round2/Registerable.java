@@ -10,6 +10,8 @@ public abstract class Registerable {
 	private final List<Student> students = new ArrayList<Student>();
 	
 	private int maxStudents = 0;
+
+	private Achievement achievement;
 	
 	private Date earlyEnrol = new Date();
 	private Date lateEnrol = new Date();
@@ -95,5 +97,21 @@ public abstract class Registerable {
 					&& registerable.students.equals(this.students));
 		}
 		return false;
+	}
+	
+	public void setAchievement(Achievement achievement) {
+		this.achievement = achievement;
+	}
+	
+	public Achievement getAchievement() {
+		return achievement;
+	}
+	
+	public List<Restriction> getRestrictions() {
+		return restrictions;
+	}
+
+	public boolean hasAchievement() {
+		return achievement != null;
 	}
 }
