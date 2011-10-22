@@ -16,26 +16,21 @@ public abstract class Registerable {
 		return earlyEnrol;
 	}
 	
-	
 	public void setEarlyEnrol(Date earlyEnrol) {
 		this.earlyEnrol = earlyEnrol;
 	}
-	
-	
+
 	public Date getLateEnrol() {
 		return lateEnrol;
-	}
-	
+	}	
 	
 	public void setLateEnrol(Date lateEnrol) {
 		this.lateEnrol = lateEnrol;
 	}
 
-	
 	public Date getLateUnenrol() {
 		return lateUnenrol;
 	}
-
 	
 	public void setLateUnenrol(Date lateUnenrol) {
 		this.lateUnenrol = lateUnenrol;
