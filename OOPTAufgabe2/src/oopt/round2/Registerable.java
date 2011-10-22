@@ -6,12 +6,12 @@ import java.util.List;
 
 public abstract class Registerable {
 	
-	protected final List<Restriction> restrictions = new ArrayList<Restriction>();
-	protected final List<Student> students = new ArrayList<Student>();
+	private final List<Restriction> restrictions = new ArrayList<Restriction>();
+	private final List<Student> students = new ArrayList<Student>();
 	
-	protected Date earlyEnrol = new Date();
-	protected Date lateEnrol = new Date();
-	protected Date lateUnenrol = new Date();
+	private Date earlyEnrol = new Date();
+	private Date lateEnrol = new Date();
+	private Date lateUnenrol = new Date();
 	
 	public boolean registerStudent(Student student) {
 		Date now = new Date();
@@ -35,6 +35,10 @@ public abstract class Registerable {
 		}
 		
 		return students.remove(student);
+	}
+	
+	public List<Student> getStudents() {
+		return students;
 	}
 	
 	public Date getEarlyEnrol() {

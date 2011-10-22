@@ -1,13 +1,8 @@
 package oopt.round2;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
-
-import oopt.round2.Course.State;
 
 public class UniversityService {
 
@@ -71,14 +66,14 @@ public class UniversityService {
 	public void cancelCourse(String courseIdentifier) {
 		Course course = getCourseFor(courseIdentifier);
 		
-		for (Student student : course.students) {
+		for (Student student : course.getStudents()) {
 			informCanceled(student,course,"Course has been canceled");
 		}
 		
 		deleteCourse(courseIdentifier);
 	}
 	
-	public boolean informCanceled(Student student, Course course, String detail_message) {
+	private boolean informCanceled(Student student, Course course, String detail_message) {
 		
 		//TODO: send email?
 		return true;
@@ -91,7 +86,6 @@ public class UniversityService {
 	 * @return true if the unenrole deadline has not passed, false otherwise
 	 */
 	public boolean unenrole(String lvaIdentifier, String matrikelNumber) {
-
 		Course course = getCourseFor(lvaIdentifier);
 		Student student = getStudentFor(matrikelNumber);
 		
@@ -105,18 +99,11 @@ public class UniversityService {
 	 */
 	public int studentCountIn(String lvaIdentifier) {
 		Course course = getCourseFor(lvaIdentifier);
-
-		return course.students.size();
+		return course.getStudents().size();
 	}
 	
 	public List<Course> getCourses() {
-		List<Course> visibleCourses = new ArrayList<Course>();
-		for (Course course : courses){
-			if (course.getState() == State.DEFAULT) {
-				visibleCourses.add(course);
-			}
-		}
-		return visibleCourses;
+		return courses;
 	}
 
 	public List<Student> getStudents() {

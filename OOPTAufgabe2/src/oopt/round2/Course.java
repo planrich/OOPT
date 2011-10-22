@@ -1,7 +1,5 @@
 package oopt.round2;
 
-
-
 /**
  * Representing a course at any university.
  * 
