@@ -23,12 +23,17 @@ public class Test {
 		System.out.println("generating a triangle");
 		System.out.println("Trying to scale the Triangle, will not even compile: p.scale(2.5)");
 		System.out.println("Perimeter of Triangle with lengths 3.6, 7.0, 1.2: " + p.perimeter());
+		((Triangle) p).setA(4);
+		((Triangle) p).setB(5);
+		((Triangle) p).setC(6);
+		System.out.println("Perimeter of Triangle after resetting lengths: " + p.perimeter());
 				
 		System.out.println("-> Testing IrregularPolygon:");
 		
 		Rectangle r = new Rectangle(8.5, 3.3);
 		r.scale(0.5);
-		System.out.println("Area of Rectangle with lengths a and b: 8.5*0.5, 3.3*0.5: " + r.area());
+		System.out.println("Area of Rectangle with lengths a and b: 8.5*0.5, 3.3*0.5: " + r.area() + "This rectangle has " + r.edges() + " edges!");
+		System.out.println("set Rectangle won't compile: r.set(5)");
 		
 	}
 }
