@@ -1,0 +1,7 @@
+<project default="export" basedir=".">
+	<target name="export">
+		<jar destfile="export.jar" basedir="src">
+			<include name="**/*.java"/>
+		</jar>
+	</target>
+</project>
