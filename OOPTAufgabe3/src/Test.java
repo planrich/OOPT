@@ -5,27 +5,30 @@ public class Test {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Square s = new Square(3.5);
-		s.scale(2.0);
-		System.out.println("Area of Square with length 3.5 * 2: " + s.area()); // 
-		s.set(1);
-		System.out.println("Perimeter of Square with length 1: " + s.perimeter());
 		
-		RegularPolygon rp = new RegularPolygon(50, 3.8);
-		System.out.println("Area of RegularPolygon with 50 sides of length 3.8: " + rp.area());
+		System.out.println("-> Testing RegularPolygons:");
+		RegularPolygon rp = new Square(3.5);
+		rp.scale(2.0);
+		System.out.println("Area of square with length 3.5 * 2: " + rp.area());
+		rp.set(1);
+		System.out.println("Perimeter of square with length 1: " + rp.perimeter());
 		
-		EquilateralTriangle e = new EquilateralTriangle(4.9);
-		System.out.println("Perimeter of EquilateralTriangle with length 4.9: " + e.perimeter());
+		Polygon p = new RegularPolygon(50, 3.8);
+		System.out.println("Area of RegularPolygon with 50 sides of length 3.8: " + p.area());
 		
-		/*
-		Triangle t = new Triangle(3.6, 7.0, 1.2);
-		// System.out.println("Trying to scale the Triangle, will not even compile: t.scale(2.5));
-		System.out.println("Perimeter of Triangle with lengths 3.6, 7.0, 1.2: " + t.perimeter());
+		p = new EquilateralTriangle(4.9);
+		System.out.println("Perimeter of EquilateralTriangle with length 4.9: " + p.perimeter());
+		
+		p = new Triangle(3.6, 7.0, 1.2);
+		System.out.println("generating a triangle");
+		System.out.println("Trying to scale the Triangle, will not even compile: p.scale(2.5)");
+		System.out.println("Perimeter of Triangle with lengths 3.6, 7.0, 1.2: " + p.perimeter());
 				
-		Rectangle rect(8.5, 3.3);
-		rect.scale(0.5);
-		System.out.println("Area of Rectangle with lengths a and b: 8.5*0.5, 3.3*0.5: " + rect.area());
-		*/
+		System.out.println("-> Testing IrregularPolygon:");
+		
+		Rectangle r = new Rectangle(8.5, 3.3);
+		r.scale(0.5);
+		System.out.println("Area of Rectangle with lengths a and b: 8.5*0.5, 3.3*0.5: " + r.area());
+		
 	}
 }

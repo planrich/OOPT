@@ -2,7 +2,7 @@
 public class Rectangle extends IrregularPolygon implements Scaleable { //rectangle is scaleable but not triangle
 
 	public Rectangle(double a, double b) {
-		super(new double[] { a, b });
+		super(new double[] { a, b, a, b }); // length >= 3
 	}
 
 	@Override
@@ -12,7 +12,7 @@ public class Rectangle extends IrregularPolygon implements Scaleable { //rectang
 
 	@Override
 	public double perimeter() {
-		return (edges[0] + edges[1]) * 2;
+		return (edges[0] + edges[1] + edges[2] + edges[3]);
 	}
 
 	@Override
