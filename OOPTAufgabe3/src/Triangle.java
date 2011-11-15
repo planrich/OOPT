@@ -10,11 +10,6 @@ public class Triangle extends IrregularPolygon {
 		double s = (edges[0] + edges[1] + edges[2]) / 2;
 		return Math.sqrt(s * (s - edges[0]) * (s - edges[1]) * (s - edges[2]));
 	}
-
-	@Override
-	public double perimeter() {
-		return edges[0] + edges[1] + edges[2];
-	}
 	
 	public void setA(double a) {
 		edges[0] = a;

@@ -16,6 +16,17 @@ public abstract class IrregularPolygon implements Polygon {
 		
 		this.edges = edges;
 	}
+
+	@Override
+	public double perimeter() {
+		double perimeter = 0;
+		
+		for (int i = 0; i < edges.length; i++) {
+			perimeter += edges[i];
+		}
+		
+		return perimeter;
+	}
 	
 	@Override
 	public int edges() {
