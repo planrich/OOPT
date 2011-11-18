@@ -1,6 +1,8 @@
 
 public abstract class SortedTree implements StringTree {
 
+	private Node root = null;
+	
 	@Override
 	public boolean contains(String node) {
 		// TODO Auto-generated method stub
@@ -20,4 +22,8 @@ public abstract class SortedTree implements StringTree {
 	}
 
 	public abstract String traverse();
+	
+	private void insert(Node node, String key) {
+		
+	}
 }
