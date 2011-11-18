@@ -20,10 +20,16 @@ public abstract class SortedTree implements StringTree {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public String toString() {
+		return null;
+	}
 
 	public abstract String traverse();
 	
 	private void insert(Node node, String key) {
 		
 	}
+
 }
