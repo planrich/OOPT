@@ -2,9 +2,13 @@
 public class PostorderTree extends SortedTree {
 
 	@Override
-	public String traverse() {
-		// TODO Auto-generated method stub
-		return null;
+	protected void traverse(StringBuilder buffer, Node node) {
+		if (node != null) {
+			traverse(buffer, node.getLeft());
+			traverse(buffer, node.getRight());
+			
+			buffer.append(node.getLabel());
+			buffer.append(" ");
+		}
 	}
-
 }

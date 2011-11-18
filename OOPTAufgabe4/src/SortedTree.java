@@ -1,7 +1,7 @@
 
 public abstract class SortedTree implements StringTree {
 
-	private Node root = null;
+	protected Node root = null;
 	
 	@Override
 	public boolean contains(String node) {
@@ -36,7 +36,13 @@ public abstract class SortedTree implements StringTree {
 		return builder.toString();
 	}
 
-	public abstract String traverse();
+	public String traverse() {
+		StringBuilder builder = new StringBuilder();
+		traverse(builder, root);
+		return builder.toString();
+	}
+	
+	protected abstract void traverse(StringBuilder buffer, Node node);
 	
 	private void insert(Node node, String key) {
 		int comp = key.compareTo(node.getLabel());

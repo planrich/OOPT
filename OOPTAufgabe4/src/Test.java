@@ -2,17 +2,19 @@
 public class Test {
 
 	public static void main(String[] args) {
-		InorderTree tree = new InorderTree();
+		SortedTree tree = new PreorderTree();
 		
-		tree.add("c");
-		tree.add("b");
-		tree.add("e");
 		tree.add("d");
+		tree.add("b");
+		tree.add("a");
+		tree.add("c");
 		tree.add("f");
+		tree.add("g");
+		tree.add("e");
 		
 		System.out.println(tree);
 		
-		System.out.println(tree.search("d"));
+		System.out.println(tree.traverse());
 	}
 
 }
