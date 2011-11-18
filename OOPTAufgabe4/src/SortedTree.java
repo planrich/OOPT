@@ -10,8 +10,13 @@ public abstract class SortedTree implements StringTree {
 
 	@Override
 	public String search(String node) {
-		// TODO Auto-generated method stub
-		return null;
+		if (!contains(node)) {
+			return NODE_NOT_FOUND;
+		}
+		
+		StringBuilder builder = new StringBuilder();
+		search(builder, root, node);
+		return builder.toString();
 	}
 
 	@Override
@@ -65,6 +70,23 @@ public abstract class SortedTree implements StringTree {
 			
 			print(buffer, node.getLeft(), deep + 1);
 			print(buffer, node.getRight(), deep + 1);
+		}
+	}
+	
+	private void search(StringBuilder buffer, Node node, String key) {
+		if (node != null) {
+			int comp = key.compareTo(node.getLabel());
+			if (comp == 0) {
+				return;
+			} else if (comp < 0) {
+				buffer.append(NODE_LEFT);
+				buffer.append(" ");
+				search(buffer, node.getLeft(), key);
+			} else {
+				buffer.append(NODE_RIGHT);
+				buffer.append(" ");
+				search(buffer, node.getRight(), key);
+			}
 		}
 	}
 	

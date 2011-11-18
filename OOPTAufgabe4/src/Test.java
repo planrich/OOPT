@@ -11,6 +11,8 @@ public class Test {
 		tree.add("f");
 		
 		System.out.println(tree);
+		
+		System.out.println(tree.search("d"));
 	}
 
 }
