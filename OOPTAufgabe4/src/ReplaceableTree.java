@@ -8,7 +8,6 @@ public class ReplaceableTree implements StringTree {
 	@Override
 	public boolean contains(String node) {
 		return contains(root, node);
-
 	}
 
 	@Override

@@ -72,8 +72,8 @@ public class Node {
 		buffer.append('\n');
 		
 		if (node != null) {
-			print(buffer, node.getLeft(), deep + 1);
-			print(buffer, node.getRight(), deep + 1);
+			printPreserveEmpty(buffer, node.getLeft(), deep + 1);
+			printPreserveEmpty(buffer, node.getRight(), deep + 1);
 		}
 	}
 	
