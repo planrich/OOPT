@@ -5,8 +5,7 @@ public abstract class SortedTree implements StringTree {
 	
 	@Override
 	public boolean contains(String node) {
-		// TODO Auto-generated method stub
-		return false;
+		return contains(root, node);
 	}
 
 	@Override
@@ -68,5 +67,19 @@ public abstract class SortedTree implements StringTree {
 			print(buffer, node.getRight(), deep + 1);
 		}
 	}
-
+	
+	private boolean contains(Node node, String key) {
+		if (node != null) {
+			if (node.getLabel().equals(key)) {
+				return true;
+			}
+			
+			boolean contain = contains(node.getLeft(), key);
+			if (!contain) {
+				contain = contains(node.getRight(), key);
+			}
+			return contain;
+		}
+		return false;
+	}
 }

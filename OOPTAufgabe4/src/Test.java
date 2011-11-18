@@ -11,7 +11,6 @@ public class Test {
 		tree.add("f");
 		
 		System.out.println(tree);
-
 	}
 
 }
