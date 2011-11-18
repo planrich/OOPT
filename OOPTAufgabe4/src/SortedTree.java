@@ -29,13 +29,6 @@ public abstract class SortedTree implements StringTree {
 		insert(root, node);
 	}
 	
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder(); 
-		print(builder, root, 0);
-		return builder.toString();
-	}
-
 	public String traverse() {
 		StringBuilder builder = new StringBuilder();
 		traverse(builder, root);
@@ -62,20 +55,6 @@ public abstract class SortedTree implements StringTree {
 			} else {
 				insert(node.getRight(), key);
 			}
-		}
-	}
-	
-	private void print(StringBuilder buffer, Node node, int deep) {
-		if (node != null) {
-			for (int i = 0; i < deep; i++) {
-				buffer.append("  ");
-			}
-			buffer.append("- ");
-			buffer.append(node.getLabel());
-			buffer.append('\n');
-			
-			print(buffer, node.getLeft(), deep + 1);
-			print(buffer, node.getRight(), deep + 1);
 		}
 	}
 	
@@ -109,5 +88,10 @@ public abstract class SortedTree implements StringTree {
 			return contain;
 		}
 		return false;
+	}
+	
+	@Override
+	public String toString() {
+		return root.toString();
 	}
 }
