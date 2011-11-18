@@ -17,19 +17,56 @@ public abstract class SortedTree implements StringTree {
 
 	@Override
 	public void add(String node) {
-		// TODO Auto-generated method stub
+		if (root == null) {
+			root = new Node(node);
+			return;
+		}
 		
+		insert(root, node);
 	}
 	
 	@Override
 	public String toString() {
-		return null;
+		StringBuilder builder = new StringBuilder(); 
+		print(builder, root, 0);
+		return builder.toString();
 	}
 
 	public abstract String traverse();
 	
 	private void insert(Node node, String key) {
-		
+		int comp = key.compareTo(node.getLabel());
+		if (comp < 0) {
+			if (node.getLeft() == null) {
+				Node n = new Node(key);
+				node.setLeft(n);
+				return;
+			} else {
+				insert(node.getLeft(), key);
+			}
+		} else {
+			if (node.getRight() == null) {
+				Node n = new Node(key);
+				node.setRight(n);
+				return;
+			} else {
+				insert(node.getRight(), key);
+			}
+		}
+	}
+	
+	private void print(StringBuilder buffer, Node node, int deep) {
+		if (node != null) {
+			for (int i = 0; i < deep; i++) {
+				buffer.append("  ");
+			}
+			buffer.append("- ");
+			buffer.append(node.getLabel());
+			buffer.append('\n');
+			
+			print(buffer, node.getLeft(), deep + 1);
+			print(buffer, node.getRight(), deep + 1);
+		}
 	}
 
 }
