@@ -1,14 +1,6 @@
 
 public class ReplaceableTree implements StringTree {
 
-<<<<<<< HEAD
-	Node root = new Node("a");
-	
-	@Override
-	public boolean contains(String node) {
-		// TODO Auto-generated method stub
-		return false;
-=======
 	protected Node root = null;
 	protected int levels = 0;
 	protected int numOfNodes = 0;
@@ -16,24 +8,14 @@ public class ReplaceableTree implements StringTree {
 	@Override
 	public boolean contains(String node) {
 		return contains(root, node);
->>>>>>> FETCH_HEAD
+
 	}
 
 	@Override
 	public String search(String node) {
 		// TODO Auto-generated method stub
-<<<<<<< HEAD
-=======
-		
->>>>>>> FETCH_HEAD
+
 		return null;
-	}
-
-	@Override
-<<<<<<< HEAD
-	public void add(String node) {
-		// TODO Auto-generated method stub
-
 	}
 	
 	public void replace(String position, String subTree) { //subTree must not be null
@@ -117,11 +99,6 @@ public class ReplaceableTree implements StringTree {
 		} else {
 			return path.substring(0, idx);
 		}
-=======
-	public String toString() {
-		StringBuilder builder = new StringBuilder(); 
-		print(builder, root, 0);
-		return builder.toString();
 	}
 	
 	@Override
@@ -146,24 +123,6 @@ public class ReplaceableTree implements StringTree {
 		if(numOfNodes-((Math.pow(2, levels-1))-1) == (Math.pow(2, levels))/2)
 			return true;
 		return false;
-	}
-	
-	private void print(StringBuilder buffer, Node node, int deep) {
-		if (node != null) {
-			for (int i = 0; i < deep; i++) {
-				buffer.append("  ");
-			}
-			buffer.append("- ");
-			buffer.append(node.getLabel());
-			buffer.append('\n');
-			
-			print(buffer, node.getLeft(), deep + 1);
-			print(buffer, node.getRight(), deep + 1);
-		}
-	}
-	
-	public void replace(String position, String subTree) {
-		
 	}
 	
 	private void insert(Node node, String key, int currentLevel) {
@@ -203,7 +162,6 @@ public class ReplaceableTree implements StringTree {
 			return contain;
 		}
 		return false;
->>>>>>> FETCH_HEAD
 	}
 	
 }
