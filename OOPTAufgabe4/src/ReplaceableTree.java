@@ -106,17 +106,51 @@ public class ReplaceableTree implements StringTree {
 			root = new Node(node);
 			numOfNodes = 1;
 			levels = 1;
-			return;
+		} else {
+			numOfNodes++;		
+			
+			
+			int start_ele = (int)Math.pow(2, levels);
+			int code = numOfNodes - start_ele;
+			
+			String binary = convertToBinary(code,levels);
+			
+			insert(root, node, binary);
+
+			updateLevels();	
 		}
-		numOfNodes++;
-		insert(root, node, 1);
 	}
+
 	
+	
+	private String convertToBinary(int code, int digits) {
+
+		StringBuilder builder = new StringBuilder();
+		while (code > 1) {
+			builder.append(code % 2);
+			code = code % 2;
+		}
+		
+		if (code == 1) {
+
+			builder.append(code % 2);
+		}
+		
+		
+		digits -= builder.length();
+		
+		while (digits > 0) {
+			builder.append("0");
+			digits -= 1;
+		}
+		
+		return builder.reverse().toString();
+	}
+
 	private void updateLevels() {
-		if(numOfNodes == (Math.pow(2, levels+1)-1)) {
+		if(numOfNodes == (Math.pow(2, levels + 1) - 1)) {
 			levels++;
 		}
-		System.out.println("Levels: " + levels + "Nodes: " +numOfNodes);
 	}
 	private boolean levelcheck() {
 		if(numOfNodes-((Math.pow(2, levels-1))-1) == (Math.pow(2, levels))/2)
@@ -124,28 +158,23 @@ public class ReplaceableTree implements StringTree {
 		return false;
 	}
 	
-	private void insert(Node node, String key, int currentLevel) {
+	private void insert(Node node, String label, String binary) {
 		
-		System.out.println("key: " + key + "   " + currentLevel + "   "+ levels);
-		if(currentLevel == levels) {
-			if (node.getLeft() == null) {
-				Node n = new Node(key);
-				node.setLeft(n);
-				updateLevels();
-				return;
-			} else if (node.getRight() == null) {
-				Node n = new Node(key);
-				node.setRight(n);
-				updateLevels();
-				return;
+		if (binary.length() == 1) {
+			//insert
+			if (binary.charAt(0) == '0') {
+				node.setLeft(new Node(label));
+			} else {
+				node.setRight(new Node(label));
 			}
 		} else {
-			if (node.getLeft()!= null && levelcheck()) {
-				insert(node.getLeft(), key, ++currentLevel);
-			} else if (node.getRight()!=null) {
-				insert(node.getRight(), key, ++currentLevel);
+			if (binary.charAt(0) == '0') {
+				insert(node.getLeft(), label, binary.substring(1));
+			} else {
+				insert(node.getLeft(), label, binary.substring(1));
 			}
-		}	
+		}
+		
 	}
 	
 	private boolean contains(Node node, String key) {
