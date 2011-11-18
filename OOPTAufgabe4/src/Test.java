@@ -65,5 +65,17 @@ public class Test {
 		tree.add("g");
 		tree.add("e");
 		System.out.println("Traversing the PostorderTree: " + tree.traverse());
+		
+		ReplaceableTree rTree = new ReplaceableTree();
+		rTree.add("c");
+		rTree.add("d");
+		rTree.add("e");
+		rTree.add("f");
+		rTree.add("g");
+		rTree.add("h");
+		rTree.add("i");
+		rTree.add("j");
+		
+		System.out.println("Replaceable Tree: \n" + rTree);
 	}
 }
