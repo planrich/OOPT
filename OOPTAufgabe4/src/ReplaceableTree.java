@@ -12,23 +12,13 @@ public class ReplaceableTree implements StringTree {
 			return false;
 		}
 		
-		return root.contains(node, null);
+		return root.contains(node);
 	}
 
 	@Override
 	public String search(String node) {
 
-		StringBuilder builder = new StringBuilder();
-		
-		if (root == null) {
-			return StringNode.NOT_FOUND;
-		}
-		
-		if (!root.contains(node, builder)) {
-			return StringNode.NOT_FOUND;
-		}
-			
-		return builder.toString();
+		return null;
 	}
 	
 	public void replace(String position, String subTree) { //subTree must not be null

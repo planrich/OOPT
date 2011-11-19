@@ -145,7 +145,7 @@ public abstract class Node {
 	 * @param builder can be null
 	 * @return return true iff the node with the key is in this node
 	 */
-	public boolean contains(String key, StringBuilder builder) {
+	public boolean contains(String key) {
 		
 		if (getLabel().equals(key)) {
 			return true;
@@ -154,17 +154,11 @@ public abstract class Node {
 		boolean contain = false;
 		
 		if (left != null) {
-			if (builder != null) {
-				builder.append(LEFT + " ");
-			}
-			contain = left.contains(key, builder);
+			contain = left.contains(key);
 		}
 		
 		if (!contain && right != null) {
-			if (builder != null) {
-				builder.append(RIGHT + " ");
-			}
-			contain = right.contains(key, builder);
+			contain = right.contains(key);
 		}
 		
 		return contain;
