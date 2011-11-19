@@ -5,17 +5,25 @@ public abstract class SortedTree implements StringTree {
 	
 	@Override
 	public boolean contains(String node) {
-		return contains(root, node);
+		if (root == null) {
+			return false;
+		}
+		
+		return root.contains(node, null);
 	}
 
 	@Override
 	public String search(String node) {
-		if (!contains(node)) {
-			return NODE_NOT_FOUND;
+
+		if (root == null) {
+			return Node.NOT_FOUND;
 		}
 		
 		StringBuilder builder = new StringBuilder();
-		search(builder, root, node);
+		if (!root.contains(node, builder)) {
+			return Node.NOT_FOUND;
+		}
+		
 		return builder.toString();
 	}
 
@@ -56,38 +64,6 @@ public abstract class SortedTree implements StringTree {
 				insert(node.getRight(), key);
 			}
 		}
-	}
-	
-	private void search(StringBuilder buffer, Node node, String key) {
-		if (node != null) {
-			int comp = key.compareTo(node.getLabel());
-			if (comp == 0) {
-				return;
-			} else if (comp < 0) {
-				buffer.append(NODE_LEFT);
-				buffer.append(" ");
-				search(buffer, node.getLeft(), key);
-			} else {
-				buffer.append(NODE_RIGHT);
-				buffer.append(" ");
-				search(buffer, node.getRight(), key);
-			}
-		}
-	}
-	
-	private boolean contains(Node node, String key) {
-		if (node != null) {
-			if (node.getLabel().equals(key)) {
-				return true;
-			}
-			
-			boolean contain = contains(node.getLeft(), key);
-			if (!contain) {
-				contain = contains(node.getRight(), key);
-			}
-			return contain;
-		}
-		return false;
 	}
 	
 	@Override

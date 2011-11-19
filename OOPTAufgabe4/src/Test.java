@@ -76,6 +76,26 @@ public class Test {
 		rTree.add("h");
 		rTree.add("i");
 		rTree.add("j");
+		rTree.add("f");
+		rTree.add("g");
+		rTree.add("h");
+		rTree.add("i");
+		rTree.add("j");
+		rTree.add("f");
+		rTree.add("g");
+		rTree.add("h");
+		rTree.add("i");
+		rTree.add("j");
+		rTree.add("f");
+		rTree.add("g");
+		rTree.add("h");
+		rTree.add("i");
+		rTree.add("j");
+		rTree.add("f");
+		rTree.add("g");
+		rTree.add("h");
+		rTree.add("i");
+		rTree.add("j");
 		
 		System.out.println("Replaceable Tree: \n" + rTree);
 		

@@ -2,19 +2,33 @@
 public class ReplaceableTree implements StringTree {
 
 	protected Node root = null;
-	protected int levels = 0;
-	protected int numOfNodes = 0;
+	protected int level = 0;
+	protected int insertPostion = 0;
 	
 	@Override
 	public boolean contains(String node) {
-		return contains(root, node);
+		
+		if (root == null) {
+			return false;
+		}
+		
+		return root.contains(node, null);
 	}
 
 	@Override
 	public String search(String node) {
-		// TODO Auto-generated method stub
 
-		return null;
+		StringBuilder builder = new StringBuilder();
+		
+		if (root == null) {
+			return Node.NOT_FOUND;
+		}
+		
+		if (!root.contains(node, builder)) {
+			return Node.NOT_FOUND;
+		}
+			
+		return builder.toString();
 	}
 	
 	public void replace(String position, String subTree) { //subTree must not be null
@@ -23,11 +37,19 @@ public class ReplaceableTree implements StringTree {
 			throw new IllegalArgumentException("subTree must not be null");
 		}
 		
-		Node n = findNodeIn(root,position);
+		if (root == null && position == "") {
+			Node replacement = Node.parseTree(subTree);
+			root = replacement; //maybe still null
+			return;
+		} else if (root == null) {
+			return;
+		}
+		
+		Node n = root.findNode(position);
 		if (n != null) {
 			
-			String last = nextDirection(position, true);
-			boolean left = last.equals(StringTree.NODE_LEFT) ? true : false;
+			String last = Node.nextDirection(position, true);
+			boolean left = last.equals(Node.LEFT) ? true : false;
 
 			Node replacement = Node.parseTree(subTree);
 			if (replacement == null) { //no replacement buildable
@@ -47,95 +69,45 @@ public class ReplaceableTree implements StringTree {
 		return root.toString();
 	}
 	
-	/**
-	 * Find a node
-	 * @param node
-	 * @param path
-	 * @param subTree
-	 * @return
-	 */
-	private Node findNodeIn(Node node, String path ) {
-		
-		if (node == null) { //failed to find path
-			return null;
-		}
-		
-		String nextDir = nextDirection(path,false);
-		
-		if (nextDir.equals("")) {
-			return node;
-		} else {
-			path = path.substring(nextDir.length(), path.length()).trim();
-			
-			if (nextDir.equals(SortedTree.NODE_LEFT)) {
-				return findNodeIn(node.getLeft(),path);
-			} else {
-				return findNodeIn(node.getRight(),path);
-			}
-		}
-	}
-	
-	/**
-	 * "left right ..." returns left, "" return "", ...
-	 * @param path
-	 * @return an empty string, "left" or "right"
-	 */
-	private String nextDirection(String path, boolean last) {
-		
-		int idx = 0;
-		if (last) {
-			idx = path.lastIndexOf(' ');
-		} else {
-			idx = path.indexOf(' ');
-		}
-		
-		if (idx == -1) {
-			return "";
-		}
-		
-		if (last) {
-			return path.substring(idx).trim();
-		} else {
-			return path.substring(0, idx);
-		}
-	}
-	
 	@Override
 	public void add(String node) {
 		if (root == null) {
 			root = new Node(node);
-			numOfNodes = 1;
-			levels = 1;
+			insertPostion = 1;
+			level = 1;
 		} else {
-			numOfNodes++;		
+			insertPostion++;		
 			
+			int start_ele = (int)Math.pow(2, level);
+			int code = insertPostion - start_ele;
 			
-			int start_ele = (int)Math.pow(2, levels);
-			int code = numOfNodes - start_ele;
+			String binary = convertToBinary(code,level);
 			
-			String binary = convertToBinary(code,levels);
+			System.out.println("insert " + insertPostion + " at level " + level + " with code " + code + " = " + binary);
 			
-			insert(root, node, binary);
+			boolean success = insert(root, node, binary);
 
 			updateLevels();	
+			
+			//it is possible to insert a not replaceable tree, so there might already be a node at that postion.
+			//therefore we make it recursive until we inserted it all
+			if (!success) {
+				add(node);
+			}
 		}
 	}
 
-	
-	
 	private String convertToBinary(int code, int digits) {
 
 		StringBuilder builder = new StringBuilder();
 		while (code > 1) {
 			builder.append(code % 2);
-			code = code % 2;
+			code = code / 2;
 		}
 		
 		if (code == 1) {
-
 			builder.append(code % 2);
 		}
-		
 		
 		digits -= builder.length();
 		
@@ -147,49 +119,48 @@ public class ReplaceableTree implements StringTree {
 		return builder.reverse().toString();
 	}
 
+	/**
+	 * Update the level! This is necessary to call after every add call.
+	 */
 	private void updateLevels() {
-		if(numOfNodes == (Math.pow(2, levels + 1) - 1)) {
-			levels++;
+		if(insertPostion == (Math.pow(2, level + 1) - 1)) {
+			level++;
 		}
 	}
-	private boolean levelcheck() {
-		if(numOfNodes-((Math.pow(2, levels-1))-1) == (Math.pow(2, levels))/2)
-			return true;
-		return false;
-	}
 	
-	private void insert(Node node, String label, String binary) {
+	/**
+	 * Inserts at the position given by the binary search string.
+	 * @param node
+	 * @param label
+	 * @param binary
+	 * @return true iff binary position is empty, false otherwise
+	 */
+	private boolean insert(Node node, String label, String binary) {
 		
 		if (binary.length() == 1) {
 			//insert
 			if (binary.charAt(0) == '0') {
-				node.setLeft(new Node(label));
+				if (node.getLeft() == null) {
+					node.setLeft(new Node(label));
+					return true;
+				} else {
+					return false;
+				}
 			} else {
-				node.setRight(new Node(label));
+				if (node.getLeft() == null) {
+					node.setRight(new Node(label));
+					return true;
+				} else {
+					return false;
+				}
 			}
 		} else {
 			if (binary.charAt(0) == '0') {
-				insert(node.getLeft(), label, binary.substring(1));
+				return insert(node.getLeft(), label, binary.substring(1));
 			} else {
-				insert(node.getLeft(), label, binary.substring(1));
+				return insert(node.getRight(), label, binary.substring(1));
 			}
 		}
 		
-	}
-	
-	private boolean contains(Node node, String key) {
-		if (node != null) {
-			if (node.getLabel().equals(key)) {
-				return true;
-			}
-			
-			boolean contain = contains(node.getLeft(), key);
-			if (!contain) {
-				contain = contains(node.getRight(), key);
-			}
-			return contain;
-		}
-		return false;
-	}
-	
+	}	
 }
