@@ -17,9 +17,55 @@ public class ReplaceableTree implements StringTree {
 
 	@Override
 	public String search(String node) {
+		
+		if (!contains(node)) {
+			return Node.NOT_FOUND;
+		}
+		
+		StringBuilder builder = new StringBuilder();
+		depthSearch(root, node, builder);
+		
+		String str = builder.toString().trim();
+		builder = new StringBuilder();
+		while (str.length() > 0) {
+			int idx = str.lastIndexOf(' ');
+			if (idx == -1) {
+				break;
+			}
+			String step = str.substring(idx, str.length()).trim();
+			builder.append(step + " ");
+			str = str.substring(0,idx);
+		}
+		
+		builder.append(str);
 
-		return null;
+		return builder.toString();
 	}
+	
+	public boolean depthSearch(Node n, String label, StringBuilder builder) {
+		
+		if (n != null) {
+			
+			if (n.getLabel().equals(label)) {
+				return true;
+			}
+			
+			boolean back = depthSearch(n.getLeft(), label, builder);
+			if (back) {
+				builder.append(Node.LEFT + " ");
+				return true;
+			}
+			back = depthSearch(n.getRight(), label, builder);
+			if (back) {
+				builder.append(Node.RIGHT + " ");
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	
 	
 	public void replace(String position, String subTree) { //subTree must not be null
 		

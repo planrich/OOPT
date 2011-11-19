@@ -76,32 +76,22 @@ public class Test {
 		rTree.add("h");
 		rTree.add("i");
 		rTree.add("j");
-		rTree.add("f");
-		rTree.add("g");
-		rTree.add("h");
-		rTree.add("i");
-		rTree.add("j");
-		rTree.add("f");
-		rTree.add("g");
-		rTree.add("h");
-		rTree.add("i");
-		rTree.add("j");
-		rTree.add("f");
-		rTree.add("g");
-		rTree.add("h");
-		rTree.add("i");
-		rTree.add("j");
-		rTree.add("f");
-		rTree.add("g");
-		rTree.add("h");
-		rTree.add("i");
-		rTree.add("j");
+		rTree.add("k");
+		rTree.add("l");
+		rTree.add("m");
+		
+		System.out.println();
 		
 		System.out.println("Replaceable Tree: \n" + rTree);
 		
 		System.out.println();
 		
-		System.out.println("Replacing not left right left with a simple sub tree:");
+		System.out.println("Searching for m in tree which should result in left right right:");
+		System.out.println(rTree.search("m"));
+		
+		System.out.println();
+		
+		System.out.println("Replacing node left right left with a simple sub tree:");
 		System.out.println(rTree.root.toStringPreserveEmpty());
 		System.out.println("replacing left right left with new tree:");
 		rTree.replace("left right left", "- a\n- b\n - c\n - d\n- e\n");
