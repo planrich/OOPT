@@ -101,15 +101,10 @@ public class Test {
 		
 		System.out.println();
 		
-		System.out.println("ReplacementTree: (preserving empyt nodes)");
-		rTree = new ReplaceableTree();
-		rTree.root = new Node("a");
-		rTree.root.setLeft(new Node("x"));
-		rTree.root.getLeft().setRight(new Node("y"));
-		rTree.root.getLeft().getRight().setLeft(new Node("z"));
+		System.out.println("Replacing not left right left with a simple sub tree:");
 		System.out.println(rTree.root.toStringPreserveEmpty());
 		System.out.println("replacing left right left with new tree:");
-		rTree.replace("left right left", "a\n- b\n - c\n - d\n- e\n");
+		rTree.replace("left right left", "- a\n- b\n - c\n - d\n- e\n");
 		System.out.println(rTree.root.toStringPreserveEmpty());
 		System.out.println();
 	}

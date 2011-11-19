@@ -1,7 +1,7 @@
 
 public class ReplaceableTree implements StringTree {
 
-	protected Node root = null;
+	protected StringNode root = null;
 	protected int level = 0;
 	protected int insertPostion = 0;
 	
@@ -21,11 +21,11 @@ public class ReplaceableTree implements StringTree {
 		StringBuilder builder = new StringBuilder();
 		
 		if (root == null) {
-			return Node.NOT_FOUND;
+			return StringNode.NOT_FOUND;
 		}
 		
 		if (!root.contains(node, builder)) {
-			return Node.NOT_FOUND;
+			return StringNode.NOT_FOUND;
 		}
 			
 		return builder.toString();
@@ -38,7 +38,7 @@ public class ReplaceableTree implements StringTree {
 		}
 		
 		if (root == null && position == "") {
-			Node replacement = Node.parseTree(subTree);
+			StringNode replacement = StringNode.parseTree(subTree);
 			root = replacement; //maybe still null
 			return;
 		} else if (root == null) {
@@ -48,10 +48,10 @@ public class ReplaceableTree implements StringTree {
 		Node n = root.findNode(position);
 		if (n != null) {
 			
-			String last = Node.nextDirection(position, true);
-			boolean left = last.equals(Node.LEFT) ? true : false;
+			String last = StringNode.nextDirection(position, true);
+			boolean left = last.equals(StringNode.LEFT) ? true : false;
 
-			Node replacement = Node.parseTree(subTree);
+			StringNode replacement = StringNode.parseTree(subTree);
 			if (replacement == null) { //no replacement buildable
 				return;
 			}
@@ -72,7 +72,7 @@ public class ReplaceableTree implements StringTree {
 	@Override
 	public void add(String node) {
 		if (root == null) {
-			root = new Node(node);
+			root = new StringNode(node);
 			insertPostion = 1;
 			level = 1;
 		} else {
@@ -83,7 +83,7 @@ public class ReplaceableTree implements StringTree {
 			
 			String binary = convertToBinary(code,level);
 			
-			System.out.println("insert " + insertPostion + " at level " + level + " with code " + code + " = " + binary);
+			//System.out.println("insert " + insertPostion + " at level " + level + " with code " + code + " = " + binary);
 			
 			boolean success = insert(root, node, binary);
 
@@ -137,18 +137,22 @@ public class ReplaceableTree implements StringTree {
 	 */
 	private boolean insert(Node node, String label, String binary) {
 		
+		if (node == null) {
+			return false;
+		}
+		
 		if (binary.length() == 1) {
 			//insert
 			if (binary.charAt(0) == '0') {
 				if (node.getLeft() == null) {
-					node.setLeft(new Node(label));
+					node.setLeft(new StringNode(label));
 					return true;
 				} else {
 					return false;
 				}
 			} else {
-				if (node.getLeft() == null) {
-					node.setRight(new Node(label));
+				if (node.getRight() == null) {
+					node.setRight(new StringNode(label));
 					return true;
 				} else {
 					return false;

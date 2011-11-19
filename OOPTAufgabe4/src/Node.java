@@ -1,11 +1,5 @@
 
-public class Node {
-
-	/***********************************
-	 * 
-	 * STATIC SECTION
-	 * 
-	 ***********************************/
+public abstract class Node {
 	
 	public static final String LEFT = "left";
 	public static final String RIGHT = "right";
@@ -41,17 +35,21 @@ public class Node {
 	 * @param from
 	 * @return
 	 */
-	public static Node parseTree(String from) {
+	public static StringNode parseTree(String from) {
 		
 		int idx = from.indexOf('\n');
 		if (idx == -1) {
 			return null;
 		}
 		
+		if (!from.startsWith("- ")) {
+			throw new IllegalArgumentException();
+		}
+		
 		String label = from.substring(2, idx);
 		from = from.substring(idx + 1);
 		
-		Node node = new Node(label);
+		StringNode node = new StringNode(label);
 		
 		parseChildren(node,from,0);
 		
@@ -88,7 +86,7 @@ public class Node {
 		line = line.substring(2);
 		
 		if (!line.equals("")) {	
-			parent.setLeft(new Node(line));
+			parent.setLeft(new StringNode(line));
 		}
 		
 		subTree = parseChildren(parent.getLeft(), subTree, level + 1);
@@ -113,33 +111,20 @@ public class Node {
 		line = line.substring(2);
 		
 		if (!line.equals("")) {	
-			parent.setRight(new Node(line));
+			parent.setRight(new StringNode(line));
 		}
 		
 		return subTree;
 	}
 	
-	/*************************************************
-	 * 
-	 * CLASS SECTION
-	 * 
-	 *************************************************/
+	protected Node left;
+	protected Node right;
 	
-	private String label;
-	private Node left;
-	private Node right;
-	
-	public Node(String label) {
-		this.label = label;
-		left = null;
-		right = null;
-	}
-
 	public Node getLeft() {
 		return left;
 	}
 
-	public void setLeft(Node left) {
+	public void setLeft(StringNode left) {
 		this.left = left;
 	}
 
@@ -147,25 +132,69 @@ public class Node {
 		return right;
 	}
 
-	public void setRight(Node right) {
+	public void setRight(StringNode right) {
 		this.right = right;
 	}
+	
+	public abstract Object getLabel();
 
-	public String getLabel() {
-		return label;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == this) {
+	/**
+	 * Returns true iff
+	 * @param node
+	 * @param key
+	 * @param builder can be null
+	 * @return return true iff the node with the key is in this node
+	 */
+	public boolean contains(String key, StringBuilder builder) {
+		
+		if (getLabel().equals(key)) {
 			return true;
 		}
-		if (obj instanceof Node) {
-			Node node = (Node) obj;
-			return label.equals(node.getLabel());
+		
+		boolean contain = false;
+		
+		if (left != null) {
+			if (builder != null) {
+				builder.append(LEFT + " ");
+			}
+			contain = left.contains(key, builder);
 		}
-		return false;
+		
+		if (!contain && right != null) {
+			if (builder != null) {
+				builder.append(RIGHT + " ");
+			}
+			contain = right.contains(key, builder);
+		}
+		
+		return contain;
 	}
+	
+	/**
+	 * Find a node in the current node and follow the path given
+	 * @param path
+	 * @return null if there is no such path, a {@link StringNode} otherwise
+	 */
+	public Node findNode(String path) {
+		
+		String nextDir = nextDirection(path,false);
+		
+		if (nextDir.equals("")) {
+			return this;
+		} else {
+			path = path.substring(nextDir.length(), path.length()).trim();
+			
+			if (nextDir.equals(StringNode.LEFT) && left != null) {
+				return this.getLeft().findNode(path);
+			} else if (right != null) {
+				return this.getRight().findNode(path);
+			} else {
+				return null;
+			}
+		}
+	}
+	
+
 	
 	@Override
 	public String toString() {
@@ -190,7 +219,7 @@ public class Node {
 			buffer.append("  ");
 		}
 		buffer.append("- ");
-		buffer.append(label);
+		buffer.append(getLabel());
 		buffer.append('\n');
 		
 		if (left != null) {
@@ -208,7 +237,7 @@ public class Node {
 				buffer.append("  ");
 			}
 			buffer.append("- ");
-			buffer.append(label);
+			buffer.append(getLabel());
 			buffer.append('\n');
 			
 			if (left != null) {
@@ -219,63 +248,4 @@ public class Node {
 				right.print(buffer, deep + 1);
 			}
 	}	
-
-	
-	/**
-	 * Find a node in the current node and follow the path given
-	 * @param path
-	 * @return null if there is no such path, a {@link Node} otherwise
-	 */
-	public Node findNode(String path) {
-		
-		String nextDir = nextDirection(path,false);
-		
-		if (nextDir.equals("")) {
-			return this;
-		} else {
-			path = path.substring(nextDir.length(), path.length()).trim();
-			
-			if (nextDir.equals(Node.LEFT) && left != null) {
-				return this.getLeft().findNode(path);
-			} else if (right != null) {
-				return this.getRight().findNode(path);
-			} else {
-				return null;
-			}
-		}
-	}
-	
-
-	
-	/**
-	 * Returns true iff
-	 * @param node
-	 * @param key
-	 * @param builder can be null
-	 * @return return true iff the node with the key is in this node
-	 */
-	public boolean contains(String key, StringBuilder builder) {
-		
-		if (label.equals(key)) {
-			return true;
-		}
-		
-		boolean contain = false;
-		
-		if (left != null) {
-			if (builder != null) {
-				builder.append(LEFT + " ");
-			}
-			contain = left.contains(key, builder);
-		}
-		
-		if (!contain && right != null) {
-			if (builder != null) {
-				builder.append(RIGHT + " ");
-			}
-			contain = right.contains(key, builder);
-		}
-		
-		return contain;
-	}
 }

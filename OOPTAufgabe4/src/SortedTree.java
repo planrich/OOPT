@@ -1,5 +1,7 @@
 
 public abstract class SortedTree implements StringTree {
+	
+	//this tree can ONLY contain StringNode not other nodes.
 
 	protected Node root = null;
 	
@@ -30,11 +32,13 @@ public abstract class SortedTree implements StringTree {
 	@Override
 	public void add(String node) {
 		if (root == null) {
-			root = new Node(node);
+			root = new StringNode(node);
 			return;
 		}
 		
-		insert(root, node);
+		if (root instanceof StringNode) {
+			insert((StringNode)root, node);
+		}
 	}
 	
 	public String traverse() {
@@ -45,23 +49,24 @@ public abstract class SortedTree implements StringTree {
 	
 	protected abstract void traverse(StringBuilder buffer, Node node);
 	
-	private void insert(Node node, String key) {
-		int comp = key.compareTo(node.getLabel());
+	private void insert(StringNode node, String key) {		
+		
+		int comp = key.compareTo((String)node.getLabel());
 		if (comp < 0) {
 			if (node.getLeft() == null) {
-				Node n = new Node(key);
+				StringNode n = new StringNode(key);
 				node.setLeft(n);
 				return;
 			} else {
-				insert(node.getLeft(), key);
+				insert((StringNode)node.getLeft(), key);
 			}
 		} else {
 			if (node.getRight() == null) {
-				Node n = new Node(key);
+				StringNode n = new StringNode(key);
 				node.setRight(n);
 				return;
 			} else {
-				insert(node.getRight(), key);
+				insert((StringNode)node.getRight(), key);
 			}
 		}
 	}
