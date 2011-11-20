@@ -30,93 +30,6 @@ public abstract class Node {
 		}
 	}
 	
-	/**
-	 * Parses a tree from a String
-	 * @param from
-	 * @return
-	 */
-	public static StringNode parseTree(String from) {
-		
-		int idx = from.indexOf('\n');
-		if (idx == -1) {
-			return null;
-		}
-		
-		if (!from.startsWith("- ")) {
-			throw new IllegalArgumentException();
-		}
-		
-		String label = from.substring(2, idx);
-		from = from.substring(idx + 1);
-		
-		StringNode node = new StringNode(label);
-		
-		parseChildren(node,from,0);
-		
-		return node;
-	}
-	
-	/**
-	 * Parses the trees children. Utility function for parseTree
-	 * @param parent
-	 * @param subTree
-	 * @param level
-	 * @return
-	 */
-	private static String parseChildren(Node parent, String subTree, int level) {
-		
-		int idx = subTree.indexOf('\n');
-		
-		String line = subTree.substring(0,idx);
-		
-		for (int i = 0; i < level; i++) {
-			if (subTree.charAt(i) != ' ') {
-				return subTree;
-			}
-		}
-		
-		subTree = subTree.substring(idx + 1);
-
-		line = line.substring(level);
-		
-		if (!line.startsWith("- ")) {
-			throw new IllegalArgumentException("Malformed subTree");
-		}
-		
-		line = line.substring(2);
-		
-		if (!line.equals("")) {	
-			parent.setLeft(new StringNode(line));
-		}
-		
-		subTree = parseChildren(parent.getLeft(), subTree, level + 1);
-		
-		idx = subTree.indexOf('\n'); //must be newline terminated
-		
-		line = subTree.substring(0,idx);
-		
-		for (int i = 0; i < level; i++) {
-			if (subTree.charAt(i) != ' ') {
-				return subTree;
-			}
-		}
-		
-		subTree = subTree.substring(idx + 1);
-		line = line.substring(level);
-		
-		if (!line.startsWith("- ")) {
-			throw new IllegalArgumentException("Malformed subTree");
-		}
-		
-		line = line.substring(2);
-		
-		if (!line.equals("")) {	
-			parent.setRight(new StringNode(line));
-		}
-		
-		return subTree;
-	}
-	
 	protected Node left;
 	protected Node right;
 	
@@ -124,7 +37,7 @@ public abstract class Node {
 		return left;
 	}
 
-	public void setLeft(StringNode left) {
+	public void setLeft(Node left) {
 		this.left = left;
 	}
 
@@ -132,7 +45,7 @@ public abstract class Node {
 		return right;
 	}
 
-	public void setRight(StringNode right) {
+	public void setRight(Node right) {
 		this.right = right;
 	}
 	
@@ -210,7 +123,7 @@ public abstract class Node {
 	private void printPreserveEmpty(StringBuilder buffer, int deep) {
 
 		for (int i = 0; i < deep; i++) {
-			buffer.append("  ");
+			buffer.append(" ");
 		}
 		buffer.append("- ");
 		buffer.append(getLabel());
@@ -218,10 +131,22 @@ public abstract class Node {
 		
 		if (left != null) {
 			left.printPreserveEmpty(buffer, deep + 1);
+		} else {
+			for (int i = 0; i < deep + 1; i++) {
+				buffer.append(" ");
+			}
+			buffer.append("- ");
+			buffer.append('\n');
 		}
 		
 		if (right != null) {
 			right.printPreserveEmpty(buffer, deep + 1);
+		} else {
+			for (int i = 0; i < deep + 1; i++) {
+				buffer.append(" ");
+			}
+			buffer.append("- ");
+			buffer.append('\n');
 		}
 	}
 	
@@ -241,5 +166,5 @@ public abstract class Node {
 			if (right != null) {
 				right.print(buffer, deep + 1);
 			}
-	}	
+	}
 }

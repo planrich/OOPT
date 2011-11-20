@@ -86,16 +86,42 @@ public class Test {
 		
 		System.out.println();
 		
-		System.out.println("Searching for m in tree which should result in left right right:");
+		System.out.println("Searching for m/l/k/c/f:");
 		System.out.println(rTree.search("m"));
+		System.out.println(rTree.search("l"));
+		System.out.println(rTree.search("k"));
+		System.out.println(rTree.search("c"));
+		System.out.println(rTree.search("f"));
 		
 		System.out.println();
 		
-		System.out.println("Replacing node left right left with a simple sub tree:");
-		System.out.println(rTree.root.toStringPreserveEmpty());
 		System.out.println("replacing left right left with new tree:");
-		rTree.replace("left right left", "- a\n- b\n - c\n - d\n- e\n");
+		rTree.replace("left right left", "- a\n - b\n  - c\n  - d\n - e\n");
 		System.out.println(rTree.root.toStringPreserveEmpty());
+		System.out.println();
+		
+		System.out.println("IntTree 1-7 inserted:");
+		IntTree it = new IntTree();
+		it.add(1);
+		it.add(2);
+		it.add(3);
+		it.add(4);
+		it.add(5);
+		it.add(6);
+		it.add(7);
+		System.out.println(it);
+		System.out.println();
+		
+		System.out.println("replaceing root with new tree");
+		it.replace("", "- 1\n - \n - 3\n  - \n  - 7\n");
+		System.out.println(it.root.toStringPreserveEmpty());
+		System.out.println();
+		System.out.println("filling up again to match first tree");
+		it.add(2);
+		it.add(4);
+		it.add(5);
+		it.add(6);
+		System.out.println(it);
 		System.out.println();
 	}
 }
