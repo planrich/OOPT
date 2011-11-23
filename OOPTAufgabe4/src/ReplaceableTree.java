@@ -37,7 +37,7 @@ public class ReplaceableTree extends Replaceable implements StringTree {
 	}
 	
 	@Override
-	public Node getFor(String label) {
+	protected Node getFor(String label) {
 		return new StringNode(label);
 	}
 
