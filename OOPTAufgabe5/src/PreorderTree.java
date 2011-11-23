@@ -1,4 +1,4 @@
 
-public class PreorderTree<E extends Comparable<E>> extends SortedTree<E> {
+public class PreorderTree<E> extends SortedTree<E> {
 
 }

@@ -1,4 +1,4 @@
 
-public class PostorderTree<E extends Comparable<E>> extends SortedTree<E> {
+public class PostorderTree<E> extends SortedTree<E> {
 
 }

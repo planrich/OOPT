@@ -1,7 +1,7 @@
 
 public abstract class Person implements Comparable<Person> {
 
-	private String name;
+	private final String name;
 	
 	public Person(String name) {		// not null
 		this.name = name;

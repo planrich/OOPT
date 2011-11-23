@@ -1,5 +1,5 @@
 
-public abstract class SortedTree<E extends Comparable<E>> extends Tree<E> {
+public abstract class SortedTree<E> extends Tree<E> {
 
 	@Override
 	public void add(E data) {
