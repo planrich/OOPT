@@ -1,7 +1,7 @@
 
 public abstract class Tree<E> {
 	
-	private Node<E> root = null;
+	protected Node<E> root = null;
 	
 	public TreeIter<E> contains(E data) {
 		return null;
