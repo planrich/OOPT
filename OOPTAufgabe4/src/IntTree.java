@@ -35,7 +35,7 @@ public class IntTree extends Replaceable {
 	
 
 	@Override
-	public Node getFor(String label) {
+	protected Node getFor(String label) {
 		
 		Integer it = Integer.parseInt(label);
 		return new IntNode(it);

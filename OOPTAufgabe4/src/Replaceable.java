@@ -5,7 +5,7 @@ public abstract class Replaceable {
 	protected int level = 0;
 	protected int insertPostion = 0;
 	
-	public abstract Node getFor(String label);
+	protected abstract Node getFor(String label);
 	
 	public void replace(String position, String subTree) {
 		//if position, or subTree is malformed
