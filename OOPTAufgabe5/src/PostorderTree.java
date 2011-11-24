@@ -1,4 +1,11 @@
 
-public class PostorderTree<E> extends SortedTree<E> {
+public class PostorderTree<E extends Comparable<? super E>> extends SortedTree<E> {
+
+	@Override
+	public TreeIter<E> iterator(Node<E> e) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

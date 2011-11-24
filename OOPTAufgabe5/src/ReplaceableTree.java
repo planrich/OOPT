@@ -1,5 +1,5 @@
 
-public class ReplaceableTree<E> extends Tree<E> {
+public class ReplaceableTree<E extends Comparable<? super E>> extends Tree<E> {
 
 	@Override
 	public void add(E data) {
@@ -8,5 +8,11 @@ public class ReplaceableTree<E> extends Tree<E> {
 	
 	public void replace(Tree<? extends E> subTree, Iter<Boolean> position) {
 		
+	}
+
+	@Override
+	public TreeIter<E> iterator(Node<E> e) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
