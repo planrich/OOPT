@@ -46,13 +46,13 @@ public abstract class Tree<E> {
 			return null;
 		}
 		
-		StringBuilder builder = new StringBuilder();
-		depthSearch(root, data, builder);
+		StringBuilder path = new StringBuilder();
+		depthSearch(root, data, path);
 
-		return new BoolIter(builder.reverse().toString());
+		return new BoolIter(path.reverse().toString());
 	}
 	
-	protected boolean depthSearch(Node<E> node, E data, StringBuilder builder) {
+	protected boolean depthSearch(Node<E> node, E data, StringBuilder path) {
 		
 		if (node != null) {
 			
@@ -60,14 +60,14 @@ public abstract class Tree<E> {
 				return true;
 			}
 			
-			boolean back = depthSearch(node.getLeft(), data, builder);
+			boolean back = depthSearch(node.getLeft(), data, path);
 			if (back) {
-				builder.append("0");
+				path.append("0");
 				return true;
 			}
-			back = depthSearch(node.getRight(), data, builder);
+			back = depthSearch(node.getRight(), data, path);
 			if (back) {
-				builder.append("1");
+				path.append("1");
 				return true;
 			}
 		}
@@ -76,6 +76,53 @@ public abstract class Tree<E> {
 	}
 
 	public abstract void add(E data);
+	
+	protected final class StackIter implements TreeIter<E> {
+
+		protected Stack<E> next;
+		protected Stack<E> previous;
+		
+		public StackIter(Stack<E> s) {
+			this.next = s;
+			this.previous = new Stack<E>();
+		}
+		
+		@Override
+		public E next() {
+			Node<E> node = next.pop();
+			if (node == null) {
+				return null;
+			}
+			previous.push(node);
+			return node.getData();
+		}
+
+		@Override
+		public E previous() {
+			Node<E> node = previous.pop();
+			if (node == null) {
+				return null;
+			}
+			next.push(node);
+			return node.getData();
+		}
+
+		@Override
+		public boolean hasNext() {
+			return next.hasNext();
+		}
+
+		@Override
+		public boolean hasPrevious() {
+			return previous.hasNext();
+		}
+
+		@Override
+		public TreeIter<E> down() {
+			return Tree.this.iterator(next.current());
+		}
+		
+	}
 	
 	protected class BoolIter implements Iter<Boolean> {
 

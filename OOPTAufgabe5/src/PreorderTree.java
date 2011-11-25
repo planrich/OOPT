@@ -98,7 +98,7 @@ public class PreorderTree<E extends Comparable<? super E>> extends SortedTree<E>
 						next = cur.getRight();
 					}
 				}
-				
+
 				return next != null;
 			}
 			
