@@ -37,7 +37,10 @@ public class Stack<E> {
 		return topElement.getNext() != null;
 	}
 	
-	public Node<E> current() {
+	public Node<E> peek() {
+		if (topElement == null) {
+			return null;
+		}
 		return topElement.getElement();
 	}
 	

@@ -76,54 +76,7 @@ public abstract class Tree<E> {
 	}
 
 	public abstract void add(E data);
-	
-	protected final class StackIter implements TreeIter<E> {
 
-		protected Stack<E> next;
-		protected Stack<E> previous;
-		
-		public StackIter(Stack<E> s) {
-			this.next = s;
-			this.previous = new Stack<E>();
-		}
-		
-		@Override
-		public E next() {
-			Node<E> node = next.pop();
-			if (node == null) {
-				return null;
-			}
-			previous.push(node);
-			return node.getData();
-		}
-
-		@Override
-		public E previous() {
-			Node<E> node = previous.pop();
-			if (node == null) {
-				return null;
-			}
-			next.push(node);
-			return node.getData();
-		}
-
-		@Override
-		public boolean hasNext() {
-			return next.hasNext();
-		}
-
-		@Override
-		public boolean hasPrevious() {
-			return previous.hasNext();
-		}
-
-		@Override
-		public TreeIter<E> down() {
-			return Tree.this.iterator(next.current());
-		}
-		
-	}
-	
 	protected class BoolIter implements Iter<Boolean> {
 
 		String path;

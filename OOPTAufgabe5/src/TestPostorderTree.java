@@ -31,4 +31,22 @@ public class TestPostorderTree extends TestSortedTree {
 		
 		Assert.assertNull(iter.next());
 	}
+	
+	@Test
+	public void testContains() {
+		TreeIter<Integer> iter = tree.contains(10);
+		Assert.assertNotNull(iter);
+		Assert.assertEquals(Integer.valueOf(2), iter.next());
+		
+		iter = tree.contains(2);
+		Assert.assertNotNull(iter);
+		Assert.assertEquals(Integer.valueOf(2), iter.next());
+		
+		iter = tree.contains(15);
+		Assert.assertNotNull(iter);
+		Assert.assertEquals(Integer.valueOf(12), iter.next());
+		
+		Assert.assertNull(tree.contains(8));
+		Assert.assertNull(tree.contains(30));
+	}
 }
