@@ -25,6 +25,10 @@ public class Stack<E> {
 		return node;
 	}
 	
+	public boolean isEmpty() {
+		return topElement == null;
+	}
+	
 	public boolean hasNext() {
 		if (topElement == null) {
 			return false;
