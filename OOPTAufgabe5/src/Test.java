@@ -152,7 +152,6 @@ public class Test {
 		System.out.println("Searching for Maracuja in ReplaceableTree! Path:");
 		System.out.println(path);
 		
-		
 		ReplaceableTree<Person> rep2 = new ReplaceableTree<Person>();
 		rep2.add(new Student("Albert Einstein", 300300));
 		rep2.add(new Student("Unnamed", 192838298));
@@ -165,7 +164,7 @@ public class Test {
 		printStructure(rep2.iterator(), 0);
 		
 		rep2.replace(preorder1, rep2.search(new Professor("Albert Einstein", "going for physics")));
-		System.out.println("replaced prof. Ablert Einstein with PreorderTree:");
+		System.out.println("replaced prof. Albert Einstein with PreorderTree:");
 		printStructure( rep2.iterator(), 0);
 		
 		rep2.replace(postorder1, rep2.search(new Professor("Michael Reiter", "complang")));

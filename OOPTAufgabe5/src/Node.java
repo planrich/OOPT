@@ -2,7 +2,7 @@
 public class Node<E> {
 	
 	private E data;
-	private Node<E> left;
+	private Node<? extends E> left;
 	private Node<E> right;
 	private Node<E> parent;
 	
@@ -19,11 +19,11 @@ public class Node<E> {
 		return parent;
 	}
 
-	public Node<E> getLeft() {
+	public Node<? extends E> getLeft() {
 		return left;
 	}
 
-	public void setLeft(Node<E> left) {
+	public void setLeft(Node<? extends E> left) {
 		this.left = left;
 	}
 
