@@ -3,37 +3,6 @@ public class Test {
 
 	public static void main(String[] args) {
 		
-		PreorderTree<String> x = new PreorderTree<String>();
-		x.add("f");
-		x.add("c");
-		x.add("g");
-		x.add("a");
-		x.add("b");
-		x.add("v");
-		x.add("s");
-		
-		Iter<Boolean> it = x.search("v");
-		while (it.hasNext()) {
-			System.out.println(it.next());
-		}
-		
-		System.out.println(x.contains("aaa"));
-		System.out.println(x.contains(""));
-		System.out.println(x.contains("f"));
-		System.out.println(x.contains("c"));
-		System.out.println(x.contains("g"));
-		System.out.println(x.contains("a"));
-		System.out.println(x.contains("b"));
-		System.out.println(x.contains("v"));
-		System.out.println(x.contains("s"));
-		
-		TreeIter<String> xx = x.iterator();
-		while (xx.hasNext()) {
-			System.out.println(xx.next());
-		}
-		
-		System.exit(0);
-		
 		System.out.print("creating test data...");
 		
 		ReplaceableTree<String> rep1 = new ReplaceableTree<String>();		
