@@ -18,7 +18,10 @@ public abstract class Tree<E> {
 	private TreeIter<E> contains(Node<E> from, E data) {
 
 		if (from != null) {
-
+			
+			if(from.getData() == null) { //added this temporarily
+				return null;
+			}
 			if (from.getData().equals(data)) {
 				return iterator(from);
 			}
@@ -38,6 +41,14 @@ public abstract class Tree<E> {
 		return iterator(root);
 	}
 
+	protected List<Node<E>> makeTraverseList(Node<E> root) {
+		List<Node<E>> list = new List<Node<E>>();
+		traverse(list, root);
+		return list;
+	}
+	
+	protected abstract void traverse(List<Node<E>> list, Node<E> root);
+	
 	public abstract TreeIter<E> iterator(Node<E> e);
 
 	public Iter<Boolean> search(E data) {		
@@ -54,6 +65,10 @@ public abstract class Tree<E> {
 	protected boolean depthSearch(Node<E> node, E data, StringBuilder path) {
 		
 		if (node != null) {
+			
+			if(node.getData() == null) { //added that temporarily
+				return false;
+			}
 			
 			if (node.getData().equals(data)) {
 				return true;

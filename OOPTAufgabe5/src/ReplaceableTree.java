@@ -1,7 +1,6 @@
 
 public class ReplaceableTree<E extends Comparable<? super E>> extends Tree<E> {
 
-	private E label;
 	private int level = 0;
 	private int insertPostion = 0;
 	
@@ -9,15 +8,15 @@ public class ReplaceableTree<E extends Comparable<? super E>> extends Tree<E> {
 		Node<E> n = new Node<E>(root, label);
 		return n;
 	}
+	
 	@Override
 	public void add(E data) {
 		if (root == null) {
-			root = getFor(label);
+			root = getFor(data);
 			insertPostion = 1;
 			level = 1;
 		} else {
 			insertPostion++;		
-			
 			int start_ele = (int)Math.pow(2, level);
 			int code = insertPostion - start_ele;
 			
@@ -25,8 +24,8 @@ public class ReplaceableTree<E extends Comparable<? super E>> extends Tree<E> {
 			
 			//System.out.println("insert " + insertPostion + " at level " + level + " with code " + code + " = " + binary);
 			
-			boolean success = insert(root, label, binary);
-
+			boolean success = insert(root, data, binary);
+			
 			if(insertPostion == (Math.pow(2, level + 1) - 1)) { // update levels
 				level++;
 			}	
@@ -34,7 +33,8 @@ public class ReplaceableTree<E extends Comparable<? super E>> extends Tree<E> {
 			//it is possible to insert a not replaceable tree, so there might already be a node at that postion.
 			//therefore we make it recursive until we inserted
 			if (!success) {
-				add(label);
+				System.out.println(data + " could not be inserted");
+				//add(data);
 			}
 		}
 	}
@@ -127,10 +127,63 @@ public class ReplaceableTree<E extends Comparable<? super E>> extends Tree<E> {
 	
 	@Override
 	public TreeIter<E> iterator(Node<E> e) {
-		// TODO Auto-generated method stub
-		return null;
+		return new RepIter(root); //inorder Iterator
 	}
 	
+	protected void traverse(List<Node<E>> list, Node<E> node) {
+		if (node != null) {
+			traverse(list, node.getLeft());
+			list.append(node);
+			traverse(list, node.getRight());
+		}
+	}
 	
+protected class RepIter implements TreeIter<E> {
+		
+		private Iter<Node<E>> iterator;
+		private Node<E> current;
+		
+		public RepIter(Node<E> root) {
+			List<Node<E>> list = new List<Node<E>>();
+			list = makeTraverseList(root);
+			iterator = list.iterator();
+			current = root;
+		}
+		
+		@Override
+		public E next() {
+			current = iterator.next();
+			if (current == null) {
+				return null;
+			}
+			return current.getData();
+		}
 
+		@Override
+		public E previous() {
+			current = iterator.previous();
+			if (current == null) {
+				return null;
+			}
+			return current.getData();
+		}
+
+		@Override
+		public boolean hasNext() {
+			return iterator.hasNext();
+		}
+
+		@Override
+		public boolean hasPrevious() {
+			return iterator.hasPrevious();
+		}
+
+		@Override
+		public TreeIter<E> down() {
+			if (current == null) {
+				return new RepIter(null);
+			}
+			return new RepIter(current);
+		}
+	}
 }

@@ -58,21 +58,13 @@ public abstract class SortedTree<E extends Comparable<? super E>> extends Tree<E
 		}
 	}
 	
-	private List<Node<E>> makeTraverseList(Node<E> root) {
-		List<Node<E>> list = new List<Node<E>>();
-		traverse(list, root);
-		return list;
-	}
-	
-	protected abstract void traverse(List<Node<E>> list, Node<E> root);
-	
 	protected class SortedIter implements TreeIter<E> {
 		
 		private Iter<Node<E>> iterator;
 		private Node<E> current;
 		
 		public SortedIter(Node<E> root) {
-			List<Node<E>> list = makeTraverseList(root);
+			List<Node<E>> list = new List<Node<E>>();
 			iterator = list.iterator();
 			current = root;
 		}

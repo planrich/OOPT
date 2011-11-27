@@ -109,6 +109,18 @@ public class Test {
 			}
 		}
 		
+		ReplaceableTree<Person> rep2 = new ReplaceableTree<Person>();
+		rep2.add(new Student("Albert Einstein", 300300));
+		rep2.add(new Student("Unnamed", 192838298));
+		rep2.add(new Professor("Albert Einstein", "going for physics"));
+		rep2.add(new Professor("Michael Reiter", "complang"));
+		
+		// TODO this printStructure is untested and i dont know jet if it is working correctly.
+		// need to test it
+		System.out.println("initial ReplaceableTree:");
+		printStructure(rep2.iterator(), 0);
+		
+		
 		String path = generatePath(search1);
 		System.out.println("Searching for Krall/complang in PostorderTree! Path:");
 		System.out.println(path);
@@ -121,17 +133,6 @@ public class Test {
 		System.out.println("Searching for Maracuja in ReplaceableTree! Path:");
 		System.out.println(path);
 		
-		ReplaceableTree<Person> rep2 = new ReplaceableTree<Person>();
-		rep2.add(new Student("Albert Einstein", 300300));
-		rep2.add(new Student("Unnamed", 192838298));
-		rep2.add(new Professor("Albert Einstein", "going for physics"));
-		rep2.add(new Professor("Michael Reiter", "complang"));
-		
-		// TODO this printStructure is untested and i dont know jet if it is working correctly.
-		// need to test it
-		System.out.println("initial ReplaceableTree:");
-		printStructure(rep2.iterator(), 0);
-		
 		rep2.replace(preorder1, rep2.search(new Professor("Albert Einstein", "going for physics")));
 		System.out.println("replaced prof. Albert Einstein with PreorderTree:");
 		printStructure( rep2.iterator(), 0);
@@ -142,7 +143,7 @@ public class Test {
 	}
 	
 	private static void printStructure(TreeIter<Person> it, int level) {
-		
+
 		while (it.hasNext()) {
 			Person next = it.next();
 			for (int i = 0; i < level; i++) {
@@ -155,7 +156,7 @@ public class Test {
 
 	private static String generatePath(Iter<Boolean> it) {
 		StringBuilder sb = new StringBuilder();
-		
+
 		while (it.hasNext()) {
 			sb.append(it.next().toString() + " ");
 		}
