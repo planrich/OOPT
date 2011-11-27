@@ -2,7 +2,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-public class TestList {
+public class UnitTestList {
 
 	@Test
 	public void testEmptyList() {

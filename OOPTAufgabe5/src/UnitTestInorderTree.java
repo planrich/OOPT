@@ -3,7 +3,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 
-public class TestInorderTree extends TestSortedTree {
+public class UnitTestInorderTree extends UnitTestSortedTree {
 
 	@Override
 	protected SortedTree<Integer> getTreeImpl() {

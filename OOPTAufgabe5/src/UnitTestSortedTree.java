@@ -1,7 +1,7 @@
 import org.junit.Before;
 
 
-public abstract class TestSortedTree {
+public abstract class UnitTestSortedTree {
 
 	protected static SortedTree<Integer> tree;
 	
