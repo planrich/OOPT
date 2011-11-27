@@ -40,16 +40,15 @@ public abstract class Tree<E> {
 
 	public abstract TreeIter<E> iterator(Node<E> e);
 
-	public Iter<Boolean> search(E data) {
-		TreeIter<E> it = contains(data); //going back previous will not always lead to search goal!
-		if (it == null) {
-			return null;
-		}
-		
+	public Iter<Boolean> search(E data) {		
 		StringBuilder path = new StringBuilder();
-		depthSearch(root, data, path);
+		boolean found = depthSearch(root, data, path);
+		
+		if (found) {
+			return new BoolIter(path.reverse().toString());
+		}
 
-		return new BoolIter(path.reverse().toString());
+		return null;
 	}
 	
 	protected boolean depthSearch(Node<E> node, E data, StringBuilder path) {
@@ -89,11 +88,19 @@ public abstract class Tree<E> {
 		
 		@Override
 		public Boolean next() {
+			if (pos >= path.length()) {
+				return false;
+			}
+			
 			return path.charAt(pos++) == '0' ? false : true;
 		}
 
 		@Override
 		public Boolean previous() {
+			if ((pos-1) < 0) {
+				return false;
+			}
+			
 			return path.charAt(--pos) == '0' ? false : true;
 		}
 
