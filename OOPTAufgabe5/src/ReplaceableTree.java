@@ -95,8 +95,8 @@ public class ReplaceableTree<E extends Comparable<? super E>> extends Tree<E> {
 	}	
 	
 	public void replace(Tree<? extends E> subTree, Iter<Boolean> position) {
-		Tree<? extends E> newTree = copyHelper(subTree);
-		Node<? extends E> pos = root;
+		Tree<E> newTree = copyHelper(subTree);
+		Node<E> pos = root;
 		
 		while(position.hasNext()) {
 			if(position.next() == false && pos.getLeft() != null) {
@@ -116,9 +116,9 @@ public class ReplaceableTree<E extends Comparable<? super E>> extends Tree<E> {
 	}
 	
 
-	private static <E extends Comparable<? super E>> Tree<E> copyHelper(Tree<E> tree) {
+	private static <E extends Comparable<? super E>> Tree<E> copyHelper(Tree<? extends E> tree) {
 		ReplaceableTree<E> rep = new ReplaceableTree<E>();
-		TreeIter<E> iter = tree.iterator();
+		TreeIter<? extends E> iter = tree.iterator();
 		while(iter.hasNext()) {
 			rep.add(iter.next());
 		}
