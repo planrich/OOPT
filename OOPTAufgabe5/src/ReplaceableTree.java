@@ -4,8 +4,8 @@ public class ReplaceableTree<E extends Comparable<? super E>> extends Tree<E> {
 	private int level = 0;
 	private int insertPostion = 0;
 	
-	private Node<E> getFor(E label) {
-		Node<E> n = new Node<E>(root, label);
+	private Node<E> getFor(E data) {
+		Node<E> n = new Node<E>(root, data);
 		return n;
 	}
 	
@@ -119,12 +119,19 @@ public class ReplaceableTree<E extends Comparable<? super E>> extends Tree<E> {
 
 	private static <E extends Comparable<? super E>> Tree<E> copyHelper(Tree<? extends E> tree) {
 		ReplaceableTree<E> rep = new ReplaceableTree<E>();
+		rep.root = tree.root.clone();
+		return rep;
+	}
+	
+	 /*	private static <E extends Comparable<? super E>> Tree<E> copyHelper(Tree<? extends E> tree) {
+		ReplaceableTree<E> rep = new ReplaceableTree<E>();
 		TreeIter<? extends E> iter = tree.iterator();
 		while(iter.hasNext()) {
 			rep.add(iter.next());
 		}
 		return rep;
-	}
+	}*/
+	 
 	
 	@Override
 	public TreeIter<E> iterator(Node<E> e) {
