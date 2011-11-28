@@ -64,7 +64,7 @@ public abstract class SortedTree<E extends Comparable<? super E>> extends Tree<E
 		private Node<E> current;
 		
 		public SortedIter(Node<E> root) {
-			List<Node<E>> list = new List<Node<E>>();
+			List<Node<E>> list = makeTraverseList(root);
 			iterator = list.iterator();
 			current = root;
 		}

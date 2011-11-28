@@ -99,14 +99,15 @@ public class ReplaceableTree<E extends Comparable<? super E>> extends Tree<E> {
 		Node<E> pos = root;
 		
 		while(position.hasNext()) {
-			if(position.next() == false && pos.getLeft() != null) {
-				if(position.hasNext()) {
+			Boolean next = position.next();
+			if(next.booleanValue() == false) {
+				if(position.hasNext() && pos.getLeft() != null) {
 					pos = pos.getLeft();
 				} else {
 					pos.setLeft(newTree.root);
 				}
-			} else if(position.next() == true && pos.getRight() != null) {
-				if(position.hasNext()) {
+			} else if(next.booleanValue()) {
+				if(position.hasNext() && pos.getRight() != null) {
 					pos = pos.getRight();
 				} else {
 					pos.setRight(newTree.root);
@@ -127,25 +128,24 @@ public class ReplaceableTree<E extends Comparable<? super E>> extends Tree<E> {
 	
 	@Override
 	public TreeIter<E> iterator(Node<E> e) {
-		return new RepIter(root); //inorder Iterator
+		return new RepIter(root); //preorder Iterator -> better for testing than inorder
 	}
 	
 	protected void traverse(List<Node<E>> list, Node<E> node) {
 		if (node != null) {
-			traverse(list, node.getLeft());
 			list.append(node);
+			traverse(list, node.getLeft());
 			traverse(list, node.getRight());
 		}
 	}
 	
-protected class RepIter implements TreeIter<E> {
+	protected class RepIter implements TreeIter<E> {
 		
 		private Iter<Node<E>> iterator;
 		private Node<E> current;
 		
 		public RepIter(Node<E> root) {
-			List<Node<E>> list = new List<Node<E>>();
-			list = makeTraverseList(root);
+			List<Node<E>> list = makeTraverseList(root);
 			iterator = list.iterator();
 			current = root;
 		}

@@ -19,9 +19,10 @@ public abstract class Tree<E> {
 
 		if (from != null) {
 			
-			if(from.getData() == null) { //added this temporarily
-				return null;
-			}
+			//MUST NOT be null see node impl
+			/*if(from.getData() == null) { //added this temporarily
+				return null; 
+			}*/
 			if (from.getData().equals(data)) {
 				return iterator(from);
 			}
@@ -66,9 +67,10 @@ public abstract class Tree<E> {
 		
 		if (node != null) {
 			
-			if(node.getData() == null) { //added that temporarily
+			//MUST NOT be null see Node impl
+			/*if(node.getData() == null) { //added that temporarily
 				return false;
-			}
+			}*/
 			
 			if (node.getData().equals(data)) {
 				return true;
