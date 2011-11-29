@@ -35,6 +35,7 @@ public class Node<E> {
 		this.right = right;
 	}
 	
+
 	public Node<E> clone() {
 		Node<E> node = new Node<E>(this.parent, this.data);
 		if (this.left != null) {

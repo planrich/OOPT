@@ -31,10 +31,9 @@ public class ReplaceableTree<E extends Comparable<? super E>> extends Tree<E> {
 			}	
 			
 			//it is possible to insert a not replaceable tree, so there might already be a node at that postion.
-			//therefore we make it recursive until we inserted
+			//therefore we make it recursive until we added
 			if (!success) {
-				System.out.println(data + " could not be inserted");
-				//add(data);
+				add(data);
 			}
 		}
 	}
@@ -116,11 +115,25 @@ public class ReplaceableTree<E extends Comparable<? super E>> extends Tree<E> {
 		}
 	}
 	
-
 	private static <E extends Comparable<? super E>> Tree<E> copyHelper(Tree<? extends E> tree) {
 		ReplaceableTree<E> rep = new ReplaceableTree<E>();
-		rep.root = tree.root.clone();
+		Node<E> newroot = new Node<E>(null, tree.root.getData());
+		deepCopy(newroot,tree.root);
+		rep.root = newroot;
 		return rep;
+	}  
+	
+	private static <E> void deepCopy(Node<E> root, Node<? extends E> copypos) {
+		
+		if (copypos.getLeft() != null) {
+			root.setLeft(new Node<E>(root, copypos.getLeft().getData()));
+			deepCopy(root.getLeft(),copypos.getLeft());
+		}
+		
+		if (copypos.getRight() != null) {
+			root.setRight(new Node<E>(root, copypos.getRight().getData()));
+			deepCopy(root.getRight(),copypos.getRight());
+		}
 	}
 	
 	 /*	private static <E extends Comparable<? super E>> Tree<E> copyHelper(Tree<? extends E> tree) {

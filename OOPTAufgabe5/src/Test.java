@@ -30,8 +30,16 @@ public class Test {
 		postorder1.add(new Professor("Blieberger", "auto"));
 		postorder1.add(new Professor("Raidl", "algodat"));
 		postorder1.add(new Professor("Reiter", "complang"));
+		postorder1.add(new Professor("Reiter2", "complang"));
+		postorder1.add(new Professor("Reiter3", "complang"));
+		postorder1.add(new Professor("Puncher", "complang"));
 		
 		System.out.println("done");
+		
+		System.out.println();
+		System.out.println("####CHECKING ALL TREE ITERATORS####");
+		System.out.println();
+		
 		System.out.println("ReplaceableTree<String>:");
 		Iter<String> it1 = rep1.iterator();
 		while (it1.hasNext()) {
@@ -40,6 +48,7 @@ public class Test {
 				System.out.println(", ");
 			}
 		}
+		System.out.println();
 		System.out.println();
 		
 		System.out.println("InorderTree<Integer>:");
@@ -50,6 +59,7 @@ public class Test {
 				System.out.println(", ");
 			}
 		}
+		System.out.println();
 		System.out.println();
 
 		System.out.println("PreorderTree<Student>:");
@@ -63,6 +73,7 @@ public class Test {
 		}
 		
 		System.out.println();
+		System.out.println();
 		
 		System.out.println("PostorderTree<Professor>:");
 		Iter<Professor> it4 = postorder1.iterator();
@@ -74,15 +85,14 @@ public class Test {
 			}
 		}
 		
+		System.out.println();
+		System.out.println();
+		System.out.println("####CHECK EXISTANCE OF VARIOUS NODES####");
+		System.out.println();
+		
 		TreeIter<Student> contains1 = preorder1.contains(new Student("Max Mustermann",1010555));
 		TreeIter<String> contains2 = rep1.contains("Zitrone");
 		TreeIter<Integer> contains3 = inorder1.contains(4);
-		
-		Iter<Boolean> search1 = postorder1.search(new Professor("Krall", "complang"));
-		Iter<Boolean> search2 = postorder1.search(new Professor("Kralli", "complang"));
-		Iter<Boolean> search3 = rep1.search("Maracuja");
-		
-		System.out.println();
 		
 		System.out.println("PreorderTree contains MaxMustermann 1010555?");
 		if (contains1 == null ) {
@@ -94,7 +104,8 @@ public class Test {
 				System.out.println(String.format("%s %d",cur.getName(),cur.getMatrikelnummer()));
 			}
 		}
-		
+
+		System.out.println();
 		System.out.println("ReplaceableTree contains 'Zitrone'?");
 		if (contains2 == null ) {
 			System.out.println("not found");
@@ -104,7 +115,8 @@ public class Test {
 				System.out.println(contains2.next());
 			}
 		}
-		
+
+		System.out.println();
 		System.out.println("InorderTree contains 4?");
 		if (contains3 == null ) {
 			System.out.println("not found");
@@ -115,28 +127,41 @@ public class Test {
 			}
 		}
 		
+		System.out.println();
+		System.out.println("####SEARCHING VARIOUS TREES####");
+		System.out.println();
+		
+		Iter<Boolean> search1 = postorder1.search(new Professor("Krall", "complang"));
+		Iter<Boolean> search2 = postorder1.search(new Professor("Kralli", "complang"));
+		Iter<Boolean> search3 = rep1.search("Maracuja");
+		
+		String path = generatePath(search1);
+		System.out.println("Searching for Krall/complang in PostorderTree! Path (empty path, krall is root):");
+		System.out.println(path);
+		System.out.println();
+		
+		path = generatePath(search2);
+		System.out.println("Searching for Kralli/complang in PostorderTree! Path (will be null):");
+		System.out.println(path);
+		System.out.println();
+		
+		path = generatePath(search3);
+		System.out.println("Searching for Maracuja in ReplaceableTree! Path:");
+		System.out.println(path);
+		System.out.println();
+
+		System.out.println();
+		System.out.println("####TESTING REPLACEABLETREE####");
+		System.out.println();
+		
 		ReplaceableTree<Person> rep2 = new ReplaceableTree<Person>();
 		rep2.add(new Student("Albert Einstein", 300300));
 		rep2.add(new Student("Unnamed", 192838298));
 		rep2.add(new Professor("Albert Einstein Prof", "going for physics"));
 		rep2.add(new Professor("Michael Reiter", "complang"));
 		
-		// TODO this printStructure is untested and i dont know jet if it is working correctly.
-		// need to test it
 		System.out.println("initial ReplaceableTree:");
 		printStructure(rep2);
-		
-		String path = generatePath(search1);
-		System.out.println("Searching for Krall/complang in PostorderTree! Path:");
-		System.out.println(path);
-		
-		path = generatePath(search2);
-		System.out.println("Searching for Kralli/complang in PostorderTree! Path:");
-		System.out.println(path);
-		
-		path = generatePath(search3);
-		System.out.println("Searching for Maracuja in ReplaceableTree! Path:");
-		System.out.println(path);
 		
 		rep2.replace(preorder1, rep2.search(new Professor("Albert Einstein Prof", "going for physics")));
 		System.out.println("replaced prof. Albert Einstein with PreorderTree:");
