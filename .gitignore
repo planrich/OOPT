@@ -1,4 +1,6 @@
 .metadata
 */bin
 *.DS_Store
+/**/.settings/**
+/**/*.jar
 
