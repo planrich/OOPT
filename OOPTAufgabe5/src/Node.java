@@ -34,16 +34,4 @@ public class Node<E> {
 	public void setRight(Node<E> right) {
 		this.right = right;
 	}
-	
-
-	public Node<E> clone() {
-		Node<E> node = new Node<E>(this.parent, this.data);
-		if (this.left != null) {
-			node.setLeft(this.left.clone());
-		}
-		if (this.right != null) {
-			node.setRight(this.right.clone());
-		}
-		return node;
-	}
 }

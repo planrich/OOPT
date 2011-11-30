@@ -1,0 +1,9 @@
+<project default="export" basedir="." name="oopt7">
+	<target name="export">
+		<regexp id="test" pattern="Test(.+)\.java"/>
+		<jar destfile="${ant.project.name}.jar" basedir="src">
+			<include name="**/*.java"/>
+			<exclude name="UnitTest*.java" />
+		</jar>
+	</target>
+</project>
