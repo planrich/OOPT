@@ -40,4 +40,39 @@ public class UnitTestList {
 		
 		Assert.assertFalse(iter.hasNext());
 	}
+	
+	@Test
+	public void testRemoveEmptyList() {
+		List<String> list = new List<String>();
+		list.remove("dd");
+	}
+	
+	@Test
+	public void testRemoveLastEntry() {
+		List<String> list = new List<String>();
+		list.add("a");
+		list.remove("a");
+		
+		List.Iterator<String> iter = list.iterator();
+		Assert.assertFalse(iter.hasNext());
+	}
+	
+	@Test
+	public void testRemoveElement() {
+		List<String> list = new List<String>();
+		list.add("a");
+		list.add("b");
+		list.add("c");
+		list.remove("b");
+		
+		List.Iterator<String> iter = list.iterator();
+		Assert.assertEquals("a", iter.next());
+		Assert.assertEquals("c", iter.next());
+		Assert.assertFalse(iter.hasNext());
+		
+		list.remove("c");
+		iter = list.iterator();
+		Assert.assertEquals("a", iter.next());
+		Assert.assertFalse(iter.hasNext());
+	}
 }

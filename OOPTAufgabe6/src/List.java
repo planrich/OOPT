@@ -5,7 +5,7 @@ public class List<E> {
 	private ListElement headElement = null;
 	private ListElement tailElement = null;
 	
-	public void append(E element) {
+	public void add(E element) {
 		ListElement e = new ListElement(element);
 		if (headElement == null) {
 			headElement = e;
@@ -14,6 +14,32 @@ public class List<E> {
 			tailElement.setNext(e);
 			e.setPrevious(tailElement);
 			tailElement = e;
+		}
+	}
+	
+	public void remove(E element) {
+		ListElement toDelete = headElement;
+		while (toDelete != null && !toDelete.getElement().equals(element)) {
+			toDelete = toDelete.next;
+		}
+		
+		if (toDelete == null) {
+			return;
+		}
+		
+		ListElement previous = toDelete.previous;
+		ListElement next = toDelete.next;
+		
+		if (previous != null) {
+			previous.next = toDelete.next;
+		} else {
+			headElement = next;
+		}
+		
+		if (next != null) {
+			next.previous = previous;
+		} else {
+			tailElement = previous;
 		}
 	}
 	
