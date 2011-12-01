@@ -22,50 +22,14 @@ public abstract class Robot {
 		return number;
 	}
 	
-	public void toWeldingRobot(int temperature) {
-		role = new WeldingRobot(temperature);
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	
-	public void toVarnishRobot(double capacity) {
-		role = new VarnishRobot(capacity);
+	public Role getRole() {
+		return role;
 	}
 	
-	private abstract class Role {
-		public abstract double getData();
-	}
-	
-	private class WeldingRobot extends Role {
-		private int temperature;
-		
-		public WeldingRobot(int temperature) {
-			this.temperature = temperature;
-		}
-		
-		public int getTemperature() {
-			return temperature;
-		}
-		
-		public double getData() {
-			return temperature;
-		}
-	}
-	
-	private class VarnishRobot extends Role {
-		private double capacity;
-		
-		public VarnishRobot(double capacity) {
-			this.capacity = capacity;
-		}
-		
-		public double getCapacity() {
-			return capacity;
-		}
-
-		public double getData() {
-			return capacity;
-		}
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == this) {
