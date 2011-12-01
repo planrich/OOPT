@@ -55,6 +55,20 @@ public class Factory {
 		}
 	}
 	
+	public double getAverageHours() {
+		List.Iterator<Robot> iter = robots.iterator();
+		double sum = 0;
+		int count = 0;
+		
+		while (iter.hasNext()) {
+			Robot robot = iter.next();
+			count++;
+			sum += robot.getHoursOperating();
+		}
+		
+		return sum / count;
+	}
+	
 	private Robot getRobot(int number) {
 		List.Iterator<Robot> iter = robots.iterator();
 		
