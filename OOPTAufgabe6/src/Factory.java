@@ -47,6 +47,14 @@ public class Factory {
 		}
 	}
 	
+	public void setRole(int robotNumber, Role role) {
+		Robot robot = getRobot(robotNumber);
+		
+		if (robot != null) {
+			robot.setRole(role);
+		}
+	}
+	
 	private Robot getRobot(int number) {
 		List.Iterator<Robot> iter = robots.iterator();
 		

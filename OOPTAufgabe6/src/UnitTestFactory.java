@@ -37,4 +37,15 @@ public class UnitTestFactory {
 		
 		Assert.assertEquals(10.5, robot.getDistance());
 	}
+	
+	@Test
+	public void testRole() {
+		Factory factory = new Factory("f");
+		CrawlerRobot robot = new CrawlerRobot(1);
+		factory.addRobot(robot);
+		
+		factory.setRole(1, new VarnishRobot(7.0));
+		Assert.assertTrue(robot.getRole() instanceof VarnishRobot);
+		Assert.assertEquals(7.0, ((VarnishRobot)robot.getRole()).getCapacity());
+	}
 }
