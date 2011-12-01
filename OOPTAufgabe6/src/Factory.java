@@ -22,14 +22,40 @@ public class Factory {
 	}
 	
 	public void addHoursOperating(int robotNumber, int hours) {
+		Robot robot = getRobot(robotNumber);
+		
+		if (robot != null) {
+			robot.addHoursOperating(hours);
+		}
+	}
+	
+	public void addRotations(int robotNumber, int rotations) {			// robotNumber must be a valid SwivelArmRobot
+		Robot robot = getRobot(robotNumber);
+		
+		if (robot != null && robot instanceof SwivelArmRobot) {
+			SwivelArmRobot saRobot = (SwivelArmRobot) robot;
+			saRobot.addRotations(rotations);
+		}
+	}
+	
+	public void addDistance(int robotNumber, double distance) {			// robotNumber must be a valid CrawlerRobot
+		Robot robot = getRobot(robotNumber);
+		
+		if (robot != null && robot instanceof CrawlerRobot) {
+			CrawlerRobot cRobot = (CrawlerRobot) robot;
+			cRobot.addDistance(distance);
+		}
+	}
+	
+	private Robot getRobot(int number) {
 		List.Iterator<Robot> iter = robots.iterator();
 		
 		while (iter.hasNext()) {
 			Robot robot = iter.next();
-			if (robot.getNumber() == robotNumber) {
-				robot.addHoursOperating(hours);
-				return;
+			if (robot.getNumber() == number) {
+				return robot;
 			}
 		}
+		return null;
 	}
 }
