@@ -65,4 +65,16 @@ public abstract class Robot {
 			return capacity;
 		}
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == this) {
+			return true;
+		}
+		if (obj instanceof Robot) {
+			Robot robot = (Robot) obj;
+			return robot.number == this.number;
+		}
+		return false;
+	}
 }
