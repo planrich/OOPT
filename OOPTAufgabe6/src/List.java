@@ -43,15 +43,16 @@ public class List<E> {
 		}
 	}
 	
-	public Iterator<E> iterator() {
-		return new ListIter(headElement);
-	}
 	
 	public interface Iterator<E> {
 		E next();
 		E previous();
 		boolean hasNext();
 		boolean hasPrevious();
+	}
+	
+	public Iterator<E> iterator() {
+		return new ListIter(headElement);
 	}
 	
 	private class ListIter implements Iterator<E> {
