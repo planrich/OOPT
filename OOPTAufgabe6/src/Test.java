@@ -45,7 +45,14 @@ public class Test {
 		simons.setRole(5, new VarnishRobot(2));
 		simons.setRole(9, new WeldingRobot(2));
 			
-		System.out.println("Status of: " + simons.getName());
-		System.out.println("Average Hours Worked: " + simons.getAverageHours());
+		fact_iter = factories.iterator();
+		while(fact_iter.hasNext()) {
+			Factory f = fact_iter.next();
+			System.out.println("Status of: " + f.getName());
+			System.out.println("Average Hours Worked: " + f.getAverageHours());
+			System.out.println("\n");
+		}
+		
+		
 	}
 }
