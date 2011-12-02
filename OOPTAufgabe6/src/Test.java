@@ -8,7 +8,7 @@ public class Test {
 		List<Factory> factories = new List<Factory>();
 		
 		Factory simons = new Factory("Simons Factory");
-		Factory klausis = new Factory("Klaus Factory");
+		Factory klausis = new Factory("Klaus Factory"); // hat 0 Roboter -> FŸr division durch 0 tests
 		Factory richards = new Factory("Richards Factory");
 		
 		factories.add(simons);
@@ -44,7 +44,29 @@ public class Test {
 		simons.setRole(2, new VarnishRobot(2));
 		simons.setRole(5, new VarnishRobot(2));
 		simons.setRole(9, new WeldingRobot(2));
-			
+		
+		System.out.println("\nAdding Robots to Richards Factory...");
+		richards.addRobot(new SwivelArmRobot(9));
+		richards.addRobot(new SwivelArmRobot(19));
+		
+		System.out.println("\nTrying to change roles of Robots that do not exist...");
+		richards.setRole(6, new WeldingRobot(6));
+		richards.setRole(12, new VarnishRobot(88));
+		
+		richards.setRole(9, new VarnishRobot(9));
+		richards.setRole(19, new WeldingRobot(19));
+		
+		System.out.println("\nTrying to set operating Hours to a negative value...");
+		richards.addHoursOperating(19, -20);
+		richards.addHoursOperating(9, -9000);
+		richards.addHoursOperating(33, 800); // a non-existent robot
+		
+		System.out.println("\nTrying to set rotations to a negative value...");
+		
+		richards.addRotations(9, -20);
+		richards.addRotations(19, -40);
+		richards.addRotations(33, 8); //a non-existent robot
+		
 		fact_iter = factories.iterator();
 		while(fact_iter.hasNext()) {
 			Factory f = fact_iter.next();
