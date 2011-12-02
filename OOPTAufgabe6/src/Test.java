@@ -70,8 +70,6 @@ public class Test {
 		richards.addRotations(19, -40);
 		richards.addRotations(33, 8); //a non-existent robot
 		
-
-		
 		fact_iter = factories.iterator();
 		while(fact_iter.hasNext()) {
 			Factory f = fact_iter.next();
@@ -79,7 +77,6 @@ public class Test {
 			System.out.println("Average Hours Worked: " + f.getAverageHours());
 			System.out.println("\n");
 		}
-		
 		
 	}
 }
