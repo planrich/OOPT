@@ -44,6 +44,9 @@ public class Test {
 		simons.setRole(2, new VarnishRobot(2));
 		simons.setRole(5, new VarnishRobot(2));
 		simons.setRole(9, new WeldingRobot(2));
+	
+		System.out.println("\nRemoving Simons Robot nr. 2");
+		simons.removeRobot(crawler1);
 		
 		System.out.println("\nAdding Robots to Richards Factory...");
 		richards.addRobot(new SwivelArmRobot(9));
@@ -66,6 +69,8 @@ public class Test {
 		richards.addRotations(9, -20);
 		richards.addRotations(19, -40);
 		richards.addRotations(33, 8); //a non-existent robot
+		
+
 		
 		fact_iter = factories.iterator();
 		while(fact_iter.hasNext()) {
