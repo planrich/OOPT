@@ -1,32 +1,44 @@
 
 public abstract class Robot {
-
-	private static int uniqueID = 0;
 	
-	protected final int identification;
-	protected int workingHours;
+	private int number;
+	private int hoursOperating;
+	private Role role;
 	
-	protected Tool currentWorkingTool;
-	
-	public Robot() {
-		this.identification = uniqueID++;
-		this.workingHours = 0;
-		this.currentWorkingTool = null;
+	public Robot(int number) {					// must be unique
+		this.number = number;
+		this.hoursOperating = 0;
 	}
 	
-	public void setWorkingHours(int workingHours) {
-		this.workingHours = workingHours;
+	public void addHoursOperating(int hours) {	// must be > 0
+		this.hoursOperating += hours;
 	}
 	
-	public int getWorkingHours() {
-		return workingHours;
+	public int getHoursOperating() {
+		return hoursOperating;
 	}
 	
-	public void setCurrentWorkingTool(Tool currentWorkingTool) {
-		this.currentWorkingTool = currentWorkingTool;
+	public int getNumber() {
+		return number;
 	}
 	
-	public Tool getCurrentWorkingTool() {
-		return currentWorkingTool;
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	
+	public Role getRole() {
+		return role;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == this) {
+			return true;
+		}
+		if (obj instanceof Robot) {
+			Robot robot = (Robot) obj;
+			return robot.number == this.number;
+		}
+		return false;
 	}
 }

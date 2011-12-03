@@ -1,47 +1,83 @@
 
 public class Factory {
-
-	public static Factory create(String name) { //name must be unique
-		Factory factory = new Factory(name);
-		return factory;
-	}
 	
-	private final String name;
+	private String name;
+	private List<Robot> robots;
+	
+	public Factory(String name) {				// not null
+		this.name = name;
+		this.robots = new List<Robot>();
+	}
 	
 	public String getName() {
 		return name;
 	}
-	
-	Factory(String name) { //name must be unique
-		this.name = name;
+
+	public void addRobot(Robot robot) {			// not null
+		robots.add(robot);
 	}
 	
-	/**
-	 * Die durchschnittliche Anzahl der Betriebstunden aller Roboter einer
-	 * Fabrik – alle Roboter zusammen und zusätzlich aufgeschlüsselt nach den
-	 * Einsatzarten (Schweißroboter oder Lackierroboter).
-	 * 
-	 * Die durchschnittliche Anzahl der Betriebstunden aller Roboter einer
-	 * Fabrik – alle Roboter zusammen und zusätzlich aufgeschlüsselt nach den
-	 * Einsatzarten (Schweißroboter oder Lackierroboter).
-	 * 
-	 * Die durchschnittliche Anzahl der Betriebstunden aller Roboter einer
-	 * Fabrik aufgeschlüsselt nach den Robotertyp (Schwenkarmroboter oder
-	 * Raupenroboter).
-	 * 
-	 * Die durchschnittliche Anzahl der Rotationen aller Schwenkarmroboter einer
-	 * Fabrik – alle zusammen und zusätzlich aufgeschlüsselt nach den
-	 * Einsatzarten (Schweißroboter oder Lackierroboter).
-	 * 
-	 * Die durchschnittliche zurückgelegte Wegstrecke aller Raupenroboter einer
-	 * Fabrik – alle zusammen und zusätzlich aufgeschlüsselt nach den
-	 * Einsatzarten.
-	 * 
-	 * Die minimale und maximale Arbeitstemperatur aller Schweißroboter
-	 * insgesamt und aufgeschlüsselt nach Robotertyp (Schwenkarmroboter oder
-	 * Raupenroboter).
-	 * 
-	 * Die durchschnittlich zurückgelegte Wegstrecke aller Raupenroboter
-	 * insgesamt und aufgeschlüsselt nach Robotertyp.
-	 */
+	public void removeRobot(Robot robot) {		// not null
+		robots.remove(robot);
+	}
+	
+	public void addHoursOperating(int robotNumber, int hours) {
+		Robot robot = getRobot(robotNumber);
+		
+		if (robot != null) {
+			robot.addHoursOperating(hours);
+		}
+	}
+	
+	public void addRotations(int robotNumber, int rotations) {			// robotNumber must be a valid SwivelArmRobot
+		Robot robot = getRobot(robotNumber);
+		
+		if (robot != null && robot instanceof SwivelArmRobot) {
+			SwivelArmRobot saRobot = (SwivelArmRobot) robot;
+			saRobot.addRotations(rotations);
+		}
+	}
+	
+	public void addDistance(int robotNumber, double distance) {			// robotNumber must be a valid CrawlerRobot
+		Robot robot = getRobot(robotNumber);
+		
+		if (robot != null && robot instanceof CrawlerRobot) {
+			CrawlerRobot cRobot = (CrawlerRobot) robot;
+			cRobot.addDistance(distance);
+		}
+	}
+	
+	public void setRole(int robotNumber, Role role) {
+		Robot robot = getRobot(robotNumber);
+		
+		if (robot != null) {
+			robot.setRole(role);
+		}
+	}
+	
+	public double getAverageHours() {
+		List.Iterator<Robot> iter = robots.iterator();
+		double sum = 0;
+		int count = 0;
+		
+		while (iter.hasNext()) {
+			Robot robot = iter.next();
+			count++;
+			sum += robot.getHoursOperating();
+		}
+		
+		return sum / count;
+	}
+	
+	private Robot getRobot(int number) {
+		List.Iterator<Robot> iter = robots.iterator();
+		
+		while (iter.hasNext()) {
+			Robot robot = iter.next();
+			if (robot.getNumber() == number) {
+				return robot;
+			}
+		}
+		return null;
+	}
 }
