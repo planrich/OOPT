@@ -1,7 +1,7 @@
 
-public abstract class Replaceable {
+abstract class Replaceable {
 	
-	Node root;
+	protected Node root;
 	protected int level = 0;
 	protected int insertPostion = 0;
 	

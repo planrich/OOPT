@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Collection;
+
 
 public class Test {
 
@@ -25,6 +28,7 @@ public class Test {
 		 * ansprechen. Berechnen Sie die statistischen Werte aller Fabriken (wie
 		 * oben beschrieben).
 		 */
+		
 	}
 
 }

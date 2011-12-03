@@ -1,5 +1,5 @@
 
-public class StringNode extends Node {
+class StringNode extends Node {
 	
 	private String label;
 	

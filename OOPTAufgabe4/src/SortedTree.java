@@ -4,9 +4,7 @@ public abstract class SortedTree implements StringTree {
 	//this tree can ONLY contain StringNode not other nodes.
 
 	protected Node root = null;
-	
-
-	
+		
 	@Override
 	public boolean contains(String node) {
 		if (root != null) {

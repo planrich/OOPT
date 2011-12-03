@@ -1,5 +1,5 @@
 
-public class IntNode extends Node {
+class IntNode extends Node {
 
 	private int label;
 	

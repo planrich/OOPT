@@ -1,5 +1,5 @@
 
-public abstract class Node {
+abstract class Node {
 	
 	public static final String LEFT = "left";
 	public static final String RIGHT = "right";
