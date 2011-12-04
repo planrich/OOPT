@@ -16,8 +16,11 @@ public class Factory {
 		robots.add(robot);
 	}
 
-	public void removeRobot(Robot robot) { // not null
-		robots.remove(robot);
+	public void removeRobot(int id) {
+		Robot robot = getRobot(id);
+		if (robot != null) {
+			robots.remove(robot);
+		}
 	}
 
 	public void addHoursOperating(int robotNumber, int hours) {
@@ -130,15 +133,24 @@ public class Factory {
 		return list;
 	}
 	
+	/**
+	 * if count is 0 then 0 is returned. it does not make sense to give back NaN 
+	 * @param from
+	 * @return 0 if there would occur a division through 0, sum / count otherwise
+	 */
 	private double getAverageHours(List<Robot> from) {
 		List.Iterator<Robot> iter = from.iterator();
-		double sum = 0;
+		int sum = 0;
 		int count = 0;
 
 		while (iter.hasNext()) {
 			Robot robot = iter.next();
 			count++;
 			sum += robot.getHoursOperating();
+		}
+		
+		if (count == 0) {
+			return 0;
 		}
 
 		return sum / count;
@@ -164,9 +176,13 @@ public class Factory {
 		return getAverageHours(filterSwivel(robots));
 	}
 	
+	/**
+	 * @param from
+	 * @return 0 iff count == 0, sum / count otherwise
+	 */
 	private double getAverageRotations(List<Robot> from) {
 		List.Iterator<Robot> iter = from.iterator();
-		double sum = 0;
+		int sum = 0;
 		int count = 0;
 
 		while (iter.hasNext()) {
@@ -175,6 +191,10 @@ public class Factory {
 				count++;
 				sum += ((SwivelArmRobot)robot).getRotations();
 			}
+		}
+		
+		if (count == 0) {
+			return 0;
 		}
 
 		return sum / count;
@@ -192,6 +212,11 @@ public class Factory {
 		return getAverageRotations(filterWelding(robots));
 	}
 	
+	/**
+	 * Average distance == NaN does not make sense
+	 * @param from
+	 * @return 0 if count is 0, sum / count otherwise
+	 */
 	private double getAverageDistance(List<Robot> from) {
 		List.Iterator<Robot> iter = from.iterator();
 		double sum = 0;
@@ -204,20 +229,16 @@ public class Factory {
 				sum += ((CrawlerRobot)robot).getDistance();
 			}
 		}
+		
+		if (count == 0) {
+			return 0;
+		}
 
 		return sum / count;
 	}
 	
 	public double getAverageDistance() {
 		return getAverageDistance(robots);
-	}
-	
-	public double getAverageDistanceCrawler() {
-		return getAverageDistance(filterCrawlers(robots));
-	}
-	
-	public double getAverageDistanceSwivel() {
-		return getAverageDistance(filterSwivel(robots));
 	}
 	
 	public double getAverageDistanceVarnish() {
@@ -228,17 +249,17 @@ public class Factory {
 		return getAverageDistance(filterWelding(robots));
 	}
 	
-	private double getTemperature(List<Robot> from, boolean max) {
+	private int getTemperature(List<Robot> from, boolean max) {
 		List.Iterator<Robot> iter = from.iterator();
-		double extreme = max ? Double.MIN_VALUE : Double.MAX_VALUE;
+		int extreme = max ? Integer.MIN_VALUE : Integer.MAX_VALUE;
 
 		while (iter.hasNext()) {
 			Robot robot = iter.next();
 			if (robot.getRole() instanceof WeldingRobot) {
 				if (max && robot.getRole().getData() > extreme) {
-					extreme = robot.getRole().getData();
+					extreme = (int)robot.getRole().getData();
 				} else if (!max && robot.getRole().getData() < extreme) {
-					extreme = robot.getRole().getData();
+					extreme = (int)robot.getRole().getData();
 				}
 			}
 		}
@@ -246,15 +267,15 @@ public class Factory {
 		return extreme;
 	}
 	
-	public double getTemperature(boolean max) {
+	public int getTemperature(boolean max) {
 		return getTemperature(robots,max);
 	}
 
-	public double getTemperatureCrawler(boolean max) {
+	public int getTemperatureCrawler(boolean max) {
 		return getTemperature(filterCrawlers(robots),max);
 	}
 	
-	public double getTemperatureSwivel(boolean max) {
+	public int getTemperatureSwivel(boolean max) {
 		return getTemperature(filterSwivel(robots),max);
 	}
 
