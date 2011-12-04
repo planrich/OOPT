@@ -9,7 +9,7 @@ public class Test {
 		 * 
 		 */
 		
-		System.out.println("\nAdding Factories...");
+		System.out.println("Creating factories");
 
 		List<Factory> factories = new List<Factory>();
 
@@ -31,11 +31,25 @@ public class Test {
 			System.out.println("- " + f.getName());
 		}
 
-		System.out.println("\nAdding Robots to Simons Factory...");
+		System.out.println();
+		System.out.println("#########################");
+		System.out.println("Robots operations:");
+		System.out.println("#########################");
+		System.out.println();
+		
+		System.out.println("adding robots");
+		
+		richards.addRobot(new SwivelArmRobot(9));
+		richards.addRobot(new SwivelArmRobot(19));
+		richards.addRobot(new CrawlerRobot(666));
+		richards.addRobot(new CrawlerRobot(667));
+		richards.addRobot(new CrawlerRobot(668));
 
 		simons.addRobot(new CrawlerRobot(2));
 		simons.addRobot(new CrawlerRobot(5));
 		simons.addRobot(new SwivelArmRobot(9));
+		
+		System.out.println("changing operationhours, rotations, distances and equipting robots");
 
 		simons.addHoursOperating(2, 100);
 		simons.addHoursOperating(5, 200);
@@ -48,18 +62,7 @@ public class Test {
 		simons.setRole(2, new VarnishRobot(2));
 		simons.setRole(5, new VarnishRobot(2));
 		simons.setRole(9, new WeldingRobot(2));
-
-		System.out.println("\nRemoving Simons Robot nr. 2");
-		simons.removeRobot(2);
-
-		System.out.println("\nAdding Robots to Richards Factory...");
-		richards.addRobot(new SwivelArmRobot(9));
-		richards.addRobot(new SwivelArmRobot(19));
-		richards.addRobot(new CrawlerRobot(666));
-		richards.addRobot(new CrawlerRobot(667));
-		richards.addRobot(new CrawlerRobot(668));
-
-		System.out.println("\nChanging roles of Robots...");
+		
 		richards.setRole(12, new VarnishRobot(88)); // does nothing at all
 
 		richards.setRole(9, new VarnishRobot(9));
@@ -72,19 +75,19 @@ public class Test {
 		richards.addDistance(666, 666.666);
 		richards.addDistance(667, 666666.66);
 		richards.addDistance(668, 3.9);
-
-		System.out
-				.println("\nTrying to set operating Hours to a negative value...");
+		
 		richards.addHoursOperating(19, -20);
 		richards.addHoursOperating(9, -9000);
 		richards.addHoursOperating(33, 800); // a non-existent robot
 		richards.addHoursOperating(666, 6666666);
 
-		System.out.println("\nTrying to set rotations to a negative value...");
-
 		richards.addRotations(9, -20);
 		richards.addRotations(19, -40);
 		richards.addRotations(33, 8); // a non-existent robot
+
+		System.out.println("removing 2 robots");
+		simons.removeRobot(2);
+		richards.removeRobot(19);
 
 		System.out.println();
 		System.out.println("#########################");
