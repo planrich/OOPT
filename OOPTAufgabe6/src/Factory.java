@@ -137,10 +137,8 @@ public class Factory {
 
 		while (iter.hasNext()) {
 			Robot robot = iter.next();
-			if (robot instanceof CrawlerRobot) {
-				count++;
-				sum += robot.getHoursOperating();
-			}
+			count++;
+			sum += robot.getHoursOperating();
 		}
 
 		return sum / count;
