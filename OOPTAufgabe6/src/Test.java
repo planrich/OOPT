@@ -9,6 +9,10 @@ public class Test {
 		 * 
 		 */
 		
+		System.out.println("NOTE:");
+		System.out.println("divisions by zero are caught automatically, so they just return 0 instead of throwing an exception. this is very likely to happen at klaus factory.");
+		System.out.println();
+		
 		System.out.println("Creating factories");
 
 		List<Factory> factories = new List<Factory>();
