@@ -15,7 +15,7 @@ public class Test {
 		
 		System.out.println("Creating factories");
 
-		List<Factory> factories = new List<Factory>();
+		FactoryList factories = new FactoryList();
 
 		Factory simons = new Factory("Simons Factory");
 		Factory klausis = new Factory("Klaus Factory"); // hat 0 Roboter -> Fuer
@@ -117,6 +117,7 @@ public class Test {
 
 		while (fact_iter.hasNext()) {
 			Factory f = fact_iter.next();
+
 			System.out.println();
 			System.out.println("-------------------------------------");
 			System.out.println(f.getName() + ":");
