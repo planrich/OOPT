@@ -9,7 +9,6 @@ public class FactoryList extends List<Factory> {
 		
 		while (fact_iter.hasNext()) {
 			Factory factory = fact_iter.next();
-			System.out.println(factory.getName());
 			if(factory.getName() == name) {
 				return factory;
 			}

@@ -95,7 +95,7 @@ public class Test {
 
 		System.out.println();
 		System.out.println("#########################");
-		System.out.println("Factory specific statistiscs:");
+		System.out.println("Factory specific statistics:");
 		System.out.println("#########################");
 		System.out.println();
 		
@@ -230,5 +230,26 @@ public class Test {
 				+ avgdistance_varnish / varnish_distancecount);
 		System.out.println("Avg distance of all welding robots: "
 				+ avgdistance_welding / welding_distancecount);
+		
+		
+		System.out.println();
+		System.out.println("#########################");
+		System.out.println("Hours-worked Factory statistics");
+		System.out.println("for the Factory named 'Richards Factory':");
+		System.out.println("#########################");
+		System.out.println();
+		
+		Factory myFactory = factories.getByName("Richards Factory");
+		System.out.println("avg hours worked: " + myFactory.getAverageHours());
+		System.out.println("avg hours worked (Crawler): "
+				+ myFactory.getAverageHoursCrawler());
+		System.out.println("avg hours worked (Swivel): "
+				+ myFactory.getAverageHoursSwivel());
+		System.out.println("avg hours worked (Varnish): "
+				+ myFactory.getAverageHoursVarnish());
+		System.out.println("avg hours worked (Welding): "
+				+ myFactory.getAverageHoursWelding());
+
+		System.out.println();
 	}
 }
