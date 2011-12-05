@@ -1,11 +1,10 @@
 
-
-public class List<E> {
+public class List {
 
 	private ListElement headElement = null;
 	private ListElement tailElement = null;
 	
-	public void add(E element) {
+	public void add(Object element) {
 		ListElement e = new ListElement(element);
 		if (headElement == null) {
 			headElement = e;
@@ -17,7 +16,7 @@ public class List<E> {
 		}
 	}
 	
-	public void remove(E element) {
+	public void remove(Object element) {
 		ListElement toDelete = headElement;
 		while (toDelete != null && !toDelete.getElement().equals(element)) {
 			toDelete = toDelete.next;
@@ -44,18 +43,18 @@ public class List<E> {
 	}
 	
 	
-	public interface Iterator<E> {
-		E next();
-		E previous();
+	public interface Iterator {
+		Object next();
+		Object previous();
 		boolean hasNext();
 		boolean hasPrevious();
 	}
 	
-	public Iterator<E> iterator() {
+	public Iterator iterator() {
 		return new ListIter(headElement);
 	}
 	
-	private class ListIter implements Iterator<E> {
+	private class ListIter implements Iterator {
 
 		private ListElement next;
 		private ListElement previous;
@@ -68,7 +67,7 @@ public class List<E> {
 		}
 		
 		@Override
-		public E next() {
+		public Object next() {
 			if (next == null) {
 				return null;
 			}
@@ -79,7 +78,7 @@ public class List<E> {
 		}
 
 		@Override
-		public E previous() {
+		public Object previous() {
 			if (previous == null) {
 				return null;
 			}
@@ -102,17 +101,17 @@ public class List<E> {
 	
 	private class ListElement {
 		
-		private E element;
+		private Object element;
 		private ListElement next;
 		private ListElement previous;
 		
-		public ListElement(E element) {
+		public ListElement(Object element) {
 			this.element = element;
 			this.next = null;
 			this.previous = null;
 		}
 		
-		public E getElement() {
+		public Object getElement() {
 			return element;
 		}
 		

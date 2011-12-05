@@ -27,11 +27,11 @@ public class Test {
 		factories.add(klausis);
 		factories.add(richards);
 
-		List.Iterator<Factory> fact_iter = factories.iterator();
+		List.Iterator factoryIter = factories.iterator();
 
 		System.out.println("Factories available: ");
-		while (fact_iter.hasNext()) {
-			Factory f = fact_iter.next();
+		while (factoryIter.hasNext()) {
+			Factory f = (Factory) factoryIter.next();
 			System.out.println("- " + f.getName());
 		}
 
@@ -100,7 +100,7 @@ public class Test {
 		System.out.println();
 		
 		
-		fact_iter = factories.iterator();
+		factoryIter = factories.iterator();
 		int min_temp = Integer.MAX_VALUE;
 		int max_temp = Integer.MIN_VALUE;
 		int min_temp_crawler = Integer.MAX_VALUE;
@@ -115,8 +115,8 @@ public class Test {
 		double avgdistance_varnish = 0;
 		int varnish_distancecount = 0;
 
-		while (fact_iter.hasNext()) {
-			Factory f = fact_iter.next();
+		while (factoryIter.hasNext()) {
+			Factory f = (Factory) factoryIter.next();
 
 			System.out.println();
 			System.out.println("-------------------------------------");

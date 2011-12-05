@@ -1,15 +1,16 @@
 
-public class FactoryList extends List<Factory> {
+public class FactoryList extends List {
 	
-	/*
-	 * returning null when no Factory with given name is found
+	/**
+	 * Will search for a factory by the given name.
+	 * @return Factory object or null.
 	 */
 	public Factory getByName(String name) {
-		List.Iterator<Factory> fact_iter = this.iterator();
+		List.Iterator iter = this.iterator();
 		
-		while (fact_iter.hasNext()) {
-			Factory factory = fact_iter.next();
-			if(factory.getName() == name) {
+		while (iter.hasNext()) {
+			Factory factory = (Factory) iter.next();
+			if (factory.getName().equals(name)) {
 				return factory;
 			}
 		}

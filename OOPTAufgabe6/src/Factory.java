@@ -1,11 +1,11 @@
 public class Factory {
 
 	private String name;
-	private List<Robot> robots;
+	private List robots;
 
 	public Factory(String name) { // not null
 		this.name = name;
-		this.robots = new List<Robot>();
+		this.robots = new List();
 	}
 
 	public String getName() {
@@ -66,10 +66,10 @@ public class Factory {
 
 
 	private Robot getRobot(int number) {
-		List.Iterator<Robot> iter = robots.iterator();
+		List.Iterator iter = robots.iterator();
 
 		while (iter.hasNext()) {
-			Robot robot = iter.next();
+			Robot robot = (Robot)iter.next();
 			if (robot.getNumber() == number) {
 				return robot;
 			}
@@ -77,12 +77,12 @@ public class Factory {
 		return null;
 	}
 
-	private List<Robot> filterCrawlers(List<Robot> from) {
-		List.Iterator<Robot> iter = from.iterator();
-		List<Robot> list = new List<Robot>();
+	private List filterCrawlers(List from) {
+		List.Iterator iter = from.iterator();
+		List list = new List();
 
 		while (iter.hasNext()) {
-			Robot robot = iter.next();
+			Robot robot = (Robot)iter.next();
 			if (robot instanceof CrawlerRobot) {
 				list.add(robot);
 			}
@@ -91,12 +91,12 @@ public class Factory {
 		return list;
 	}
 	
-	private List<Robot> filterSwivel(List<Robot> from) {
-		List.Iterator<Robot> iter = from.iterator();
-		List<Robot> list = new List<Robot>();
+	private List filterSwivel(List from) {
+		List.Iterator iter = from.iterator();
+		List list = new List();
 
 		while (iter.hasNext()) {
-			Robot robot = iter.next();
+			Robot robot = (Robot)iter.next();
 			if (robot instanceof SwivelArmRobot) {
 				list.add(robot);
 			}
@@ -105,12 +105,12 @@ public class Factory {
 		return list;
 	}
 	
-	private List<Robot> filterVarnish(List<Robot> from) {
-		List.Iterator<Robot> iter = from.iterator();
-		List<Robot> list = new List<Robot>();
+	private List filterVarnish(List from) {
+		List.Iterator iter = from.iterator();
+		List list = new List();
 		
 		while (iter.hasNext()) {
-			Robot robot = iter.next();
+			Robot robot = (Robot)iter.next();
 			if (robot.getRole() instanceof VarnishRobot) {
 				list.add(robot);
 			}
@@ -119,12 +119,12 @@ public class Factory {
 		return list;
 	}
 	
-	private List<Robot> filterWelding(List<Robot> from) {
-		List.Iterator<Robot> iter = from.iterator();
-		List<Robot> list = new List<Robot>();
+	private List filterWelding(List from) {
+		List.Iterator iter = from.iterator();
+		List list = new List();
 
 		while (iter.hasNext()) {
-			Robot robot = iter.next();
+			Robot robot = (Robot)iter.next();
 			if (robot.getRole() instanceof WeldingRobot) {
 				list.add(robot);
 			}
@@ -138,13 +138,13 @@ public class Factory {
 	 * @param from
 	 * @return 0 if there would occur a division through 0, sum / count otherwise
 	 */
-	private double getAverageHours(List<Robot> from) {
-		List.Iterator<Robot> iter = from.iterator();
+	private double getAverageHours(List from) {
+		List.Iterator iter = from.iterator();
 		int sum = 0;
 		int count = 0;
 
 		while (iter.hasNext()) {
-			Robot robot = iter.next();
+			Robot robot = (Robot)iter.next();
 			count++;
 			sum += robot.getHoursOperating();
 		}
@@ -180,13 +180,13 @@ public class Factory {
 	 * @param from
 	 * @return 0 iff count == 0, sum / count otherwise
 	 */
-	private double getAverageRotations(List<Robot> from) {
-		List.Iterator<Robot> iter = from.iterator();
+	private double getAverageRotations(List from) {
+		List.Iterator iter = from.iterator();
 		int sum = 0;
 		int count = 0;
 
 		while (iter.hasNext()) {
-			Robot robot = iter.next();
+			Robot robot = (Robot)iter.next();
 			if (robot instanceof SwivelArmRobot) {
 				count++;
 				sum += ((SwivelArmRobot)robot).getRotations();
@@ -217,13 +217,13 @@ public class Factory {
 	 * @param from
 	 * @return 0 if count is 0, sum / count otherwise
 	 */
-	private double getAverageDistance(List<Robot> from) {
-		List.Iterator<Robot> iter = from.iterator();
+	private double getAverageDistance(List from) {
+		List.Iterator iter = from.iterator();
 		double sum = 0;
 		int count = 0;
 
 		while (iter.hasNext()) {
-			Robot robot = iter.next();
+			Robot robot = (Robot)iter.next();
 			if (robot instanceof CrawlerRobot) {
 				count++;
 				sum += ((CrawlerRobot)robot).getDistance();
@@ -249,12 +249,12 @@ public class Factory {
 		return getAverageDistance(filterWelding(robots));
 	}
 	
-	private int getTemperature(List<Robot> from, boolean max) {
-		List.Iterator<Robot> iter = from.iterator();
+	private int getTemperature(List from, boolean max) {
+		List.Iterator iter = from.iterator();
 		int extreme = max ? Integer.MIN_VALUE : Integer.MAX_VALUE;
 
 		while (iter.hasNext()) {
-			Robot robot = iter.next();
+			Robot robot = (Robot)iter.next();
 			if (robot.getRole() instanceof WeldingRobot) {
 				if (max && robot.getRole().getData() > extreme) {
 					extreme = (int)robot.getRole().getData();
