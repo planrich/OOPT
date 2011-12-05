@@ -232,24 +232,30 @@ public class Test {
 				+ avgdistance_welding / welding_distancecount);
 		
 		
+		String name = "Richards Factory";
+		Factory myFactory = factories.getByName(name);
+
 		System.out.println();
 		System.out.println("#########################");
 		System.out.println("Hours-worked Factory statistics");
-		System.out.println("for the Factory named 'Richards Factory':");
+		System.out.println("for the Factory named '" + name + "'");
 		System.out.println("#########################");
 		System.out.println();
 		
-		Factory myFactory = factories.getByName("Richards Factory");
-		System.out.println("avg hours worked: " + myFactory.getAverageHours());
-		System.out.println("avg hours worked (Crawler): "
-				+ myFactory.getAverageHoursCrawler());
-		System.out.println("avg hours worked (Swivel): "
-				+ myFactory.getAverageHoursSwivel());
-		System.out.println("avg hours worked (Varnish): "
-				+ myFactory.getAverageHoursVarnish());
-		System.out.println("avg hours worked (Welding): "
-				+ myFactory.getAverageHoursWelding());
-
-		System.out.println();
+		if(myFactory != null) {
+			System.out.println("avg hours worked: " + myFactory.getAverageHours());
+			System.out.println("avg hours worked (Crawler): "
+					+ myFactory.getAverageHoursCrawler());
+			System.out.println("avg hours worked (Swivel): "
+					+ myFactory.getAverageHoursSwivel());
+			System.out.println("avg hours worked (Varnish): "
+					+ myFactory.getAverageHoursVarnish());
+			System.out.println("avg hours worked (Welding): "
+					+ myFactory.getAverageHoursWelding());
+	
+			System.out.println();
+		} else {
+			System.out.println("Factory with name " + name + " does not exist!");
+		}
 	}
 }
