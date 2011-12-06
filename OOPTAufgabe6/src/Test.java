@@ -74,12 +74,12 @@ public class Test {
 		richards.addDistance(668, 3.9);
 		
 		richards.addHoursOperating(19, -20);
-		richards.addHoursOperating(9, -9000);
+		richards.addHoursOperating(9, 9000);
 		richards.addHoursOperating(33, 800); // a non-existent robot
 		richards.addHoursOperating(666, 6666666);
 
-		richards.addRotations(9, -20);
-		richards.addRotations(19, -40);
+		richards.addRotations(9, 20);
+		richards.addRotations(19, 40);
 		richards.addRotations(33, 8); // a non-existent robot
 
 		System.out.println("removing 2 robots");
