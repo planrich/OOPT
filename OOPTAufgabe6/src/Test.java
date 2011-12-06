@@ -1,13 +1,6 @@
 public class Test {
 
 	public static void main(String[] args) {
-
-		/*
-		 * TODO
-		 * Erstellen Sie eine Menge von Fabriken von jeweils einigen Robotern – wirklich eine Menge von Fabriken (eine Form von Collection) ...
-		 * __Jede Fabrik in der Menge soll über ihren eindeutigen Namen angesprochen werden können__ ...
-		 * 
-		 */
 		
 		System.out.println("NOTE:");
 		System.out.println("divisions by zero are caught automatically, so they just return 0 instead of throwing an exception. this is very likely to happen at klaus factory.");
@@ -237,7 +230,7 @@ public class Test {
 
 		System.out.println();
 		System.out.println("#########################");
-		System.out.println("Hours-worked Factory statistics");
+		System.out.println("Hours-worked Factory statistics and testing getByName method of the FactoryList");
 		System.out.println("for the Factory named '" + name + "'");
 		System.out.println("#########################");
 		System.out.println();
