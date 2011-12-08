@@ -9,13 +9,30 @@ public class Test {
 		List<Animal> animals = new ArrayList<Animal>();
 		List<Section> sections = new ArrayList<Section>();
 		
-		animals.add(new Dolphin("Flipper"));
-		animals.add(new Mamba("Kurt"));
-		animals.add(new Python("Armin"));
+		Dolphin dolphin = new Dolphin("Flipper");
+		Mamba mamba0 = new Mamba("Kurt");
+		Mamba mamba1 = new Mamba("Armin");
 		
-		sections.add(new PythonTerrarium());
-		sections.add(new MambaTerrarium());
-		sections.add(new WaterTank());
+		animals.add(dolphin);
+		animals.add(mamba0);
+		animals.add(mamba1);
+		
+		
+		MambaTerrarium terr0 = new MambaTerrarium();
+		MambaTerrarium terr1 = new MambaTerrarium();
+		WaterTank tank0 = new WaterTank();
+		
+		terr0.load(mamba0);
+		terr1.load(mamba1);
+		tank0.load(dolphin);
+		
+		sections.add(terr0);
+		sections.add(terr1);
+		sections.add(tank0);
+		
+		for(Section s : sections) {
+			s.printAnimal();
+		}
 		
 	}
 }
