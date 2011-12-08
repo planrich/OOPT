@@ -1,5 +1,5 @@
 
-public class SeeAnimal extends Animal {
+public abstract class SeeAnimal extends Animal {
 
 	public SeeAnimal(String name) {
 		super(name);
