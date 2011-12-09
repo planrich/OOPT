@@ -9,4 +9,8 @@ public abstract class Section { //Abteil
 			System.out.println(animal.getName());
 		}
 	}
+
+	public abstract boolean loadTo(Transporter transporter);
+
+	public abstract boolean unloadFrom(Transporter transporter);
 }
