@@ -1,7 +1,8 @@
 
 public class BigTurtleTerrarium extends Terrarium {
 
-	public void load(Turtle turtle) {
+	public boolean load(Turtle turtle) {
 		this.animal = turtle;
+		return true;
 	}
 }

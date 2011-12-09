@@ -5,4 +5,9 @@ public class SmallTurtle extends Turtle {
 		super(name);
 	}
 
+	@Override
+	public boolean loadTo(Section section) {
+		return section.load(this);
+	}
+
 }

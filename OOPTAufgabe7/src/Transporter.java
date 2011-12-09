@@ -185,4 +185,30 @@ public class Transporter {
 		
 		return false;
 	}
+
+	/**
+	 * Unload both tanks and terrariums and give back the list!
+	 * @return a List of Sections unloaded from the transporter
+	 */
+	public List<Section> unload() {
+		List<Section> sections = new ArrayList<Section>();
+		
+		for (int i = 0; i < tanks.length; i++) {
+			Section section = tanks[i];
+			tanks[i] = null;
+			if (section != null) {
+				sections.add(section);
+			}
+		}
+		
+		for (int i = 0; i < terrariums.length; i++) {
+			Section section = terrariums[i];
+			terrariums[i] = null;
+			if (section != null) {
+				sections.add(section);
+			}
+		}
+		
+		return sections;
+	}
 }

@@ -5,4 +5,11 @@ public class Elefant extends BigGame {
 		super(name);
 	}
 	
+	/**
+	 * Can never load an {@link Elefant} to a section
+	 */
+	@Override
+	public boolean loadTo(Section section) {
+		return false;
+	}
 }

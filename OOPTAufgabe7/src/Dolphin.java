@@ -5,4 +5,11 @@ public class Dolphin extends SeeAnimal {
 		super(name);
 	}
 
+
+	@Override
+	public boolean loadTo(Section section) {
+		return section.load(this);
+	}
+	
+
 }

@@ -5,4 +5,8 @@ public class Mamba extends Snake {
 		super(name);
 	}
 
+	@Override
+	public boolean loadTo(Section section) {
+		return section.load(this);
+	}
 }
