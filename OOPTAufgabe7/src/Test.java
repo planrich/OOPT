@@ -49,44 +49,9 @@ public class Test {
 			animals.add(new Swordfish("swordfish" + i));
 		}
 		
-		
-		System.out.println("Animals count: " + animals.size());
+		int numOfAnimals = animals.size();
+		System.out.println("Animals count: " + numOfAnimals);
 		System.out.println();
-		
-		System.out.println("For moving there are some different kinds of moving boxes:");
-		
-		List<Section> sections = new ArrayList<Section>();
-		
-		System.out.println("big & small terrarium (each 1)");
-		Section sec0 = new BigTurtleTerrarium();
-		Section sec1 = new SmallTurtleTerrarium();
-		sections.add(sec0);
-		sections.add(sec1);
-		
-		System.out.println("2 mamba terrariums and 4 python terrariums");
-		Section t0 = new MambaTerrarium();
-		Section t1 = new MambaTerrarium();
-		Section t3 = new PythonTerrarium();
-		Section t4 = new PythonTerrarium();
-		Section t5 = new PythonTerrarium();
-		Section t6 = new PythonTerrarium();
-		sections.add(t0);
-		sections.add(t1);
-		sections.add(t3);
-		sections.add(t4);
-		sections.add(t5);
-		sections.add(t6);
-		
-		System.out.println("1 land/water tank & 2 watertanks");
-		Section s0 = new WaterLandTank();
-		Section s1 = new WaterTank();
-		sections.add(s0);
-		sections.add(s1);
-		
-		System.out.println("Sections count: " + sections.size());
-		System.out.println();
-		
-		System.out.println("Creating containers to carry all animals:");
 		
 		BigGame[] bigGames = new BigGame[2];
 		bigGames[0] = new Elefant("Elefant1");
@@ -96,13 +61,11 @@ public class Test {
 		bigGames[0] = new Giraffe("Giraffe3");
 		bigGames[1] = new Giraffe("Giraffe4");
 		
-		Transporter truck = new Transporter(bigGames, 3, 3, 3, 2, 2, 2, 2);
-		Trailer trailer = new Trailer(bigGames2, 2, 3, 3, 2, 2, 2, 2);
+		Transporter truck = new Transporter(bigGames, 2, 3, 3, 2, 2, 2, 2);
+		Trailer trailer = new Trailer(bigGames2, 2, 5, 5, 5, 5, 5, 5);
 		truck.load(trailer);
 
-		System.out.println("Moving all animals to Schšnbrunn using the given transporters!");
-		System.out.println("Of course there is by far not enought space to move them in one trip so lets compute the trips:");
-
+		System.out.println("Moving all animals to Schšnbrunn using the given transporter (including trailer, of course)!");
 		
 		List<Animal> animals_in_schoenbrunn = new ArrayList<Animal>();
 		
@@ -116,25 +79,67 @@ public class Test {
 				System.out.print("trying to load animal '" + a.getName() + "' to a transporter...");
 				if (canLoadTo(truck,a)) {
 					it.remove();
-					System.out.println("loaded");
+					System.out.println("loaded to transporter");
 					loaded++;
 				} else {
-					System.out.println("failed");
-				}
+					System.out.println("trying to load into the trailer instead...");
+					if (canLoadTo(trailer,a)) {
+						it.remove();
+						System.out.println("loaded to trailer");
+						loaded++;
+					} else {
+						System.out.println("failed loading to trailer");
+					}
+					System.out.println("failed loading to the transporter");
+				}				
 			}
 			
 			System.out.println("trip " + trip + ": tried to load as much animals as possible (loaded "+loaded+")... unloading all transporters in Schšnbrunn");
 			trip++;
 
 			List<Animal> unloadedAnimals = truck.unload();
+			System.out.println("Unloaded:" + unloadedAnimals.size());
 			for(Animal a : unloadedAnimals) {
 				animals_in_schoenbrunn.add(a);
+			}
+			System.out.println("Finished! Transported " + animals_in_schoenbrunn.size() + " of " + numOfAnimals + " animals");
+			
+			
+			// TEST 2
+			System.out.println("\n\nTest 2: Trying to load 2 Mambas and 1 Python into a transporter with only 3 Python Terrariums:");
+			
+			List<Animal> animals2 = new ArrayList<Animal>();
+			animals2.add (new Mamba("Mamba 1"));
+			animals2.add (new Mamba("Mamba 2"));
+			animals2.add (new Python("Python 1"));
+			
+			BigGame[] bigGames3 = new BigGame[1];
+			bigGames3[0] = new Elefant("Elefant3");
+			
+			
+			System.out.println("Creating new Transporter with only 3 sections of Python Terrariums (and one Elephant)");
+			Transporter transporter2 = new Transporter(bigGames3, 1, 0, 0, 0, 0, 0, 3);
+			
+			for(Animal animal : animals2) {
+				System.out.println("Trying to load " + animal.getName() + " into the transporter");
+				if (canLoadTo(transporter2, animal)) {
+					System.out.println("Loaded");
+				} else {
+					System.out.println("Failed");
+				}
+			}
+			
+			System.out.println("Animals now on the Transporter:");
+			List<Animal> animalsOnTransporter = transporter2.list();
+			
+			for(Animal animal: animalsOnTransporter) {
+				System.out.println(animal.getName());
 			}
 		}		
 	}
 	
-	private static boolean canLoadTo(Transporter transporter, Animal animal) {
-		if (animal.load(transporter)) {
+	private static boolean canLoadTo(Container container, Animal animal) {
+		if (animal.load(container)) {
 			return true;
 		}
 		return false;
