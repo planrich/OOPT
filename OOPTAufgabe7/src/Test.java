@@ -69,7 +69,7 @@ public class Test {
 
 		System.out.println("Moving all animals to Schšnbrunn using the given transporter (including trailers, of course)!");
 		
-		List<Animal> animals_in_schoenbrunn = new ArrayList<Animal>();
+		List<Animal> animalsInSchoenbrunn = new ArrayList<Animal>();
 		
 		int trip = 1;
 		int loaded = -1;
@@ -105,11 +105,11 @@ public class Test {
 			List<Animal> unloadedAnimals = truck.unload();
 			System.out.println("Unloaded:" + unloadedAnimals.size());
 			for(Animal a : unloadedAnimals) {
-				animals_in_schoenbrunn.add(a);
+				animalsInSchoenbrunn.add(a);
 			}
 		}
-		System.out.println("Finished! Transported " + animals_in_schoenbrunn.size() + " of " + numOfAnimals + " animals");
-			
+		
+		System.out.println("Finished! Transported " + animalsInSchoenbrunn.size() + " of " + numOfAnimals + " animals");	
 			
 		// TEST 2
 		System.out.println("\n\nTest 2: Trying to load 2 Mambas and 1 Python into a transporter with only 3 Python Terrariums:");
