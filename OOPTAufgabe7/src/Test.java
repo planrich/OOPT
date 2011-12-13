@@ -108,7 +108,7 @@ public class Test {
 				animalsInSchoenbrunn.add(a);
 			}
 		}
-		System.out.println("Finished! Transported " + animalsInSchoenbrunn.size() + " of " + numOfAnimals + " animals");	
+		System.out.println("Finished Transporting");	
 			
 		// TEST 2
 		System.out.println("\n\nTest 2: Trying to load 2 Mambas and 1 Python into a transporter with only 3 Python Terrariums:");

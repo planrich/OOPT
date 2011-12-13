@@ -9,6 +9,11 @@ public abstract class Animal {
 	public Animal(String name) {
 		this.name = name;
 	}
-
+	
+	/**
+	 * add this animal to the container
+	 * @param container must not be null
+	 * @return true if successful
+	 */
 	public abstract boolean load(Container container);
 }

@@ -1,4 +1,8 @@
 
+/**
+ * Section class including loading of different animal types, as well as unloading them
+ * Every load method must not contain a null parameter
+ */
 public abstract class Section {
 	
 	protected Animal animal = null;

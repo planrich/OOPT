@@ -3,6 +3,11 @@ public class Hitch {
 	
 	private Trailer trailer;
 	
+	/**
+	 * Connects the trailer to this hitch.
+	 * @param trailer The trailer. Must not be null.
+	 * @return true if successful
+	 */
 	public boolean loadTrailer(Trailer trailer) {
 		if (this.trailer == null) {
 			this.trailer = trailer;
