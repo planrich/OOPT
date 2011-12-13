@@ -116,7 +116,7 @@ public class Transporter {
 	 * @return true iff section finds free space
 	 */
 	public boolean load(Section sec) {
-		return sec.loadTo(this);
+		return sec.load(this);
 	}
 	
 	/**

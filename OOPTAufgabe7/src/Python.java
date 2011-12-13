@@ -6,7 +6,7 @@ public class Python extends Snake {
 	}
 
 	@Override
-	public boolean loadTo(Section section) {
-		return section.load(this);
+	public boolean load(Section section) {
+		return section.loadPython(this);
 	}
 }

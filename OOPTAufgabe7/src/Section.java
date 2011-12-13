@@ -1,32 +1,14 @@
 
-public abstract class Section { //Abteil
-
-	protected Animal animal;
-	protected boolean isFree = true;
+public abstract class Section {
 	
-	public Animal getAnimal() {
-		return animal;
-	}
-
-	public abstract boolean loadTo(Transporter transporter);
-
-	public abstract boolean unloadFrom(Transporter transporter);
-
-	public boolean load(Animal a) {
-		if (isFree) {
-			return a.loadTo(this);
-		}
-		
-		return false;
-	}
+	protected Animal animal = null;
 	
-	public Animal unload() {
-		Animal a = this.animal;
-		this.animal = null;
-		if (a != null) {
-			isFree = true;
-		}
-		
-		return a;
-	}
+	public abstract boolean loadMamba(Mamba mamba);
+	public abstract boolean loadPython(Python python);
+	public abstract boolean loadBigTurtle(BigTurtle turtle);
+	public abstract boolean loadSmallTurtle(SmallTurtle turtle);
+	
+	public abstract boolean loadDolphin(Dolphin dolphin);
+	public abstract boolean loadSwordfish(Swordfish swordfish);
+	public abstract boolean loadSeal(Seal seal);
 }

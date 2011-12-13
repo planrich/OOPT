@@ -9,7 +9,7 @@ public class Elefant extends BigGame {
 	 * Can never load an {@link Elefant} to a section
 	 */
 	@Override
-	public boolean loadTo(Section section) {
+	public boolean load(Section section) {
 		return false;
 	}
 }

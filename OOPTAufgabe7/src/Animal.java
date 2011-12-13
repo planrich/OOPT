@@ -10,5 +10,5 @@ public abstract class Animal {
 		this.name = name;
 	}
 
-	public abstract boolean loadTo(Section section);
+	public abstract boolean load(Section section);
 }

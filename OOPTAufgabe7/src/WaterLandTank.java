@@ -3,10 +3,11 @@
  * A {@link WaterLandTank} can load any {@link SeeAnimal}
  * @author klaus
  */
-public class WaterLandTank extends Tank {
+public class WaterLandTank extends WaterTank {
 
-	public boolean load(SeeAnimal seeAnimal) {
-		this.animal = seeAnimal;
+	@Override
+	public boolean loadSeal(Seal seal) {
+		this.animal = seal;
 		return true;
 	}
 }

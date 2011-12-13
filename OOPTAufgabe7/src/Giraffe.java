@@ -9,7 +9,7 @@ public class Giraffe extends BigGame {
 	 * Can never load an {@link Giraffe} to a section
 	 */
 	@Override
-	public boolean loadTo(Section section) {
+	public boolean load(Section section) {
 		return false;
 	}
 	
