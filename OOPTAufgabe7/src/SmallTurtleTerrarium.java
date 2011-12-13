@@ -18,6 +18,9 @@ public class SmallTurtleTerrarium extends Terrarium {
 
 	@Override
 	public boolean loadSmallTurtle(SmallTurtle turtle) {
+		if (this.animal != null) {
+			return false;
+		}
 		this.animal = turtle;
 		return true;
 	}

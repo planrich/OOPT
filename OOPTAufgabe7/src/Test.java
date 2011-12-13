@@ -87,22 +87,20 @@ public class Test {
 		System.out.println();
 		
 		System.out.println("Creating containers to carry all animals:");
-
-		List<Container> container = new ArrayList<Container>();
 		
-		Transporter truck = new Transporter(2, 1, 1, null);
-		Transporter trailer0 = new Transporter(5, 1, 2, null);
-		Transporter trailer1 = new Transporter(2, 0, 1, null);
-		Transporter trailer2 = new Transporter(3, 1, 0, null);
-		Transporter trailer3 = new Transporter(2, 0, 0, null);
+		BigGame[] bigGames = new BigGame[2];
+		bigGames[0] = new Elefant("Elefant1");
+		bigGames[1] = new Giraffe("Giraffe1");
 		
-		transporters.add(truck);
-		transporters.add(trailer0);
-		transporters.add(trailer1);
-		transporters.add(trailer2);
-		transporters.add(trailer3);
+		BigGame[] bigGames2 = new BigGame[2];
+		bigGames[0] = new Giraffe("Giraffe3");
+		bigGames[1] = new Giraffe("Giraffe4");
+		
+		Transporter truck = new Transporter(bigGames, 3, 3, 3, 2, 2, 2, 2);
+		Trailer trailer = new Trailer(bigGames2, 2, 3, 3, 2, 2, 2, 2);
+		truck.load(trailer);
 
-		System.out.println("Moving all animals to Schšnbrunn using the given sections and transporters!");
+		System.out.println("Moving all animals to Schšnbrunn using the given transporters!");
 		System.out.println("Of course there is by far not enought space to move them in one trip so lets compute the trips:");
 
 		
@@ -115,8 +113,8 @@ public class Test {
 			Iterator<Animal> it = animals.iterator();
 			while (it.hasNext()) {
 				Animal a = it.next();
-				System.out.print("trying to load animal '" + a.getName() + "' to a section...");
-				if (canLoadTo(sections,a)) {
+				System.out.print("trying to load animal '" + a.getName() + "' to a transporter...");
+				if (canLoadTo(truck,a)) {
 					it.remove();
 					System.out.println("loaded");
 					loaded++;
@@ -125,39 +123,21 @@ public class Test {
 				}
 			}
 			
-			Iterator<Section> its = sections.iterator();
-			while (its.hasNext()) {
-				Section s = its.next();
-				Iterator<Transporter> itt = transporters.iterator();
-				System.out.print("trying to load a section containing the animal with name " + s.getAnimal().getName() + " ...");
-				while (itt.hasNext()) {
-					Transporter curtransporter = itt.next();
-					if (curtransporter.load(s)) {
-						System.out.println("loaded");
-						break;
-					} 
-				}
-			}
-			
 			System.out.println("trip " + trip + ": tried to load as much animals as possible (loaded "+loaded+")... unloading all transporters in Schšnbrunn");
 			trip++;
-			for (Transporter transporter : transporters) {
-				List<Section> sec = transporter.unload();
-				for (Section section : sec) {
-					animals_in_schoenbrunn.add(section.unload());
-				}
+
+			List<Animal> unloadedAnimals = truck.unload();
+			for(Animal a : unloadedAnimals) {
+				animals_in_schoenbrunn.add(a);
 			}
-		}
-		
+		}		
 	}
-
-	private static boolean canLoadTo(List<Section> sections, Animal a) {
-		for (Section section : sections) {
-			if (section.load(a)) {
-				return true;
-			}
+	
+	private static boolean canLoadTo(Transporter transporter, Animal animal) {
+		if (animal.load(transporter)) {
+			return true;
 		}
-
 		return false;
 	}
+	
 }

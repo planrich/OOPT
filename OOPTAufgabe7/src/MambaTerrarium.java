@@ -3,6 +3,9 @@ public class MambaTerrarium extends Terrarium {
 
 	@Override
 	public boolean loadMamba(Mamba mamba) {
+		if (this.animal != null) {
+			return false;
+		}
 		this.animal = mamba;
 		return true;
 	}

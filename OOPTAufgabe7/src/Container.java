@@ -10,7 +10,7 @@ public abstract class Container {
 	
 	/**
 	 * Initalizes a new Container
-	 * @param bigGame Nust be not null.
+	 * @param bigGame Must be not null.
 	 * @param hitches Must be greater or equal than bigGame.length.
 	 * @param waterTanks Must be >= 0
 	 * @param waterLandTanks Must be >= 0
@@ -21,7 +21,7 @@ public abstract class Container {
 	 */
 	public Container(BigGame[] bigGame, int hitches, int waterTanks, int waterLandTanks, int bigTurtleTerrariums, int smallTurtleTerrariums,
 			int mambaTerrariums, int pythonTerrariums) {
-		this.sections = new Section[waterTanks + waterLandTanks + bigTurtleTerrariums + smallTurtleTerrariums];
+		this.sections = new Section[waterTanks + waterLandTanks + bigTurtleTerrariums + smallTurtleTerrariums + mambaTerrariums + pythonTerrariums];
 		this.hitches = new Hitch[hitches - bigGame.length];
 		this.bigGame = bigGame;
 		
@@ -75,6 +75,27 @@ public abstract class Container {
 		for (Section section : sections) {
 			if (section.getAnimal() != null) {
 				result.add(section.getAnimal());
+			}
+		}
+		return result;
+	}
+	
+	public List<Animal> unload() {
+		List<Animal> result = new ArrayList<Animal>();
+		for (Hitch hitch : hitches) {
+			if (hitch.getTrailer() != null) {
+				result.addAll(hitch.getTrailer().unload());
+			}
+		}
+		
+		
+		for (BigGame bg : bigGame) {
+			result.add(bg);
+		}
+		
+		for (Section section : sections) {
+			if (section.getAnimal() != null) {
+				result.add(section.unload());
 			}
 		}
 		return result;

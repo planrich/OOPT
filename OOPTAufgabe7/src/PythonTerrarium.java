@@ -3,12 +3,18 @@ public class PythonTerrarium extends Terrarium {
 
 	@Override
 	public boolean loadMamba(Mamba mamba) {
+		if (this.animal != null) {
+			return false;
+		}
 		this.animal = mamba;
 		return true;
 	}
 
 	@Override
 	public boolean loadPython(Python python) {
+		if (this.animal != null) {
+			return false;
+		}
 		this.animal = python;
 		return true;
 	}
