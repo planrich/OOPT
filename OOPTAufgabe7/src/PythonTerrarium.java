@@ -24,18 +24,26 @@ public class PythonTerrarium extends Terrarium {
 	}
 
 	@Override
-	public boolean loadDolphin(Dolphin dolphin) {
-		return false;
+	public Mamba unloadMamba() {
+		Animal a = this.animal;
+		this.animal = null;
+		return (Mamba) a;
 	}
 
 	@Override
-	public boolean loadSwordfish(Swordfish swordfish) {
-		return false;
+	public Python unloadPython() {
+		Animal a = this.animal;
+		this.animal = null;
+		return (Python) a;
 	}
 
 	@Override
-	public boolean loadSeal(Seal seal) {
-		return false;
+	public BigTurtle unloadBigTurtle() {
+		return null;
 	}
-	
+
+	@Override
+	public SmallTurtle unloadSmallTurtle() {
+		return null;
+	}
 }

@@ -6,26 +6,6 @@
 public class WaterTank extends Tank {
 
 	@Override
-	public boolean loadMamba(Mamba mamba) {
-		return false;
-	}
-
-	@Override
-	public boolean loadPython(Python python) {
-		return false;
-	}
-
-	@Override
-	public boolean loadBigTurtle(BigTurtle turtle) {
-		return false;
-	}
-
-	@Override
-	public boolean loadSmallTurtle(SmallTurtle turtle) {
-		return false;
-	}
-
-	@Override
 	public boolean loadDolphin(Dolphin dolphin) {
 		this.animal = dolphin;
 		return true;
@@ -40,5 +20,24 @@ public class WaterTank extends Tank {
 	@Override
 	public boolean loadSeal(Seal seal) {
 		return false;
+	}
+
+	@Override
+	public Dolphin unloadDolphin() {
+		Dolphin dolphin = (Dolphin) this.animal;
+		this.animal = null;
+		return dolphin;
+	}
+
+	@Override
+	public Swordfish unloadSwordfish() {
+		Swordfish swordFish = (Swordfish) this.animal;
+		this.animal = null;
+		return swordFish;
+	}
+
+	@Override
+	public Seal unloadSeal() {
+		return null;
 	}
 }

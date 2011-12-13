@@ -24,17 +24,26 @@ public class BigTurtleTerrarium extends Terrarium {
 	}
 
 	@Override
-	public boolean loadDolphin(Dolphin dolphin) {
-		return false;
+	public Mamba unloadMamba() {
+		return null;
 	}
 
 	@Override
-	public boolean loadSwordfish(Swordfish swordfish) {
-		return false;
+	public Python unloadPython() {
+		return null;
 	}
 
 	@Override
-	public boolean loadSeal(Seal seal) {
-		return false;
+	public BigTurtle unloadBigTurtle() {
+		Animal a = this.animal;
+		this.animal = null;
+		return (BigTurtle) a;
+	}
+
+	@Override
+	public SmallTurtle unloadSmallTurtle() {
+		Animal a = this.animal;
+		this.animal = null;
+		return (SmallTurtle) a;
 	}
 }
