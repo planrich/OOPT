@@ -61,9 +61,9 @@ public class Test {
 		bigGames[0] = new Giraffe("Giraffe3");
 		bigGames[1] = new Giraffe("Giraffe4");
 		
-		Transporter truck = new Transporter(bigGames, 2, 3, 3, 2, 2, 4, 6);
-		Trailer trailer = new Trailer(bigGames2, 2, 3, 5, 2, 2, 5, 5);
-		Trailer trailer2 = new Trailer(bigGames2, 2, 3, 7, 7, 1, 1, 1);
+		Transporter truck = new Transporter(bigGames, 4, 3, 3, 0, 0, 4, 6);
+		Trailer trailer = new Trailer(bigGames2, 2, 3, 5, 0, 0, 5, 5);
+		Trailer trailer2 = new Trailer(bigGames2, 2, 0, 0, 5, 5, 0, 0);
 		truck.load(trailer);
 		truck.load(trailer2);
 
@@ -85,16 +85,16 @@ public class Test {
 					loaded++;
 				} else {
 					System.out.println("trying to load into one of the trailers instead...");
-					if (canLoadTo(trailer,a)) {
+					if (canLoadTo(trailer, a)) {
 						it.remove();
 						System.out.println("loaded to trailer");
 						loaded++;
-					} else if (canLoadTo(trailer2,a)){
+					} else if (canLoadTo(trailer2, a)){
 						it.remove();
 						System.out.println("loaded to trailer2");
 						loaded++;
 					} else {
-						System.out.println("failed loading to trailer");
+						System.out.println("failed loading to trailers");
 					}
 					System.out.println("failed loading to the transporter");
 				}				
@@ -108,7 +108,6 @@ public class Test {
 				animalsInSchoenbrunn.add(a);
 			}
 		}
-		
 		System.out.println("Finished! Transported " + animalsInSchoenbrunn.size() + " of " + numOfAnimals + " animals");	
 			
 		// TEST 2
