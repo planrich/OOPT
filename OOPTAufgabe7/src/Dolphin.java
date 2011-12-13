@@ -5,9 +5,8 @@ public class Dolphin extends SeeAnimal {
 		super(name);
 	}
 
-
 	@Override
-	public boolean load(Section section) {
-		return section.loadDolphin(this);
+	public boolean load(Container container) {
+		return container.loadDolphin(this);
 	}
 }

@@ -15,19 +15,4 @@ public abstract class Terrarium extends Section {
 	public boolean loadSeal(Seal seal) {
 		return false;
 	}
-	
-	@Override
-	public Dolphin unloadDolphin() {
-		return null;
-	}
-
-	@Override
-	public Swordfish unloadSwordfish() {
-		return null;
-	}
-
-	@Override
-	public Seal unloadSeal() {
-		return null;
-	}
 }

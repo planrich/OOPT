@@ -6,8 +6,8 @@ public class SmallTurtle extends Turtle {
 	}
 
 	@Override
-	public boolean load(Section section) {
-		return section.loadSmallTurtle(this);
+	public boolean load(Container container) {
+		return container.loadSmallTurtle(this);
 	}
 
 }

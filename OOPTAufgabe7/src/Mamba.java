@@ -6,7 +6,7 @@ public class Mamba extends Snake {
 	}
 
 	@Override
-	public boolean load(Section section) {
-		return section.loadMamba(this);
+	public boolean load(Container container) {
+		return container.loadMamba(this);
 	}
 }

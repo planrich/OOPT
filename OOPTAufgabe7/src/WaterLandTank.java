@@ -10,11 +10,4 @@ public class WaterLandTank extends WaterTank {
 		this.animal = seal;
 		return true;
 	}
-	
-	@Override
-	public Seal unloadSeal() {
-		Seal seal = (Seal) this.animal;
-		this.animal = null;
-		return seal;
-	}
 }

@@ -6,7 +6,7 @@ public class BigTurtle extends Turtle {
 	}
 	
 	@Override
-	public boolean load(Section section) {
-		return section.loadBigTurtle(this);
+	public boolean load(Container container) {
+		return container.loadBigTurtle(this);
 	}
 }

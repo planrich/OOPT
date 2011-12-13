@@ -6,7 +6,7 @@ public class Swordfish extends SeeAnimal {
 	}
 
 	@Override
-	public boolean load(Section section) {
-		return section.loadSwordfish(this);
+	public boolean load(Container container) {
+		return container.loadSwordfish(this);
 	}
 }

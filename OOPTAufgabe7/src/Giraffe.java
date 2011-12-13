@@ -5,11 +5,8 @@ public class Giraffe extends BigGame {
 		super(name);
 	}
 
-	/**
-	 * Can never load an {@link Giraffe} to a section
-	 */
 	@Override
-	public boolean load(Section section) {
+	public boolean load(Container container) {
 		return false;
 	}
 	

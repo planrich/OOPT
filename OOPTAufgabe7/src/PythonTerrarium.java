@@ -22,28 +22,4 @@ public class PythonTerrarium extends Terrarium {
 	public boolean loadSmallTurtle(SmallTurtle turtle) {
 		return false;
 	}
-
-	@Override
-	public Mamba unloadMamba() {
-		Animal a = this.animal;
-		this.animal = null;
-		return (Mamba) a;
-	}
-
-	@Override
-	public Python unloadPython() {
-		Animal a = this.animal;
-		this.animal = null;
-		return (Python) a;
-	}
-
-	@Override
-	public BigTurtle unloadBigTurtle() {
-		return null;
-	}
-
-	@Override
-	public SmallTurtle unloadSmallTurtle() {
-		return null;
-	}
 }

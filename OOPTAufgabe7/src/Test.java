@@ -1,6 +1,6 @@
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ArrayList;
 
 public class Test {
 
@@ -10,7 +10,7 @@ public class Test {
 		
 		List<Animal> animals = new ArrayList<Animal>();
 		
-		/*System.out.println("2 Elefants");
+		System.out.println("2 Elefants");
 		animals.add(new Elefant("elefant0"));
 		animals.add(new Elefant("elefant1"));
 		
@@ -18,7 +18,7 @@ public class Test {
 		animals.add(new Giraffe("griaffe0"));
 		animals.add(new Giraffe("griaffe1"));
 		animals.add(new Giraffe("griaffe2"));
-		animals.add(new Giraffe("griaffe3"));*/
+		animals.add(new Giraffe("griaffe3"));
 		
 		System.out.println("20 Pythons");
 		for (int i = 0; i < 20; i++) {
@@ -86,9 +86,9 @@ public class Test {
 		System.out.println("Sections count: " + sections.size());
 		System.out.println();
 		
-		System.out.println("Creating transporters to carry all animals:");
+		System.out.println("Creating containers to carry all animals:");
 
-		List<Transporter> transporters = new ArrayList<Transporter>();
+		List<Container> container = new ArrayList<Container>();
 		
 		Transporter truck = new Transporter(2, 1, 1, null);
 		Transporter trailer0 = new Transporter(5, 1, 2, null);

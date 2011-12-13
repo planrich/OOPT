@@ -6,7 +6,7 @@ public class Seal extends SeeAnimal {
 	}
 
 	@Override
-	public boolean load(Section section) {
-		return section.loadSeal(this);
+	public boolean load(Container container) {
+		return container.loadSeal(this);
 	}
 }

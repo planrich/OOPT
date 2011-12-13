@@ -5,11 +5,8 @@ public class Elefant extends BigGame {
 		super(name);
 	}
 	
-	/**
-	 * Can never load an {@link Elefant} to a section
-	 */
 	@Override
-	public boolean load(Section section) {
+	public boolean load(Container container) {
 		return false;
 	}
 }
