@@ -88,7 +88,6 @@ public abstract class Container {
 			}
 		}
 		
-		
 		for (BigGame bg : bigGame) {
 			result.add(bg);
 		}
