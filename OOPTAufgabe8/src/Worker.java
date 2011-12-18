@@ -33,14 +33,19 @@ public abstract class Worker extends Thread {
 				return;
 			}
 			
+			try { beforeWork(); }
+			catch (InterruptedException ex) {
+				return;
+			}
+			
 			// simulate the work time
 			try { Thread.sleep(duration); }
 			catch (InterruptedException ex) {
 				return;
 			}
 			
-			// do the real time
-			try { doWork(); }
+			// do the real work
+			try { afterWork(); }
 			catch (InterruptedException ex) {
 				return;
 			}
@@ -52,8 +57,12 @@ public abstract class Worker extends Thread {
 	}
 	
 	/**
-	 * Every worker must implement this method.
+	 * Do stuff like getting the ingredients in this method.
+	 */
+	protected abstract void beforeWork() throws InterruptedException;
+	
+	/**
 	 * If operations must be atomic, use synchronized blocks inside this method.
 	 */
-	protected abstract void doWork() throws InterruptedException;
+	protected abstract void afterWork() throws InterruptedException;
 }

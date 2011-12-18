@@ -6,7 +6,7 @@ public class Cook extends Worker {
 	}
 
 	@Override
-	protected void doWork() throws InterruptedException {
+	protected void beforeWork() throws InterruptedException {
 		synchronized (CoolingWareHouse.instance().removingLock) {
 			while (!CoolingWareHouse.instance().removeWildBoar()) {
 				System.out.println("The cook is waiting ...");
@@ -16,4 +16,8 @@ public class Cook extends Worker {
 		}
 	}
 
+	@Override
+	protected void afterWork() throws InterruptedException {
+		
+	}
 }

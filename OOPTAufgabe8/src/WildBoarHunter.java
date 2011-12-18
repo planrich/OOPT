@@ -6,7 +6,7 @@ public class WildBoarHunter extends Worker {
 	}
 
 	@Override
-	protected void doWork() throws InterruptedException {
+	protected void afterWork() throws InterruptedException {
 		synchronized (CoolingWareHouse.instance().addingLock) {
 			while (!CoolingWareHouse.instance().addWildBoar()) {
 				System.out.println("Waiting now ...");
@@ -14,5 +14,10 @@ public class WildBoarHunter extends Worker {
 			}
 			System.out.println("Added a boar.");
 		}
+	}
+
+	@Override
+	protected void beforeWork() throws InterruptedException {
+		// do nothing
 	}
 }
