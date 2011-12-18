@@ -40,7 +40,10 @@ public abstract class Worker extends Thread {
 			}
 			
 			// do the real time
-			doWork();
+			try { doWork(); }
+			catch (InterruptedException ex) {
+				return;
+			}
 			
 			if (workIterations != (-1)) {
 				workIterations--;
@@ -52,5 +55,5 @@ public abstract class Worker extends Thread {
 	 * Every worker must implement this method.
 	 * If operations must be atomic, use synchronized blocks inside this method.
 	 */
-	protected abstract void doWork();
+	protected abstract void doWork() throws InterruptedException;
 }
