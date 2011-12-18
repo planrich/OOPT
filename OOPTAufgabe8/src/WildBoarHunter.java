@@ -1,7 +1,9 @@
 
 public class WildBoarHunter extends Worker {
 	
-	protected static long DURATION = 200;
+	public WildBoarHunter(int workIterations, long duration) {
+		super(workIterations, duration);
+	}
 
 	@Override
 	protected void doWork() {
