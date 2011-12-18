@@ -6,8 +6,8 @@ public class Test {
 	public static void main(String[] args) {
 		List<Worker> workers = new ArrayList<Worker>();
 		
-		WildBoarHunter hunter1 = new WildBoarHunter(2, 10);
-		WildBoarHunter hunter2 = new WildBoarHunter(2, 20);
+		WildBoarHunter hunter1 = new WildBoarHunter(5, 10);
+		WildBoarHunter hunter2 = new WildBoarHunter(5, 20);
 		workers.add(hunter1);
 		workers.add(hunter2);
 		

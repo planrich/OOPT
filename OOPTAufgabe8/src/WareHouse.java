@@ -17,7 +17,7 @@ public abstract class WareHouse {
 	}
 	
 	public synchronized void removeWare(int count) throws InterruptedException {
-		if (wareCount - count < 0) {
+		while (wareCount - count < 0) {
 			wait();
 		}
 		wareCount -= count;
@@ -26,5 +26,9 @@ public abstract class WareHouse {
 	
 	public synchronized int getWareCount() {
 		return wareCount;
+	}
+	
+	public void setMaxCount(int maxCount) {
+		this.maxCount = maxCount;
 	}
 }
