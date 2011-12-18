@@ -15,4 +15,12 @@ public class Table extends WareHouse {
 		}
 		return instance;
 	}
+	
+	/**
+	 * Add a cook
+	 * @param w must not be null
+	 */
+	public void add(Cook w) {
+		addWorker(w);
+	}
 }

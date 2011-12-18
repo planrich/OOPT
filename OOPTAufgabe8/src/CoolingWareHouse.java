@@ -15,4 +15,12 @@ public class CoolingWareHouse extends WareHouse {
 		}
 		return instance;
 	}
+	
+	/**
+	 * Add a {@link WildBoarHunter}
+	 * @param hunter must not be null
+	 */
+	public void add(WildBoarHunter hunter) {
+		this.addWorker(hunter);
+	}
 }

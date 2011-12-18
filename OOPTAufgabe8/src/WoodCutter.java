@@ -14,6 +14,19 @@ public class WoodCutter extends Worker {
 	@Override
 	protected void afterWork() throws InterruptedException {
 		StoneQuarry.instance().addWare(1);
+		++farmCount;
 		System.out.println("WoodCutter added a new tree.");
+	}
+	
+	@Override
+	protected boolean willThereBeAnyMoreWork() {
+		Table t = Table.instance();
+		return t.anyHarvestWorkerIsGoingToWork() || t.getWareCount() > 0; //NO FOOD -> NO WORK
+		
+	}
+	
+	@Override
+	public void printHarvestCount() {
+		System.out.println(String.format("%s cut down %d trees", getClass().getSimpleName(), getFarmCount()));
 	}
 }

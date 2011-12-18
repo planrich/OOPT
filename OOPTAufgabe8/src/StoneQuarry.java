@@ -15,4 +15,12 @@ public class StoneQuarry extends WareHouse {
 		}
 		return instance;
 	}
+	
+	/**
+	 * add a {@link WoodCutter}
+	 * @param wc must no be null
+	 */
+	public void add(WoodCutter wc) {
+		addWorker(wc);
+	}
 }
