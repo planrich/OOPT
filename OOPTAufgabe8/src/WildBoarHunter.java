@@ -7,13 +7,8 @@ public class WildBoarHunter extends Worker {
 
 	@Override
 	protected void afterWork() throws InterruptedException {
-		synchronized (CoolingWareHouse.instance().addingLock) {
-			while (!CoolingWareHouse.instance().addWare(1)) {
-				System.out.println("Waiting now ...");
-				CoolingWareHouse.instance().addingLock.wait();
-			}
-			System.out.println("Added a boar.");
-		}
+		CoolingWareHouse.instance().addWare(1);
+		System.out.println("Added a boar.");
 	}
 
 	@Override

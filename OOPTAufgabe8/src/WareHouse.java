@@ -1,9 +1,6 @@
 
 public abstract class WareHouse {
 	
-	public Object addingLock = new Object();
-	public Object removingLock = new Object();
-	
 	private int wareCount = 0;
 	private int maxCount;
 	
@@ -11,26 +8,20 @@ public abstract class WareHouse {
 		this.maxCount = maxCount;
 	}
 	
-	public synchronized boolean addWare(int count) {
-		synchronized (removingLock) {
-			if (wareCount + count > maxCount) {
-				return false;
-			}
-			wareCount += count;
-			removingLock.notifyAll();
-			return true;
+	public synchronized void addWare(int count) throws InterruptedException {
+		while (wareCount + count > maxCount) {
+			wait();
 		}
+		wareCount += count;
+		notify();
 	}
 	
-	public synchronized boolean removeWare(int count) {
-		synchronized (addingLock) {
-			if (wareCount - count < 0) {
-				return false;
-			}
-			wareCount -= count;
-			addingLock.notifyAll();
-			return true;
+	public synchronized void removeWare(int count) throws InterruptedException {
+		if (wareCount - count < 0) {
+			wait();
 		}
+		wareCount -= count;
+		notify();
 	}
 	
 	public synchronized int getWareCount() {
