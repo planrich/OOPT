@@ -33,25 +33,18 @@ public abstract class Worker extends Thread {
 				return;
 			}
 			
-			try { beforeWork(); }
-			catch (InterruptedException ex) {
+			try { 
+				beforeWork();
+				Thread.sleep(duration);
+				afterWork();
+			} catch (InterruptedException ex) {
 				return;
 			}
 			
-			// simulate the work time
-			try { Thread.sleep(duration); }
-			catch (InterruptedException ex) {
-				return;
-			}
-			
-			// do the real work
-			try { afterWork(); }
-			catch (InterruptedException ex) {
-				return;
-			}
-			
-			if (workIterations != (-1)) {
-				workIterations--;
+			synchronized (this) {
+				if (workIterations != (-1)) {
+					workIterations--;
+				}
 			}
 		}
 	}
