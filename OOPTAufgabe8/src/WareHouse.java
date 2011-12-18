@@ -11,23 +11,23 @@ public abstract class WareHouse {
 		this.maxCount = maxCount;
 	}
 	
-	public synchronized boolean addWildBoar() {
+	public synchronized boolean addWare(int count) {
 		synchronized (removingLock) {
-			if (wareCount == maxCount) {
+			if (wareCount + count > maxCount) {
 				return false;
 			}
-			wareCount += 1;
+			wareCount += count;
 			removingLock.notifyAll();
 			return true;
 		}
 	}
 	
-	public synchronized boolean removeWildBoar() {
+	public synchronized boolean removeWare(int count) {
 		synchronized (addingLock) {
-			if (wareCount == 0) {
+			if (wareCount - count < 0) {
 				return false;
 			}
-			wareCount -= 1;
+			wareCount -= count;
 			addingLock.notifyAll();
 			return true;
 		}
