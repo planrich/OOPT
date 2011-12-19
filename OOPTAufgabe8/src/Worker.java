@@ -50,6 +50,14 @@ public abstract class Worker extends Thread {
 				return;
 			}
 			
+			synchronized (this) {
+				if (!willThereBeAnyMoreWork()) { //one day there is xmas -> nobody wants to work anymore
+					System.out.println(String.format("%s: there is no more work, i'm out!", this.getClass().getSimpleName()));
+					return;
+				}
+			}
+			
+			
 			try { 
 				beforeWork();
 				Thread.sleep(duration);
@@ -61,9 +69,10 @@ public abstract class Worker extends Thread {
 			synchronized (this) {
 				if (workIterations != (-1)) {
 					workIterations--;
-				} else if (!willThereBeAnyMoreWork()) { //one day there is xmas -> nobody wants to work anymore
-					System.out.println(String.format("%s: there is no more work, i'm out!", this.getClass().getSimpleName()));
-					workIterations = 0;
+				}
+				
+				if (workIterations == 0) {
+					System.out.println("finised");
 				}
 			}
 		}

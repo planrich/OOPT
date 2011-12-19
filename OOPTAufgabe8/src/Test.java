@@ -5,9 +5,6 @@ public class Test {
 
 	public static void main(String[] args) {
 
-		System.out
-				.println("NOTE: Assumtion is that if there is any resource left any worker will wait, even if he needs 2 and has 1 and all depandant worker already dont work.");
-
 		List<Worker> workers = new ArrayList<Worker>();
 
 		initWorkers(workers);
@@ -62,12 +59,20 @@ public class Test {
 		System.out.println();
 		System.out
 				.println("Work should be done now! check if there is anyone still working...");
+		int interrupted = 0;
 		for (Worker worker : workers) {
 			if (!worker.getState().equals(Thread.State.TERMINATED)) {
 				System.out.println(worker.getClass().getSimpleName()
-						+ " still workinger -> interrupt()");
+						+ " still working -> interrupt()");
 				worker.interrupt();
+				interrupted ++;
 			}
+		}
+		
+		if (interrupted > 0) {
+			System.out.println("Still there are some people working!");
+		} else {
+			System.out.println("Lazy bastards... nobody working anymore");
 		}
 
 		for (Worker worker : workers) {
