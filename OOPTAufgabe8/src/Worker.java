@@ -15,7 +15,8 @@ public abstract class Worker extends Thread {
 	
 	/**
 	 * You can specify how often this worker should do his work.
-	 * -1 as parameter means infinitly
+	 * -1 as parameter means infinity
+	 * duration must be >0
 	 */
 	public Worker(int workIterations, long duration) {
 		this.workIterations = workIterations;
@@ -23,6 +24,9 @@ public abstract class Worker extends Thread {
 		this.farmCount = 0;
 	}
 	
+	/**
+	 * @param duration must be >0
+	 */
 	public Worker(long duration) {
 		this(-1, duration);
 	}
@@ -79,8 +83,8 @@ public abstract class Worker extends Thread {
 	}
 	
 	/**
-	 * Does a worker has more work? Yes if there are any resources left or the dependant workers do still work
-	 * @return true iff there is any resource left (cook-boar,...) or one dependant worker is still working, false otherwise
+	 * Does a worker have more work? Yes if there are any resources left or the dependant workers do still work
+	 * @return true if there is any resource left (cook-boar,...) or one dependant worker is still working, false otherwise
 	 */
 	protected abstract boolean willThereBeAnyMoreWork();
 	

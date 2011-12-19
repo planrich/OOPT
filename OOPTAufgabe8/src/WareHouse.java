@@ -8,6 +8,9 @@ public abstract class WareHouse {
 	private int maxCount;
 	private List<Worker> harvestWorker;
 	
+	/**
+	 * @param maxCount has to be >0
+	 */
 	public WareHouse(int maxCount) {
 		this.maxCount = maxCount;
 		harvestWorker = new ArrayList<Worker>();
@@ -25,7 +28,7 @@ public abstract class WareHouse {
 	/**
 	 * Is there any worker that will eventually work again?
 	 * 
-	 * @return true iff any state of any worker is not terminated, false otherwise
+	 * @return true if state of any worker is not terminated, false otherwise
 	 */
 	public boolean anyHarvestWorkerIsGoingToWork() {
 		for (Worker w : harvestWorker) {
@@ -37,6 +40,10 @@ public abstract class WareHouse {
 		return false;
 	}
 	
+	/**
+	 * @param count has to be >0
+	 * @throws InterruptedException
+	 */
 	public synchronized void addWare(int count) throws InterruptedException {
 		while (wareCount + count > maxCount) {
 			wait();
@@ -45,6 +52,10 @@ public abstract class WareHouse {
 		notify();
 	}
 	
+	/**
+	 * @param count has to be >0
+	 * @throws InterruptedException
+	 */
 	public synchronized void removeWare(int count) throws InterruptedException {
 		while (wareCount - count < 0) {
 			wait();
@@ -53,10 +64,16 @@ public abstract class WareHouse {
 		notify();
 	}
 	
+	/**
+	 * @return wareCount of the WareHouse
+	 */
 	public synchronized int getWareCount() {
 		return wareCount;
 	}
 	
+	/**
+	 * @param maxCount has to be >0
+	 */
 	public void setMaxCount(int maxCount) {
 		this.maxCount = maxCount;
 	}
