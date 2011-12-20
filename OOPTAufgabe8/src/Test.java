@@ -148,14 +148,14 @@ public class Test {
 			workers.add(hunter1);
 			workers.add(hunter2);
 	
-			CoolingWareHouse.instance().setMaxCount(9);
+			CoolingWareHouse.instance().setMaxCount(4);
 			CoolingWareHouse.instance().add(hunter1);
 			CoolingWareHouse.instance().add(hunter2);
 	
 			Cook cook = new Cook(35);
 			workers.add(cook);
 	
-			Table.instance().setMaxCount(8);
+			Table.instance().setMaxCount(6);
 			Table.instance().add(cook);
 	
 			WoodCutter cutter1 = new WoodCutter(1);
@@ -169,7 +169,7 @@ public class Test {
 			workers.add(cutter4);
 			workers.add(cutter5);
 	
-			StoneQuarry.instance().setMaxCount(7);
+			StoneQuarry.instance().setMaxCount(5);
 			StoneQuarry.instance().add(cutter1);
 			StoneQuarry.instance().add(cutter2);
 			StoneQuarry.instance().add(cutter3);
